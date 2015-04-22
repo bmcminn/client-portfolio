@@ -3,12 +3,13 @@
   return [
 
     /**
-     *
-     *
+     * Handlebars helper tag that acccepts the name of a partial and processes
+     * it with handlebars, then processes it as markdown
+     * @param  string $content partial name
+     * @return string          handlebarred and markdowned content
      */
     "markdown" => function($content) {
 
-      // TODO: add in markdown parsing
       global $handlebarsConfig, $appModel;
 
       $markdown = new ParsedownExtra();
