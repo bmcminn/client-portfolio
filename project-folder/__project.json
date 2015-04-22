@@ -1,0 +1,9 @@
+{
+  "name":     "Whatever"
+, "client":   "ClientName"
+, "license":  "_byas"
+
+, "author": {
+    "name": "Doc Brown"
+  }
+}
