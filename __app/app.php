@@ -30,8 +30,8 @@
 
   // Project Data Here
   $appModel = array_replace_recursive(
-    requireJSON(BASE_DIR.DS.$path.DS.'__project.json'),
     requireJSON(__DIR__.DS.'__author.json'),
+    requireJSON(BASE_DIR.DS.$path.DS.'__project.json'),
     [
       'path'        =>  $path
     , 'projectPath' =>  $path
