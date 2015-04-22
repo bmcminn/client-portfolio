@@ -1,0 +1,32 @@
+{
+  "name": "photofolio",
+  "version": "0.0.0",
+  "description": "A client portfolio for photographers to manage and share asset previews and downloads.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmcminn/client-portfolio"
+  },
+  "keywords": [
+    "photography",
+    "client",
+    "previews",
+    "portfolio"
+  ],
+  "author": "Brandtley McMinn <labs@gbox.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bmcminn/client-portfolio/issues"
+  },
+  "homepage": "https://github.com/bmcminn/client-portfolio",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-stylus": "^0.21.0",
+    "grunt-jsonlint": "^1.0.4"
+  }
+}
