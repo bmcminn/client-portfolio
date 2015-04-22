@@ -16,33 +16,33 @@
 
 
   /**
-   * [console description]
+   * Dumps data into a JS console.log command
    * @param  [type] $data [description]
    * @return [type]       [description]
    */
-  function console($data) {
-    echo "<script>console.log(JSON.parse('", json_encode($data), "'));</script>";
+  function console($data, $type="log") {
+    echo "<script>console.$type(JSON.parse('", json_encode($data), "'));</script>";
   }
 
 
-
-  function getPartials($viewsPath) {
-    $files = glob($viewsPath.DS.'_*');
+  /**
+   * Gets all handlebar partial files from the globally defined VIEWS directory
+   * @param  string $viewsPath path to the views directory where partials are kept
+   * @return array             key->val array of partials file contents
+   */
+  function getPartials() {
+    $files = glob(VIEWS.DS.'_*'.HANDLEBARS_EXT);
     $partials = [];
 
     foreach ($files as $index => $filepath) {
       $name = array_pop(explode(DS, $filepath));
       $name = preg_replace('/\.[^.]+$/','',$name);
-      $partials[$name] = file_get_contents($filepath);
+
+      $markdown = new ParsedownExtra();
+      $file = file_get_contents($filepath);
+
+      $partials[$name] = $markdown->text($file);
     }
 
     return $partials;
   }
-
-
-  function getHelpers() {
-    // TODO: make a helpers.php with an array of all Handlebars helpers
-    return [];
-  }
-
-

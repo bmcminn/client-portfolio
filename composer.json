@@ -8,6 +8,8 @@
         }
     ],
     "require": {
-      "zordius/lightncandy": "dev-master"
+      "zordius/lightncandy": "dev-master",
+      "erusev/parsedown-extra": "dev-master",
+      "filp/whoops": "1.2.*@dev"
     }
 }

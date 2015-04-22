@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="nofollow" />
   <link rel="shortcut icon" href="/favicon.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ resources }}style.css">
   <link rel="stylesheet" type="application/font-woff2" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2">
 </head>
 <body>
@@ -42,7 +42,7 @@
     <ul class="image-list project-thumbnails">
     // TODO: Add some kind of gallery if javascript is enabled
     {{ path }}
-    {{#each files }}
+    {{#each thumbnails }}
       <li><img src="{{ ../projectPath }}/{{ this }}" alt="{{ this }}"></li>
     {{/each}}
     </ul>
@@ -54,9 +54,8 @@
     <a name="attribution"></a>
     <hr>
 
-    {{#if license.byas }}
-      {{> _byas }}
-    {{/if}}
+
+    {{{markdown license }}}
 
 
   </div>
