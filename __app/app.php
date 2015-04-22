@@ -11,7 +11,6 @@
   require '../vendor/autoload.php';
 
 
-
   // hookup Whoops
   $whoops = new \Whoops\Run;
   $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -65,11 +64,14 @@
   ];
 
 
-
+  // get project layout file
   $template = file_get_contents(VIEWS.DS.'photo.hbs');
 
+  // compile and prep handlebars template
   $template = LightnCandy::compile($template, $handlebarsConfig);
   $renderer = LightnCandy::prepare($template);
+
+  // render our template to the page
   echo $template = $renderer($appModel);
 
   console($appModel);
