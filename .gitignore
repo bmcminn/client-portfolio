@@ -1,7 +1,7 @@
 vendor/
 node_modules/
 bower_components/
-
+.grunt/
 __*__/
 
 composer.phar
