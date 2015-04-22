@@ -1,0 +1,13 @@
+{
+    "name": "Brandtley/gbox-photos",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bmcminn",
+            "email": "labs@gbox.name"
+        }
+    ],
+    "require": {
+      "zordius/lightncandy": "dev-master"
+    }
+}

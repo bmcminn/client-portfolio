@@ -1,0 +1,41 @@
+
+## Attribution Clause:
+
+The photos I provide to you are my intellectual property that I license to you under the [Creative Commons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt). A summarized version can be found [here](https://creativecommons.org/licenses/by-sa/4.0/), but you you must abide by the following terms:
+
+1. Please don't crop my watermark
+1. If you do need to crop my watermark and remove it from the graphic, attribute me by name and/or link to my website ([http://brandtley.name](http://brandtley.name/))
+1. If you share the photo online, please include the following copyright format
+
+> &copy; YYYY - Brandtley McMinn
+
+I hope you enjoy the photos, and I appreciate you sharing my work, but I would appreciate credit/attribution as well.
+
+Thank you,<br>
+Brandtley McMinn
+
+
+
+
+-----
+
+
+<p>Attribution Clause:</p>
+
+<p>The photos I provide to you are my intellectual property that I license to you under the <a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt">Creative Commons Attribution-ShareAlike 4.0</a>. A summarized version can be found <a href="https://creativecommons.org/licenses/by-sa/4.0/">here</a>, but you you must abide by the following terms:</p>
+
+<ol>
+<li>Please don't crop my watermark</li>
+<li>If you do need to crop my watermark and remove it from the graphic, attribute me by name and/or link to my website (<a href="http://brandtley.name/">http://brandtley.name</a>)</li>
+<li>If you share the photo online, please include the following copyright format</li>
+</ol>
+
+<blockquote>
+  <p>&copy; YYYY - Brandtley McMinn</p>
+</blockquote>
+
+<p>I hope you enjoy the photos, and I appreciate you sharing my work, but I would appreciate credit/attribution as well.</p>
+
+<p>Thank you,
+Brandtley McMinn</p>
+
