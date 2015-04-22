@@ -7,6 +7,17 @@
             "email": "labs@gbox.name"
         }
     ],
+
+    "autoload": {
+      "files": [
+        "__app/funcs.php"
+      ],
+
+      "psr-4": {
+
+      }
+    },
+
     "require": {
       "zordius/lightncandy": "dev-master",
       "erusev/parsedown-extra": "dev-master",

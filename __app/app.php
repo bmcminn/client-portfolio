@@ -6,8 +6,9 @@
   define('BASE_DIR', __DIR__.DS.'..');
   define('HANDLEBARS_EXT', '.hbs');
 
+
+  // load Composer modules
   require '../vendor/autoload.php';
-  require 'funcs.php';
 
 
 
