@@ -10,7 +10,7 @@
 
     "autoload": {
       "files": [
-        "__app/funcs.php"
+        "_app/funcs.php"
       ],
 
       "psr-4": {
@@ -19,8 +19,9 @@
     },
 
     "require": {
-      "zordius/lightncandy": "dev-master",
-      "erusev/parsedown-extra": "dev-master",
-      "filp/whoops": "1.2.*@dev"
+      "badphp/dispatch": "8.*@dev",
+      "filp/whoops": "1.2.*@dev",
+      "xamin/handlebars.php": "dev-master",
+      "erusev/parsedown-extra": "dev-master"
     }
 }

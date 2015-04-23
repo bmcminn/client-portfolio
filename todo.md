@@ -1,2 +1,2 @@
-TODO: Add NPM for preprocessing, JShint, JSONlint, etc
 TODO: Config grunt process
+TODO: Consider rebuilding project to use a router system like Dispatch
