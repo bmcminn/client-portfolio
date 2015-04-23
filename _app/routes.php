@@ -45,5 +45,7 @@
   map(404, function ($code) {
     global $appModel, $handlebars;
 
+    $appModel['code'] = $code;
+
     echo $handlebars->render('httpcode', $appModel);
   });

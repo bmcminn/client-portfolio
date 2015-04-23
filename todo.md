@@ -1,2 +1,3 @@
 TODO: Config grunt process
-TODO: Consider rebuilding project to use a router system like Dispatch
+TODO: Fix up httpcode.handlebars
+TODO: Figure out how to change handlebars extension
