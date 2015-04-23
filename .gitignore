@@ -4,6 +4,8 @@ bower_components/
 .grunt/
 __*/
 
+_projects/
+
 composer.phar
 *.sublime-workspace
 *.lock
