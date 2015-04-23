@@ -1,5 +1,8 @@
 <?php
 
+  if (preg_match('/\.(?:png|jpg|jpeg|gif|css|less)$/', filter_input(INPUT_SERVER, 'REQUEST_URI'))) {
+    return false;    // serve the requested resource as-is.
+  }
 
   // Define constants
   define('DS', DIRECTORY_SEPARATOR);
@@ -7,7 +10,7 @@
   define('APP_DIR', __DIR__.DS.'_app');
   define('BASE_DIR', __DIR__);
   define('PROJECT_DIR', __DIR__.DS.'_projects');
-  define('HANDLEBARS_EXT', '.hbs');
+  define('HANDLEBARS_EXT', '.handlebars');
 
 
   // load Composer modules
@@ -18,9 +21,11 @@
   use Handlebars\Handlebars;
 
   $handlebars = new Handlebars([
-    'loader'          => new \Handlebars\Loader\FilesystemLoader(VIEWS_DIR),
-    'partials_loader' => new \Handlebars\Loader\FilesystemLoader(VIEWS_DIR, ['prefix' => '_'])
+    'loader'          => new \Handlebars\Loader\FilesystemLoader(VIEWS_DIR)
+  , 'partials_loader' => new \Handlebars\Loader\FilesystemLoader(VIEWS_DIR, ['prefix' => '_'])
   ]);
+
+  require '_app/helpers.php';
 
 
   // hookup Whoops
@@ -37,7 +42,9 @@
   $appModel = array_replace_recursive(
     requireJSON('_app/author.json'),
     [
-      'date' => [
+      'resources' => '/resources/'
+    , 'license'   => '_byas'
+    , 'date' => [
         'year'      => date('Y')
       , 'month'     => date('M')
       , 'day'       => date('j')
@@ -46,7 +53,6 @@
       ]
     ]
   );
-
 
   // // define our config as a constant
   // $handlebarsConfig = [

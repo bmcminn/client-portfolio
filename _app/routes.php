@@ -13,14 +13,14 @@
    */
   map('/<projectname>', function($params) {
 
-    global
-      $appModel,
-      $handlebars
-      ;
+    global $handlebars;
 
     $path = $params['projectname'];
 
     $projectDirectory = PROJECT_DIR.DS.$path;
+
+
+    $appModel = config('appModel');
 
     $appModel = array_replace_recursive(
       requireJSON("_projects/$path/project.json"),
