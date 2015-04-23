@@ -1,28 +1,29 @@
 <?php
 
-  /**
-   * HOME ROUTE
-   */
+  //
+  // HOME ROUTE
+  //
   map('/', function() {
     // TODO: Add 404 page here
   });
 
 
-  /**
-   * PROJECT ROUTES
-   */
-  map('/<projectname>', function($params) {
 
-    global $handlebars;
+  //
+  // PROJECT ROUTES
+  //
+  map('/<projectname>', function($params) {
+    global $appModel, $handlebars;
 
     $path = $params['projectname'];
 
-    $projectDirectory = PROJECT_DIR.DS.$path;
-
-
-    $appModel = config('appModel');
+    if (!file_exists(PROJECT_DIR.DS.$path)) {
+      error(404);
+      return;
+    }
 
     $appModel = array_replace_recursive(
+      $appModel,
       requireJSON("_projects/$path/project.json"),
       [
         'projectPath' =>  "/$path/"
@@ -34,6 +35,15 @@
 
     // render template
     echo $handlebars->render('photo', $appModel);
+  });
 
 
+
+  //
+  // 404 PAGE
+  //
+  map(404, function ($code) {
+    global $appModel, $handlebars;
+
+    echo $handlebars->render('httpcode', $appModel);
   });

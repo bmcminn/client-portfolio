@@ -4,6 +4,11 @@
     return false;    // serve the requested resource as-is.
   }
 
+
+  // Set default timezone so we don't depend on the system timezone being configured correctly
+  date_default_timezone_set('America/Chicago');
+
+
   // Define constants
   define('DS', DIRECTORY_SEPARATOR);
   define('VIEWS_DIR', __DIR__.DS.'_views'.DS);
@@ -34,10 +39,6 @@
   $whoops->register();
 
 
-  // Set default timezone so we don't depend on the system timezone being configured correctly
-  date_default_timezone_set('America/Chicago');
-
-
   // Project Data Here
   $appModel = array_replace_recursive(
     requireJSON('_app/author.json'),
@@ -53,29 +54,6 @@
       ]
     ]
   );
-
-  // // define our config as a constant
-  // $handlebarsConfig = [
-  //   // define flags
-  //   // 'flags' =>
-
-  //   // get partials from our VIEWS directory
-  // , 'partials' => getPartials(VIEWS)
-
-  //   // load all helpers
-  // , 'helpers'  => require "helpers.php"
-  // ];
-
-
-  // // get project layout file
-  // $template = file_get_contents(VIEWS.DS.'photo.hbs');
-
-  // // compile and prep handlebars template
-  // $template = LightnCandy::compile($template, $handlebarsConfig);
-  // $renderer = LightnCandy::prepare($template);
-
-  // // render our template to the page
-  // echo $template = $renderer($appModel);
 
 
   // Load our default routes
