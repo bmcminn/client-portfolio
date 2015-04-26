@@ -36,3 +36,5 @@ Once the assets are setup, I'll create a `project.json` file with the following 
 ```
 
 Personally I prefer to license my materials with some leniency built in, so I chose to license this project with [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), since I don't care what they do with these assets, I just ask that they provide credit for my work.
+
+

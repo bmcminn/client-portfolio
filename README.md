@@ -49,21 +49,27 @@ A simple to use client project portal that allows you to send your client links 
     ```
 
 
-## Adding/Editing Projects
+## [Adding/Editing Projects](https://github.com/bmcminn/client-portfolio/tree/master/_projects/README.md)
 
 
-
-
-## Deploying
+## [Editing Templates/Themes](https://github.com/bmcminn/client-portfolio/tree/master/_views/README.md)
 
 
 ## Changelog
 
 Changes are logged as best as possible, but are not guaranteed to be in order of application. However the date of each log entry will be accurate.
 
+### April 26, 2015
+- Updated documentation across repo.
+- Updated Handlebars `helpers.php` to include a more robust markdown setup.
+- Fixed the system so it works in deeper sub directory structures.
+- Fixed the system so it works on shared hosts.
+- Fixed the system so it allows you to request binary assets when developing in PHP's internal server instance.
+- Added feature to handle multiple zip folders on projects.
+
 ### April 23, 2015
 
-- Fixed error with Markdown parsing in Handlebars `{{markdown}}`` helper
+- Fixed error with Markdown parsing in Handlebars `{{markdown}}` helper.
 - Added Handlebars helpers.
 - Replaced LightnCandy library with [Xamin/Handlebars](https://github.com/XaminProject/handlebars.php).
 - Rebuilt system to use [Dispatch](https://github.com/badphp/dispatch) for application routing.
@@ -79,7 +85,6 @@ Changes are logged as best as possible, but are not guaranteed to be in order of
 - Fixed issue with `markdown` helper not compiling Handlebars partial before running markdown parser.
 - Added `markdown` helper to helpers.php for Handlebars.
 - Added Markdown support via [Parsedown Extra](https://github.com/erusev/parsedown-extra).
-
 
 ### April 21, 2015
 
