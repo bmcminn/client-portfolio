@@ -13,25 +13,6 @@
 
   <div class="container">
 
-    <header class="page-header fixed-header">
-      <div class="container">
-        <nav class="page-nav">
-          <ul class="inline-list">
-            <li>
-              <a class="button nav-link picture" href="#thumbnails">Thumbnails</a>
-            </li>
-            <li>
-              <a class="button nav-link" href="#attribution">License</a>
-            </li>
-            <li>
-              <a class="button download" href="{{ path }}/{{ download }}">Download (zip)</a>
-            </li>
-          </ul
-        </nav>
-      </div>
-    </header>
-
-
     <h1>{{ client }} | {{ name }}</h1>
 
     <a name="thumbnails"></a>
@@ -41,14 +22,13 @@
     <h2>Thumbnails</h2>
     <ul class="image-list project-thumbnails">
     // TODO: Add some kind of gallery if javascript is enabled
-    {{ path }}
     {{#each thumbnails }}
-      <li><img src="{{ ../projectPath }}/{{ this }}" alt="{{ this }}"></li>
+      <li><img src="{{ this }}" alt="{{ this }}"></li>
     {{/each}}
     </ul>
 
     <p class="text-center copyright-container">
-      &copy; {{ date.year }} - {{ author.name }}
+      &copy; {{ year }} - {{ author.name }}
     </p>
 
     <a name="attribution"></a>
@@ -59,5 +39,30 @@
 
 
   </div>
+
+  <footer class="page-footer fixed-footer">
+    <div class="container">
+      <nav class="page-nav">
+        <ul class="inline-list">
+          <li><span class="button empty"><b>Downloads:</b></span></li>
+<!--
+          <li>
+            <a class="button nav-link picture" href="#thumbnails">Thumbnails</a>
+          </li>
+          <li>
+            <a class="button nav-link" href="#attribution">License</a>
+          </li>
+          -->
+          {{#each download}}
+          <li>
+            <a class="button download" href="{{ path }}">{{capitalize name }}</a>
+          </li>
+          {{/each}}
+        </ul
+      </nav>
+    </div>
+  </footer>
+
+
 </body>
 </html>

@@ -23,14 +23,15 @@ img { box-sizing: content-box; }
 
 body {
   margin: 0;
-  padding: 1rem;
-  padding-top: 4.5rem;
+  padding: 0 1rem;
+  padding-bottom: 6.5rem;
   font-family: 'OpenSans', sans-serif;
   color: #353535;
   overflow-y: scroll;
 }
 
-.page-header {
+.page-header,
+.page-footer {
   height: 4.5rem;
   background-color: #fff;
   padding: 1rem;
@@ -43,6 +44,15 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     width: 100%;
   }
+
+  .fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.1);
+    width: 100%;
+  }
+
 
 .container {
   width: 100%;
@@ -61,13 +71,12 @@ hr {
   display: inline-block;
   padding: 0 1rem;
   line-height: 2.5rem;
-  background-color: #e3e3e3;
   border-radius: 3px;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .button.nav-link {
+  background-color: #e3e3e3;
   color: #353535;
 }
 .button.nav-link:visited {
