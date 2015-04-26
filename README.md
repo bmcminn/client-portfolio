@@ -5,13 +5,53 @@
 
 ## Overview
 
-A simple to use client photography portal that allows you to send links to your clients to preview and download the work you develop for them.
+A simple to use client project portal that allows you to send your client links to preview and/or download the work you develop for them.
 
-## Features
+### Features
 
-Manage multiple projects with
+- Easy install
+- Flexible and extensible project setup and simple configuration
+- Customize your layout and theme with [Handlebars](http://handlebarsjs.com/) and [Stylus](https://learnboost.github.io/stylus/)
 
-## Workflow
+### Folder structure (of a live app instance)
+
+    |-- client-portfolio/
+    |   |-- _app/..
+    |   |-- _projects/
+    |   |   |-- project-name/
+    |   |   |   |-- # (png|jpg|jpeg|gif)'s go here
+    |   |   |   |-- # zip's go here
+    |   |   |   `-- project.json
+    |   |   |-- other-projects/..
+    |   |   `-- other-projects/..
+    |   |-- _views/
+    |   `-- vendors/
+    |-- .htaccess
+    `-- index.php
+
+## Installation
+
+1. Ensure you have the following installed:
+    - Terminal application
+    - [PHP 5.4+](https://php.net/downloads.php)
+    - [Composer](https://getcomposer.org/download/)
+    - [Node.js/NPM](https://nodejs.org/)
+1. Enter the following commands to get up an running:
+    ```bash
+    > # install all PHP libraries
+    > composer install
+
+    > # install node.js packages
+    > npm i
+
+    > # If you're working from Localhost run the following and open in browser
+    > php -S localhost:3005 index.php
+    ```
+
+
+## Adding/Editing Projects
+
+
 
 
 ## Deploying
