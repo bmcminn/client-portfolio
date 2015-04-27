@@ -15,54 +15,37 @@
 
     <h1>{{ client }} | {{ name }}</h1>
 
-    <a name="thumbnails"></a>
     <hr>
 
+    <h2>Downloads</h2>
+    <ul class="inline-list">
+      {{#each download}}
+      <li>
+        <a class="button download" href="{{ path }}">{{capitalize name }}</a>
+      </li>
+      {{/each}}
+    </ul>
+
+    <hr>
 
     <h2>Thumbnails</h2>
-    <ul class="image-list project-thumbnails">
-    // TODO: Add some kind of gallery if javascript is enabled
+    <ul class="grid project-thumbnails">
+    <!-- // TODO: Add some kind of gallery if javascript is enabled -->
     {{#each thumbnails }}
-      <li><img src="{{ this }}" alt="{{ this }}"></li>
+      <li data-image="{{ this }}"><img src="{{ this }}" alt="{{ this }}"></li>
     {{/each}}
     </ul>
 
     <p class="text-center copyright-container">
-      &copy; {{ year }} - {{ author.name }} - <img src="https://licensebuttons.net/l/{{ license }}/4.0/80x15.png" alt="")
+      &copy; {{ year }} - {{ author.name }} - <img src="https://licensebuttons.net/l/{{ license }}/4.0/80x15.png" alt="">
     </p>
 
-    <a name="attribution"></a>
-    <hr>
 
+    <hr>
 
     {{{markdown_partial license }}}
 
-
   </div>
-
-  <footer class="page-footer fixed-footer">
-    <div class="container">
-      <nav class="page-nav">
-        <ul class="inline-list">
-          <li><span class="button empty"><b>Downloads:</b></span></li>
-<!--
-          <li>
-            <a class="button nav-link picture" href="#thumbnails">Thumbnails</a>
-          </li>
-          <li>
-            <a class="button nav-link" href="#attribution">License</a>
-          </li>
-          -->
-          {{#each download}}
-          <li>
-            <a class="button download" href="{{ path }}">{{capitalize name }}</a>
-          </li>
-          {{/each}}
-        </ul
-      </nav>
-    </div>
-  </footer>
-
 
 </body>
 </html>
