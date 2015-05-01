@@ -55,22 +55,21 @@
       $name = preg_replace('/.(jpg|jpeg|png|gif)/i', '', basename($path));
 
       $thumbs[$thumb] = [
-        "path"        => BASE_URL . "/$path"
-      , "name"        => $name
-      , "nicename"    => ucwords(preg_replace('/[-_\s]/', ' ', $name))
-      , "orientation" => $orientation
-      , "width"       => $sizes[0]
-      , "height"      => $sizes[1]
+        'path'        => BASE_URL . "/{$path}"
+      , 'name'        => $name
+      , 'nicename'    => ucwords(preg_replace('/[-_\s]/', ' ', $name))
+      , 'orientation' => $orientation
+      , 'width'       => $sizes[0]
+      , 'height'      => $sizes[1]
       ];
     }
 
-    console($thumbs);
 
     // recompile app model with project model data
     $appModel = array_replace_recursive(
-      $appModel,
-      requireJSON("_projects/{$projectPath}/project.json"),
-      [
+      $appModel
+    , requireJSON("_projects/{$projectPath}/project.json")
+    , [
         'projectPath' =>  BASE_URL . "/{$projectPath}/"
       , 'resources'   =>  BASE_URL.'/resources/'
       , 'download'    =>  $zip
