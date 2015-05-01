@@ -17,6 +17,7 @@
 
     <hr>
 
+    {{#if download}}
     <h2>Downloads</h2>
     <ul class="inline-list">
       {{#each download}}
@@ -27,6 +28,7 @@
     </ul>
 
     <hr>
+    {{/if}}
 
     <h2>Thumbnails</h2>
     <ul class="grid project-thumbnails">
@@ -37,9 +39,8 @@
     </ul>
 
     <p class="text-center copyright-container">
-      &copy; {{ year }} - {{ author.name }} - <img src="https://licensebuttons.net/l/{{ license }}/4.0/80x15.png" alt="">
+      &copy; {{ date.year }} - {{ author.name }} - <img src="https://licensebuttons.net/l/{{ license }}/4.0/80x15.png" alt="">
     </p>
-
 
     <hr>
 
