@@ -140,6 +140,7 @@ blockquote {
 
 .project-thumbnails {
   font-size: 0;
+  text-align: center;
 }
 
   [data-image] {
@@ -148,7 +149,6 @@ blockquote {
     /*height: 260px;*/
     overflow: hidden;
     display: inline-block;
-    margin-bottom: 0.5rem;
   }
 
   [data-image] img {
@@ -161,11 +161,12 @@ blockquote {
   }
 
 
-@media (min-width: 550px) {
+@media (min-width: 575px) {
 
   [data-image] {
     width: 33.33333%;
     height: 230px;
+    margin-bottom: 0.5rem;
   }
 
   [data-image-landscape] {
