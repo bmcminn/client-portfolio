@@ -22,7 +22,8 @@
       return;
     }
 
-    // Do we have a zip folder?
+
+    // Get .zip folders
     $zip = glob("_projects/{$projectPath}/*.zip");
 
     if (!count($zip) > 0) {
@@ -41,9 +42,29 @@
     $thumbs = glob("_projects/{$projectPath}/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 
     foreach ($thumbs as $thumb => $path) {
-      $thumbs[$thumb] = BASE_URL . "/$path";
+
+      // Get image size and orientation
+      $sizes = getimagesize($path);
+      $orientation = 'portrait';
+
+      if ($sizes[0] > $sizes[1]) {
+        $orientation = 'landscape';
+      }
+
+      // Get image nicename
+      $name = preg_replace('/.(jpg|jpeg|png|gif)/i', '', basename($path));
+
+      $thumbs[$thumb] = [
+        "path"        => BASE_URL . "/$path"
+      , "name"        => $name
+      , "nicename"    => ucwords(preg_replace('/[-_\s]/', ' ', $name))
+      , "orientation" => $orientation
+      , "width"       => $sizes[0]
+      , "height"      => $sizes[1]
+      ];
     }
 
+    console($thumbs);
 
     // recompile app model with project model data
     $appModel = array_replace_recursive(
