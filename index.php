@@ -32,7 +32,7 @@
 
 
   // serve the requested resource as-is.
-  if (preg_match('/\.(?:png|jpg|jpeg|gif|css|less|zip)$/', REQUEST_URI)) {
+  if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|less|zip)$/', REQUEST_URI)) {
     return false;
   }
 
