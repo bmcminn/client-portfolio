@@ -22,8 +22,6 @@
       return;
     }
 
-    console(BASE_URL);
-
     // Do we have a zip folder?
     $zip = glob("_projects/{$projectPath}/*.zip");
 
@@ -59,7 +57,6 @@
       ]
     );
 
-    console($appModel);
 
     // handle download limits on our project
     // if (isset($appModel['limit'])) {
