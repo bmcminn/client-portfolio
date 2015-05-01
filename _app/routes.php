@@ -41,27 +41,31 @@
     // Get our thumbnails
     $thumbs = glob("_projects/{$projectPath}/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
 
-    foreach ($thumbs as $thumb => $path) {
+    if (!count($thumbs) > 0) {
+      $thumbs = null;
+    } else {
+      foreach ($thumbs as $thumb => $path) {
 
-      // Get image size and orientation
-      $sizes = getimagesize($path);
-      $orientation = 'portrait';
+        // Get image size and orientation
+        $sizes = getimagesize($path);
+        $orientation = 'portrait';
 
-      if ($sizes[0] > $sizes[1]) {
-        $orientation = 'landscape';
+        if ($sizes[0] > $sizes[1]) {
+          $orientation = 'landscape';
+        }
+
+        // Get image nicename
+        $name = preg_replace('/.(jpg|jpeg|png|gif)/i', '', basename($path));
+
+        $thumbs[$thumb] = [
+          'path'        => BASE_URL . "/{$path}"
+        , 'name'        => $name
+        , 'nicename'    => ucwords(preg_replace('/[-_\s]/', ' ', $name))
+        , 'orientation' => $orientation
+        , 'width'       => $sizes[0]
+        , 'height'      => $sizes[1]
+        ];
       }
-
-      // Get image nicename
-      $name = preg_replace('/.(jpg|jpeg|png|gif)/i', '', basename($path));
-
-      $thumbs[$thumb] = [
-        'path'        => BASE_URL . "/{$path}"
-      , 'name'        => $name
-      , 'nicename'    => ucwords(preg_replace('/[-_\s]/', ' ', $name))
-      , 'orientation' => $orientation
-      , 'width'       => $sizes[0]
-      , 'height'      => $sizes[1]
-      ];
     }
 
 
