@@ -33,6 +33,7 @@
         $zip[$file] = [
           'name' => preg_replace('/-/', ' ', basename($filePath, '.zip'))
         , 'path' => $filePath
+        , 'size' => round(filesize($filePath)/1024/1024, 1)
         ];
       }
     }
