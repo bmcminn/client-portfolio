@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="nofollow" />
   <link rel="shortcut icon" href="/favicon.png">
-  <link rel="stylesheet" href="{{ resources }}style.css">
-  <link rel="stylesheet" type="application/font-woff2" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2">
+  <link rel="stylesheet" href="{{ resources }}main.css">
 </head>
 <body>
 
@@ -34,7 +33,6 @@
     {{#if thumbnails }}
       <h2>Thumbnails</h2>
       <ul class="grid project-thumbnails" data-container="photos">
-      <!-- // TODO: Add some kind of gallery if javascript is enabled -->
       {{#each thumbnails }}
         <li data-image data-image-{{ this.orientation }}><img src="{{ this.path }}" alt="{{ this.nicename }}"></li>
       {{/each}}
