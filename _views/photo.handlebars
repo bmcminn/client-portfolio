@@ -21,7 +21,7 @@
       <ul class="inline-list">
         {{#each download}}
         <li>
-          <a class="button download" href="{{ path }}">{{capitalize name }} ({{ size }}Mb)</a>
+          <a class="button download" href="{{ path }}">{{capitalize name }} ({{ size }})</a>
         </li>
         {{/each}}
       </ul>
@@ -34,7 +34,9 @@
       <h2>Thumbnails</h2>
       <ul class="grid project-thumbnails" data-container="photos">
       {{#each thumbnails }}
-        <li data-image data-image-{{ this.orientation }}><img src="{{ this.path }}" alt="{{ this.nicename }}"></li>
+        <li data-image data-image-{{ this.orientation }}>
+          <img src="{{ this.path }}" alt="{{ this.nicename }}" title="{{ this.nicename }}">
+        </li>
       {{/each}}
       </ul>
     {{/if}}
