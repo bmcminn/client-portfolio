@@ -11,6 +11,7 @@
       "folder_exclude_patterns": [
         "node_modules",
         "vendor",
+        // "resources",
         "bower_components"
       ]
 		}
