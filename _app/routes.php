@@ -56,7 +56,7 @@
         }
 
         // Get image nicename
-        $name = preg_replace('/.(jpg|jpeg|png|gif)/i', '', basename($path));
+        $name = preg_replace('/\.[\w\d]+/i', '', basename($path));
 
         $thumbs[$thumb] = [
           'path'        => BASE_URL . "/{$path}"
