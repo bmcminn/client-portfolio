@@ -4,9 +4,24 @@
   // HOME ROUTE
   //
   map(BASE_URL.'/', function() {
-    // TODO: Add 404 page here
+    error(404);
   });
 
+
+  //
+  // ADMIN STUFF
+  //
+
+  map(BASE_URL.'/admin/', function($db) {
+
+    echo 'admin';
+
+  });
+
+
+  map(BASE_URL.'/login', function($db) {
+    echo 'login';
+  });
 
 
   //
