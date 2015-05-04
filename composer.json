@@ -1,27 +1,28 @@
 {
-    "name": "Brandtley/gbox-photos",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "bmcminn",
-            "email": "labs@gbox.name"
-        }
+  "name": "Brandtley/gbox-photos",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "bmcminn",
+      "email": "labs@gbox.name"
+    }
+  ],
+
+  "autoload": {
+    "files": [
+      "_app/funcs.php"
     ],
 
-    "autoload": {
-      "files": [
-        "_app/funcs.php"
-      ],
+    "psr-4": {
 
-      "psr-4": {
-
-      }
-    },
-
-    "require": {
-      "badphp/dispatch": "8.*@dev",
-      "filp/whoops": "1.2.*@dev",
-      "xamin/handlebars.php": "dev-master",
-      "erusev/parsedown-extra": "dev-master"
     }
+  },
+
+  "require": {
+    "badphp/dispatch": "8.*@dev",
+    "filp/whoops": "1.2.*@dev",
+    "xamin/handlebars.php": "dev-master",
+    "erusev/parsedown-extra": "dev-master",
+    "agentejo/mongo-lite": "dev-master",
+  }
 }
