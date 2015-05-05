@@ -6,8 +6,10 @@
 
   // Get base url for project (allows us to nest the app within a subdir of our host)
   define('SERVER_NAME',     filter_var($_SERVER['SERVER_NAME'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE));
-  define('REQUEST_URI',     filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE));
+  define('REQUEST_URI',     preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
+  define('REQUEST_ARGS',    preg_replace('/^*+\?/', '', filter_var($_SERVER['QUERY_STRING'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
   define('BASE_URL',        preg_replace('/\/[A-Z\d-_]+$/i', '', REQUEST_URI));
+  define('HTTP',            '//');
 
 
   // serve the requested resource as-is.
