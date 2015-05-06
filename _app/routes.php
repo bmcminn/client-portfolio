@@ -5,6 +5,7 @@
   //
   map(BASE_URL.'/', function() {
     error(404);
+    return;
   });
 
 
@@ -12,16 +13,21 @@
   // ADMIN STUFF
   //
 
-  map(BASE_URL.'/admin/', function($db) {
+  // map(BASE_URL.'/admin/', function($db) {
+  //   global $appModel, $handlebars;
 
-    echo 'admin';
+  //   echo 'admin';
 
-  });
-
+  // });
 
   map(BASE_URL.'/login', function($db) {
-    echo 'login';
+    global $appModel, $handlebars;
+
+    print_r($_POST);
+
+    echo $handlebars->render('login', $appModel);
   });
+
 
 
   //
@@ -126,7 +132,7 @@
 
 
   //
-  // 404 PAGE
+  // HTTP CODE HANDLEING PAGES
   //
   map(404, function ($code) {
     global $appModel, $handlebars;
@@ -135,3 +141,5 @@
 
     echo $handlebars->render('httpcode', $appModel);
   });
+
+
