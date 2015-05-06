@@ -5,11 +5,14 @@
 
 
   // Get base url for project (allows us to nest the app within a subdir of our host)
-  define('SERVER_NAME',     filter_var($_SERVER['SERVER_NAME'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE));
-  define('REQUEST_URI',     preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
-  define('REQUEST_ARGS',    preg_replace('/^*+\?/', '', filter_var($_SERVER['QUERY_STRING'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
-  define('BASE_URL',        preg_replace('/\/[A-Z\d-_]+$/i', '', REQUEST_URI));
-  define('HTTP',            '//');
+  $filterPort = filter_var($_SERVER['SERVER_PORT'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE);
+  define('SERVER_PORT', $filterPort===80?'':":{$filterPort}");
+
+  define('SERVER_NAME', filter_var($_SERVER['SERVER_NAME'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE).SERVER_PORT);
+  define('REQUEST_URI', preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
+  define('BASE_URL',    preg_replace('/\/[\d\w?&=%\-_]+$/i', '', REQUEST_URI));
+  define('HTTP',        '//');
+
 
 
   // serve the requested resource as-is.
@@ -19,7 +22,7 @@
 
 
   // Setup debugging
-  if (preg_match('/localhost\:/', SERVER_NAME)) {
+  if (preg_match('/localhost/', SERVER_NAME)) {
     ini_set('display_errors',1);
     ini_set('display_startup_errors',1);
     error_reporting(-1);
@@ -32,12 +35,12 @@
 
   // Define constants
   define('DS',              DIRECTORY_SEPARATOR);
+  define('BASE_DIR',        __DIR__);
   define('VIEWS_DIR',       __DIR__.DS.'_views'.DS);
   define('APP_DIR',         __DIR__.DS.'_app');
-  define('BASE_DIR',        __DIR__);
   define('PROJECT_DIR',     __DIR__.DS.'_projects');
-  define('HANDLEBARS_EXT',  '.handlebars');
   define('DB_FOLDER',       __DIR__.DS.'_data');
+  define('HANDLEBARS_EXT',  '.handlebars');
 
 
   // load Composer modules
