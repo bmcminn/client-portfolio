@@ -19,6 +19,10 @@
   //     return config('dispatch.url') . $context->get($args);
   //   });
 
+  $handlebars->addHelper('url', function($template, $context, $args, $source) {
+    return HTTP.SERVER_NAME.BASE_URL.$args;
+  });
+
 
   $handlebars->addHelper('markdown_template', function($template, $context, $args, $source) {
       global $appModel;
