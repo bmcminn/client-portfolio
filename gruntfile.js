@@ -85,6 +85,7 @@ module.exports = function(grunt) {
         },
         files: {
           './resources/main.css': './_resources/stylus/main.styl'
+        , './resources/login.css': './_resources/stylus/login.styl'
         }
       },
 

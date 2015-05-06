@@ -2,19 +2,23 @@
  * © 2015 Brandtley McMinn <labs@gbox.name>
  */
 
-/* line 186 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 286 : D:\github\client-portfolio\_resources\stylus\login.styl */
 
 /* line 1 : d:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
 
-/* line 286 : d:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
+/* line 186 : d:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
+
+/* line 76 : D:\github\client-portfolio\_resources\stylus\main.styl */
+
+/* line 21 : D:\github\client-portfolio\_resources\stylus\main.styl */
 
 /* line 3 : D:\github\client-portfolio\_resources\stylus\_variables.styl */
 
-/* line 21 : D:\github\client-portfolio\_resources\stylus\_variables.styl */
+/* line 8 : D:\github\client-portfolio\_resources\stylus\_variables.styl */
 
 /* line 1 : D:\github\client-portfolio\_resources\stylus\_colors.styl */
 
-/* line 8 : D:\github\client-portfolio\_resources\stylus\_colors.styl */
+/* line 38 : D:\github\client-portfolio\_resources\stylus\_colors.styl */
 
 /* line 6 : D:\github\client-portfolio\_resources\stylus\_typography.styl */
 @font-face {
@@ -40,7 +44,7 @@
   text-align: right;
 }
 
-/* line 38 : D:\github\client-portfolio\_resources\stylus\_typography.styl */
+/* line 381 : D:\github\client-portfolio\_resources\stylus\_typography.styl */
 
 /* line 1 : D:\github\client-portfolio\_resources\stylus\_normalize.styl */
 /* normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -449,8 +453,6 @@ blockquote {
   margin: 0;
   width: 100%;
 }
-
-/* line 141 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 480px) {
 
 /* line 143 : D:\github\client-portfolio\_resources\stylus\main.styl */
@@ -458,8 +460,6 @@ blockquote {
     width: 50%;
   }
 }
-
-/* line 148 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 575px) {
 
 /* line 150 : D:\github\client-portfolio\_resources\stylus\main.styl */
@@ -474,8 +474,6 @@ blockquote {
     width: 66.66666%;
   }
 }
-
-/* line 160 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 650px) {
 
 /* line 161 : D:\github\client-portfolio\_resources\stylus\main.styl */
@@ -483,8 +481,6 @@ blockquote {
     height: 265px;
   }
 }
-
-/* line 166 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 750px) {
 
 /* line 167 : D:\github\client-portfolio\_resources\stylus\main.styl */
@@ -492,8 +488,6 @@ blockquote {
     height: 300px;
   }
 }
-
-/* line 172 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 810px) {
 
 /* line 173 : D:\github\client-portfolio\_resources\stylus\main.styl */
@@ -501,8 +495,6 @@ blockquote {
     height: 320px;
   }
 }
-
-/* line 178 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 860px) {
 
 /* line 180 : D:\github\client-portfolio\_resources\stylus\main.styl */
@@ -515,4 +507,113 @@ blockquote {
   [data-image-landscape] {
     width: 50%;
   }
+}
+
+/* line 3 : D:\github\client-portfolio\_resources\stylus\login.styl */
+body {
+  background-color: #e3e3e3;
+}
+
+/* line 6 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form {
+  border: 1px solid #c3c3c3;
+  padding: 0 1rem;
+  background-color: #fff;
+  border-radius: 3px;
+  width: 100%;
+  max-width: 320px;
+  margin: 2rem auto;
+  font-size: 0;
+}
+
+/* line 16 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form > * {
+  font-size: initial;
+}
+
+/* line 20 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form h1,
+form h2,
+form h3,
+form h4,
+form h5,
+form h6 {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+/* line 24 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label {
+  box-sizing: border-box;
+  border: 1px solid #e3e3e3;
+  display: inline-block;
+  padding: 0.5rem;
+  line-height: 1.5rem;
+  text-transform: capitalize;
+  border-radius: 3px 3px 0 0;
+  width: 100%;
+}
+
+/* line 34 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label:last-of-type {
+  border-radius: 0 0 3px 3px;
+}
+
+/* line 37 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label.half {
+  width: 50%;
+}
+
+/* line 40 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label.third {
+  width: 33.33333%;
+}
+
+/* line 43 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label.fourth {
+  width: 25%;
+}
+
+/* line 46 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label.fifth {
+  width: 20%;
+}
+
+/* line 49 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label.two.fifth {
+  width: 40%;
+}
+
+/* line 52 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label.half+.half,
+form label.third+.third,
+form label.fourth+.fourth,
+form label.fifth+.fifth {
+  border-left: 0;
+}
+
+/* line 58 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form input {
+  display: block;
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #e3e3e3;
+}
+
+/* line 65 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form button {
+  display: block;
+  border: 1px solid;
+  border-color: #c3c3c3;
+  width: 100%;
+  border-radius: 3px;
+  padding: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* line 74 : D:\github\client-portfolio\_resources\stylus\login.styl */
+form label+label {
+  border-top: 0;
+  border-radius: 0;
 }
