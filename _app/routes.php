@@ -4,8 +4,10 @@
   // HOME ROUTE
   //
   map(BASE_URL.'/', function() {
-    error(404);
-    return;
+    checkUserStatus();
+
+    // TODO: Fix this problem with BASE_URL
+    // return redirect('/login');
   });
 
 
@@ -13,17 +15,138 @@
   // ADMIN STUFF
   //
 
-  // map(BASE_URL.'/admin/', function($db) {
-  //   global $appModel, $handlebars;
+  map(BASE_URL.'/admin', function($db) {
+    checkUserTimeout();
 
-  //   echo 'admin';
+    global $appModel, $handlebars;
+    echo 'admin';
+  });
 
-  // });
 
-  map(BASE_URL.'/login', function($db) {
+  //
+  // LOGIN STUFF
+  //
+
+  map(BASE_URL.'/logout', function() {
+    logUserOut();
+  });
+
+
+  map(BASE_URL.'/login', function($db, $passHash) {
+
+    checkUserStatus();
+
     global $appModel, $handlebars;
 
-    print_r($_POST);
+    console($_POST, '$_POST', 'info');
+    console($_GET, '$_GET', 'info');
+    console($_SESSION, '$_SESSION', 'info');
+
+    $eMessage = [];
+
+    // If the form was submitted
+    // AND we have POST data
+    // TODO: AND the referrer wasn't a foreign (cURL|wget) request
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+
+      // alias our login creds
+      $username = strtolower($_POST['username']); // lower caseing to ensure we don't have duplicate usernames
+      $password = $_POST['password'];
+
+      // check if USERNAME is an empty string
+      if (empty($username)) {
+        $eMessage[] = 'Username is a required field';
+      }
+
+      // check if PASSWORD is an empty string
+      if (empty($password)) {
+        $eMessage[] = 'Password is a required field';
+      }
+
+      // cache the posted USERNAME in our viewmodel to hydrate the field
+      $appModel['loginInfo'] = [
+        'username' => $_POST['username']
+      ];
+
+      // lets test our creds
+      if (!empty($username) && !empty($password)) {
+
+        if (strlen($password) > 72) {
+          $eMessage[] = "Password must be 72 characters or less";
+        } else {
+
+          // Get our user data from the DB
+          $user = $db->users->find(function($document) use ($username, $password, $passHash) {
+            return $document["username"] === $username
+                && $passHash->CheckPassword($password, $document["password"])
+              ;
+          });
+
+          // User is valid, we can log them in :)
+          if ($user->valid()) {
+
+            // alias the current User record
+            $user = $user->current();
+
+            // unset various user data so we don't chance exposing it to the UI
+            unset($user['_id']);
+            unset($user['password']);
+
+            // update the user timestamp value to now
+            $user['timestamp'] = time();
+            $user['lastLogin'] = date('Y-m-d');
+
+            // update the timestamp for our user record
+            $db->users->update(
+              function($document) use ($username) {
+                return $document['username'] === $username;
+              },
+              [
+                'timestamp' => $user['timestamp']
+              , 'lastLogin' => $user['lastLogin']
+              ]
+            );
+
+            console($user, '$user', 'info');
+
+            // assign our SESSION data
+            $_SESSION['user'] = $user;
+
+            // Go to /admin
+            redirect('/admin');
+
+          } else {
+            $eMessage[] = 'The username or password did not match our records';
+          }
+        }
+      }
+    }
+
+    // add error messaging to our view model
+    if (!empty($eMessage)) {
+      $appModel['loginError'] = [
+        'message' => $eMessage
+      ];
+    }
+
+
+  // $user = [
+  //   "fname"       =>  "Bob"
+  // , "lname"       =>  "Belcher"
+  // , "clientName"  =>  "Bob's Burgers"
+  // , "phone"       =>  "135-555-1234"
+  // , "email"       =>  "bob@bobsburgers.com"
+  // , "username"    =>  "bobby"
+  // , "password"    =>  "sdjfklsdjl"
+  // , "address" => [
+  //     "street"      => "4100 Lost Avenue"
+  //   , "city"        => "Wharfington"
+  //   , "state"       => "Pennsylvania"
+  //   , "stateShort"  => "PA"
+  //   , "zip"         => "83565"
+  //   ]
+  // ];
+
 
     echo $handlebars->render('login', $appModel);
   });

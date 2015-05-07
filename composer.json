@@ -23,6 +23,7 @@
     "filp/whoops": "1.2.*@dev",
     "xamin/handlebars.php": "dev-master",
     "erusev/parsedown-extra": "dev-master",
-    "agentejo/mongo-lite": "dev-master"
+    "agentejo/mongo-lite": "dev-master",
+    "hautelook/phpass": "dev-master"
   }
 }

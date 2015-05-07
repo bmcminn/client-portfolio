@@ -20,7 +20,7 @@
   //   });
 
   $handlebars->addHelper('url', function($template, $context, $args, $source) {
-    return HTTP.SERVER_NAME.BASE_URL.$args;
+    return SITE_URL.$args;
   });
 
 

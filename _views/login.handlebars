@@ -12,9 +12,16 @@
 
   <form action="{{url /login }}" method="POST">
     <h1>Login</h1>
+    {{#if loginError }}
+    <ul class="error">
+      {{#each loginError.message }}
+        <li>{{ . }}</li>
+      {{/each}}
+    </ul>
+    {{/if}}
     <label for="username">
       Username
-      <input name="username" id="username" type="text" value="{{ user.name }}">
+      <input name="username" id="username" type="text" value="{{ loginInfo.username }}">
     </label>
 
 

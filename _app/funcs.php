@@ -23,12 +23,59 @@
 
 
   /**
+   * Checks if the 'user' session data has been established
+   * @return [type] [description]
+   */
+  function checkUserStatus() {
+    // TODO: remap this function to handle use session validation
+    // if (isset($_SESSION['user'])) {
+    //   return redirect('/admin');
+    // }
+  }
+
+
+  function checkUserTimeout() {
+    // if (isset($_SESSION['timestamp'])) {
+
+    //   return redirect('/login');
+    // }
+  }
+
+
+  /**
+   * Logs out the user by destroying the session
+   * @return [type] [description]
+   */
+  function logUserOut() {
+    session_destroy();
+    return redirect('/login');
+  }
+
+  /**
+   * [filterVar description]
+   * @param  [type] $var [description]
+   * @return [type]      [description]
+   */
+  function filterVar($var) {
+    return filter_var($var, FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE);
+  }
+
+
+
+  /**
    * Dumps data into a JS console.log command
    * @param  [type] $data [description]
    * @return [type]       [description]
    */
-  function console($data, $type="log") {
-    echo "<script>console.$type(JSON.parse('", json_encode($data), "'));</script>";
+  function console($data, $alias=null, $type="log") {
+
+    if ($alias) {
+      $alias = "\"{$alias}\",";
+    } else {
+      $alias = '';
+    }
+
+    echo "<script>console.{$type}({$alias}JSON.parse('", preg_replace('/\'/', "\\'", json_encode($data)), "'));</script>";
   }
 
 

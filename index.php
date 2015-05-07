@@ -1,18 +1,28 @@
 <?php
 
+  // Disable CORS for now
+  // TODO: determine if we can submit logins via command prompt utilities
+  header("Access-Control-Allow-Origin: null");
+
+
   // Init the user session
   session_start();
 
 
+  // Prevent PHP garbage collection from deleting our session
+  if(!isset($_SESSION['gc_last_access']) || (time() - $_SESSION['gc_last_access']) > 60) {
+    $_SESSION['gc_last_access'] = time();
+  }
+
+
   // Get base url for project (allows us to nest the app within a subdir of our host)
   $filterPort = filter_var($_SERVER['SERVER_PORT'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE);
-  define('SERVER_PORT', $filterPort===80?'':":{$filterPort}");
-
-  define('SERVER_NAME', filter_var($_SERVER['SERVER_NAME'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE).SERVER_PORT);
-  define('REQUEST_URI', preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
-  define('BASE_URL',    preg_replace('/\/[\d\w?&=%\-_]+$/i', '', REQUEST_URI));
-  define('HTTP',        '//');
-
+  define('SERVER_PORT',     $filterPort===80?'':":{$filterPort}");
+  define('SERVER_NAME',     filter_var($_SERVER['SERVER_NAME'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE).SERVER_PORT);
+  define('REQUEST_URI',     preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
+  define('BASE_URL',        preg_replace('/\/[\d\w?&=%\-_]+$/i', '', REQUEST_URI));
+  define('SITE_URL',        '//'.SERVER_NAME.BASE_URL);
+  define('SESSION_TIMEOUT', 600000); // 10 minutes
 
 
   // serve the requested resource as-is.
@@ -29,7 +39,7 @@
   }
 
 
-  // Set default timezone so we don't depend on the system timezone being configured correctly
+  // Set default timezone
   date_default_timezone_set('America/Chicago');
 
 
@@ -45,7 +55,17 @@
 
   // load Composer modules
   require 'vendor/autoload.php';
+
+  // setup Database stuff
   require APP_DIR.DS.'database.php';
+
+
+  //
+  // setup PHPass
+  //
+  use Hautelook\Phpass\PasswordHash;
+
+  $passHash = new PasswordHash(8,false);
 
 
   //
@@ -86,5 +106,6 @@
   // Load our default routes
   require APP_DIR . DS . "routes.php";
 
-  // Dispatch Throwdown!
-  dispatch($db);
+
+  // Dispatch!
+  dispatch($db, $passHash);
