@@ -27,8 +27,7 @@ _projects/*/
 ######################
 *.log
 *.db
-*.sql
-*.sqlite
+*.sql*
 
 # OS generated files #
 ######################
