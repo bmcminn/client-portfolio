@@ -47,8 +47,23 @@
   }
 
 
+  /**
+   * Checks the curring route and
+   * @param  string $route The route partial we should check for
+   * @return bool
+   */
   function onRoute($route) {
     return strpos(REQUEST_URI, $route) ? true : false;
+  }
+
+
+  /**
+   * [setLastRoute description]
+   * @param [type] $route [description]
+   */
+  function setLastRoute($route) {
+    $_SESSION['lastRoute'] = $route;
+    return null;
   }
 
 
@@ -60,6 +75,7 @@
     session_destroy();
     return redirect('/login');
   }
+
 
   /**
    * [filterVar description]

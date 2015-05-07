@@ -16,12 +16,14 @@
   //
 
   map(BASE_URL.'/admin', function($db) {
-    $_SESSION['lastRoute'] = BASE_URL.'/admin';
+
+    setLastRoute(BASE_URL.'/admin');
 
     checkUserStatus();
 
     global $appModel, $handlebars;
-    echo 'admin';
+
+    echo $handlebars->render('admin', $appModel);
   });
 
 
@@ -89,28 +91,32 @@
             // alias the current User record
             $user = $user->current();
 
-            // unset various user data so we don't chance exposing it to the UI
+            // unset various user data so we don't want to update
             unset($user['_id']);
             unset($user['password']);
 
             // update the user timestamp value to now
-            $user['timestamp'] = time();
-            $user['lastLogin'] = date('Y-m-d');
+            $user = array_replace_recursive(
+              $user
+            , [
+                'timestamp'          => time()
+              , 'lastLogin'          => date('Y-m-d')
+              , 'lastLoginLocation'  => $_SERVER['REMOTE_ADDR']
+              ]);
+
 
             // update the timestamp for our user record
             $db->users->update(
               function($document) use ($username) {
                 return $document['username'] === $username;
               },
-              [
-                'timestamp' => $user['timestamp']
-              , 'lastLogin' => $user['lastLogin']
-              ]
+              $user
             );
 
-            console($user, '$user', 'info');
+            // remove any last bits we shouldn't expose to the user
+            unset($user['lastLoginLocation']);
 
-            // assign our SESSION data
+            // set our SESSION data
             $_SESSION['user'] = $user;
 
             // Go to /admin
