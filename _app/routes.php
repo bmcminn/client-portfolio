@@ -16,7 +16,9 @@
   //
 
   map(BASE_URL.'/admin', function($db) {
-    checkUserTimeout();
+    $_SESSION['lastRoute'] = BASE_URL.'/admin';
+
+    checkUserStatus();
 
     global $appModel, $handlebars;
     echo 'admin';
@@ -36,11 +38,10 @@
 
     checkUserStatus();
 
+    // TODO: move ALL this into a function...
+
     global $appModel, $handlebars;
 
-    console($_POST, '$_POST', 'info');
-    console($_GET, '$_GET', 'info');
-    console($_SESSION, '$_SESSION', 'info');
 
     $eMessage = [];
 

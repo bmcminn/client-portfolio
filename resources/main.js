@@ -1,1 +1,6 @@
-!function(a){a('[data-container="photos"]').imagesLoaded()}(jQuery);
+/**
+ * © 2015 Brandtley McMinn <labs@gbox.name>
+ */
+(function($) {
+    $('[data-container="photos"]').imagesLoaded();
+})(jQuery);

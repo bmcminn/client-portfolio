@@ -27,18 +27,28 @@
    * @return [type] [description]
    */
   function checkUserStatus() {
-    // TODO: remap this function to handle use session validation
-    // if (isset($_SESSION['user'])) {
-    //   return redirect('/admin');
-    // }
+
+    // the user is logged in
+    if (isset($_SESSION['user'])) {
+
+      // the user session has timed out
+      if (!onRoute('login')) {
+        if (time() - $_SESSION['user']['timestamp'] > SESSION_TIMEOUT) {
+          return redirect('/login');
+        }
+      }
+
+      // since we're logged in, we don't need to see the login view
+      if (onRoute('login')) {
+        return redirect('/admin');
+      }
+    }
+
   }
 
 
-  function checkUserTimeout() {
-    // if (isset($_SESSION['timestamp'])) {
-
-    //   return redirect('/login');
-    // }
+  function onRoute($route) {
+    return strpos(REQUEST_URI, $route) ? true : false;
   }
 
 

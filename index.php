@@ -22,8 +22,10 @@
   define('REQUEST_URI',     preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
   define('BASE_URL',        preg_replace('/\/[\d\w?&=%\-_]+$/i', '', REQUEST_URI));
   define('SITE_URL',        '//'.SERVER_NAME.BASE_URL);
-  define('SESSION_TIMEOUT', 600000); // 10 minutes
+  define('SESSION_TIMEOUT', 600); // 10 minutes
 
+
+  // TODO: set route handler for project assets (/projects/PROJECT_NAME/*.jpg|jpeg|gif|png|zip) and validate if the user has access to them
 
   // serve the requested resource as-is.
   if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|less|zip)$/', REQUEST_URI)) {
@@ -58,6 +60,14 @@
 
   // setup Database stuff
   require APP_DIR.DS.'database.php';
+
+
+
+
+  console($_POST, '$_POST', 'info');
+  console($_GET, '$_GET', 'info');
+  console($_SESSION, '$_SESSION', 'info');
+
 
 
   //
