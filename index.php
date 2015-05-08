@@ -15,6 +15,16 @@
   }
 
 
+  // Define constants
+  define('DS',              DIRECTORY_SEPARATOR);
+  define('BASE_DIR',        __DIR__);
+  define('VIEWS_DIR',       __DIR__.DS.'_views'.DS);
+  define('APP_DIR',         __DIR__.DS.'_app');
+  define('PROJECT_DIR',     __DIR__.DS.'_projects');
+  define('DB_FOLDER',       __DIR__.DS.'_data');
+  define('HANDLEBARS_EXT',  '.handlebars');
+
+
   // Get base url for project (allows us to nest the app within a subdir of our host)
   $filterPort = filter_var($_SERVER['SERVER_PORT'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE);
   define('SERVER_PORT',     $filterPort===80?'':":{$filterPort}");
@@ -22,8 +32,25 @@
   define('REQUEST_URI',     preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
   define('BASE_URL',        preg_replace('/\/[\d\w?&=%\-_]+$/i', '', REQUEST_URI));
   define('SITE_URL',        '//'.SERVER_NAME.BASE_URL);
+
+
+  // Load environment configs
+  $env = null;
+  if (!strpos(REQUEST_URI, 'localhost')) {
+    $env = require APP_DIR.DS.'env.dev.php';
+  } else {
+    $env = require APP_DIR.DS.'env.prod.php';
+  }
+
+
+  // setup error configs
+  ini_set('display_errors',$env['show_errors']);
+  ini_set('display_startup_errors',$env['show_errors']);
+  error_reporting($env['error_reporting']);
+
+
   // define('SESSION_TIMEOUT', 600); // 10 minutes
-  define('SESSION_TIMEOUT', 60000); // 1000 minutes
+  define('SESSION_TIMEOUT', $env['session_timeout']); // 1000 minutes
 
 
   // TODO: set route handler for project assets (/projects/PROJECT_NAME/*.jpg|jpeg|gif|png|zip) and validate if the user has access to them
@@ -34,26 +61,8 @@
   }
 
 
-  // Setup debugging
-  if (preg_match('/localhost/', SERVER_NAME)) {
-    ini_set('display_errors',1);
-    ini_set('display_startup_errors',1);
-    error_reporting(-1);
-  }
-
-
   // Set default timezone
   date_default_timezone_set('America/Chicago');
-
-
-  // Define constants
-  define('DS',              DIRECTORY_SEPARATOR);
-  define('BASE_DIR',        __DIR__);
-  define('VIEWS_DIR',       __DIR__.DS.'_views'.DS);
-  define('APP_DIR',         __DIR__.DS.'_app');
-  define('PROJECT_DIR',     __DIR__.DS.'_projects');
-  define('DB_FOLDER',       __DIR__.DS.'_data');
-  define('HANDLEBARS_EXT',  '.handlebars');
 
 
   // load Composer modules
