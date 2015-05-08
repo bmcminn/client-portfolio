@@ -22,7 +22,8 @@
   define('REQUEST_URI',     preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
   define('BASE_URL',        preg_replace('/\/[\d\w?&=%\-_]+$/i', '', REQUEST_URI));
   define('SITE_URL',        '//'.SERVER_NAME.BASE_URL);
-  define('SESSION_TIMEOUT', 600); // 10 minutes
+  // define('SESSION_TIMEOUT', 600); // 10 minutes
+  define('SESSION_TIMEOUT', 60000); // 1000 minutes
 
 
   // TODO: set route handler for project assets (/projects/PROJECT_NAME/*.jpg|jpeg|gif|png|zip) and validate if the user has access to them
@@ -62,14 +63,6 @@
   require APP_DIR.DS.'database.php';
 
 
-
-
-  console($_POST, '$_POST', 'info');
-  console($_GET, '$_GET', 'info');
-  console($_SESSION, '$_SESSION', 'info');
-
-
-
   //
   // setup PHPass
   //
@@ -100,6 +93,7 @@
   // Project Data Here
   $appModel = array_replace_recursive(
     requireJSON('_app/author.json'),
+    [ 'labels' => requireJSON('_labels/en-us.json')],
     [
       'resources' => '/resources/'
     , 'date' => [
@@ -115,6 +109,17 @@
 
   // Load our default routes
   require APP_DIR . DS . "routes.php";
+
+
+
+
+
+  console($_POST, '$_POST', 'info');
+  console($_GET, '$_GET', 'info');
+  console($_SESSION, '$_SESSION', 'info');
+  // console($appModel, '$appModel', 'info');
+
+
 
 
   // Dispatch!
