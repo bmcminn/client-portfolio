@@ -2,7 +2,7 @@
  * © 2015 Brandtley McMinn <labs@gbox.name>
  */
 
-/* line 201 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 200 : D:\github\client-portfolio\_resources\stylus\main.styl */
 
 /* line 1 : d:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
 
@@ -303,6 +303,10 @@ th {
   padding: 0;
 }
 
+/* line 381 : D:\github\client-portfolio\_resources\stylus\_normalize.styl */
+
+/* line 1 : D:\github\client-portfolio\_resources\stylus\_mixins.styl */
+
 /* line 8 : D:\github\client-portfolio\_resources\stylus\main.styl */
 html {
   background-color: #fff;
@@ -332,28 +336,28 @@ body {
   overflow-y: scroll;
 }
 
-/* line 30 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 29 : D:\github\client-portfolio\_resources\stylus\main.styl */
 
-/* line 31 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 30 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .grid li {
   box-sizing: border-box;
 }
 
-/* line 35 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 34 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .container {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* line 41 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 40 : D:\github\client-portfolio\_resources\stylus\main.styl */
 hr {
   border: 0;
   height: 3px;
   background-color: #e3e3e3;
 }
 
-/* line 52 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 51 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .button {
   display: inline-block;
   padding: 0 1rem;
@@ -362,24 +366,24 @@ hr {
   text-decoration: none;
 }
 
-/* line 59 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 58 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .button.nav-link {
   background-color: #e3e3e3;
   color: #363636;
 }
 
-/* line 63 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 62 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .button.nav-link:visited {
   color: #363636;
 }
 
-/* line 67 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 66 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .button.download {
   background-color: #6c6;
   color: #fff;
 }
 
-/* line 72 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 71 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .button.download::before {
   font-family: 'FontAwesome';
   font-size: 1.1rem;
@@ -392,7 +396,7 @@ hr {
   content: "\f0ed";
 }
 
-/* line 86 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 85 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .inline-list {
   margin: 1rem 0;
   padding: 0;
@@ -400,7 +404,7 @@ hr {
   overflow: hidden;
 }
 
-/* line 92 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 91 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .inline-list li {
   display: inline-block;
   position: relative;
@@ -409,30 +413,30 @@ hr {
   margin-bottom: 1rem;
 }
 
-/* line 100 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 99 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .grid {
   margin: 1rem 0;
   padding: 0;
 }
 
-/* line 105 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 104 : D:\github\client-portfolio\_resources\stylus\main.styl */
 blockquote {
   background-color: #e3e3e3;
   padding: 0.25rem 1rem;
 }
 
-/* line 111 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 110 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .page-nav ul {
   margin: 0;
 }
 
-/* line 117 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 116 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .project-thumbnails {
   font-size: 0;
   text-align: center;
 }
 
-/* line 122 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 121 : D:\github\client-portfolio\_resources\stylus\main.styl */
 [data-image] {
   padding: 0.5rem;
   width: 100%;
@@ -440,7 +444,7 @@ blockquote {
   display: inline-block;
 }
 
-/* line 129 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 128 : D:\github\client-portfolio\_resources\stylus\main.styl */
 [data-image] img {
   object-fit: fill;
   object-position: center;
@@ -450,7 +454,7 @@ blockquote {
   width: 100%;
 }
 
-/* line 146 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 145 : D:\github\client-portfolio\_resources\stylus\main.styl */
 .error {
   color: #f26a85;
   background-color: #fce1e7;
@@ -460,68 +464,68 @@ blockquote {
   list-style-position: inside;
 }
 
-/* line 156 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 155 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 480px) {
 
-/* line 158 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 157 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image-portrait] {
     width: 50%;
   }
 }
 
-/* line 163 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 162 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 575px) {
 
-/* line 165 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 164 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image] {
     width: 33.33333%;
     height: 230px;
     margin-bottom: 0.5rem;
   }
 
-/* line 170 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 169 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image-landscape] {
     width: 66.66666%;
   }
 }
 
-/* line 175 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 174 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 650px) {
 
-/* line 176 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 175 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image] {
     height: 265px;
   }
 }
 
-/* line 181 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 180 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 750px) {
 
-/* line 182 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 181 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image] {
     height: 300px;
   }
 }
 
-/* line 187 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 186 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 810px) {
 
-/* line 188 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 187 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image] {
     height: 320px;
   }
 }
 
-/* line 193 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 192 : D:\github\client-portfolio\_resources\stylus\main.styl */
 @media (min-width: 860px) {
 
-/* line 195 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 194 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image] {
     width: 25%;
     height: 260px;
   }
 
-/* line 200 : D:\github\client-portfolio\_resources\stylus\main.styl */
+/* line 199 : D:\github\client-portfolio\_resources\stylus\main.styl */
   [data-image-landscape] {
     width: 50%;
   }

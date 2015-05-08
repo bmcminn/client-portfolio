@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>{{ user.clientName }} | {{ labels.admin }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="nofollow" />
   <link rel="shortcut icon" href="/favicon.png">
@@ -10,14 +10,11 @@
 </head>
 <body>
 
-  <h1>Admin</h1>
+{{> admin-header }}
 
-  <nav>
-    <ul>
-      <li>
-        <a class="button" href="{{url /logout }}">Logout</a>
-      </li>
-    </ul>
-  </nav>
+
+
+
+
 </body>
 </html>
