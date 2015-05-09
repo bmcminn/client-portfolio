@@ -12,9 +12,9 @@
 
   <form action="{{url /login }}" method="POST">
     <h1>Login</h1>
-    {{#if loginError }}
+    {{#if formError }}
     <ul class="error">
-      {{#each loginError.message }}
+      {{#each formError }}
         <li>{{ . }}</li>
       {{/each}}
     </ul>

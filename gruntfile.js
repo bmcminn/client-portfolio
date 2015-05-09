@@ -119,7 +119,22 @@ module.exports = function(grunt) {
         ],
         tasks: ['jshint', 'uglify:dev']
       }
+    },
+
+
+    php: {
+      dist: {
+        options: {
+          port: 3005,
+          keepalive: true,
+          router: "index.php",
+          directives: {
+            'error_log': require('path').resolve('_logs/error.log')
+          }
+        }
+      }
     }
+
   });
 
 

@@ -102,7 +102,6 @@
 
   // Project Data Here
   $appModel = array_replace_recursive(
-    requireJSON('_app/author.json'),
     [ 'labels' => requireJSON('_labels/en-us.json')],
     [
       'resources' => '/resources/'

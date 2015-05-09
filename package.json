@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  , "server": "php -S localhost:3005 index.php"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "load-grunt-tasks": "^3.1.0",
     "lodash": "^3.8.0",
     "chalk": "^1.0.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-php": "~1.5.0"
   }
 }

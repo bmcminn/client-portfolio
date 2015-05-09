@@ -8,18 +8,14 @@ body
 
 form
   position: relative;
-  top: 50%;
-  left: 50%;
   border: 1px solid $gray
   padding: 0 1rem
   background-color: $white
   border-radius: $radius
   width: 90%
   max-width 320px
-  margin: 0
+  margin: 0 auto
   font-size: 0
-  transform(translate3d(-50%,-50%,0) translateZ(0))
-  filter(blur(0))
 
   > *
     font-size: initial
@@ -32,6 +28,7 @@ form
   label
     box-sizing: border-box
     border: 1px solid $gray-light
+    border-bottom-width: 0
     display: inline-block
     padding: 0.5rem
     line-height: 1.5rem
@@ -41,7 +38,7 @@ form
 
     &:last-of-type
       border-radius: 0 0 $radius $radius
-
+      border-bottom-width: 1px
     &.half
       width: 50%
 
@@ -80,6 +77,6 @@ form
     margin: 1rem 0
 
   label+label
-    border-top: 0
+    border-bottom: 0
     border-radius: 0
 

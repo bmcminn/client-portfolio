@@ -22,6 +22,31 @@
   }
 
 
+  /**
+   * [initAdmin description]
+   * @return [type] [description]
+   */
+  function initAdmin() {
+    global $db, $appModel;
+
+    $admin = $db->users->find(function($doc) {
+      return $doc['type'] === 'admin';
+    });
+
+
+    // add the author data to the $appModel
+    if ($admin->valid()) {
+      print_r($admins->current());
+
+    // set a system flag that we can use to init the register admin view
+    } else {
+      define("FLAG_REGISTER_ADMIN", true);
+    }
+
+    return;
+  }
+
+
 
   /**
    * Runs the user login routine
@@ -31,7 +56,7 @@
 
     global $appModel, $handlebars, $db, $passHash;
 
-    $eMessage = [];
+    $errors = [];
 
     // If the form was submitted
     // AND we have POST data
@@ -44,12 +69,12 @@
 
       // check if USERNAME is an empty string
       if (empty($username)) {
-        $eMessage[] = 'Username is a required field';
+        $errors[] = 'Username is a required field';
       }
 
       // check if PASSWORD is an empty string
       if (empty($password)) {
-        $eMessage[] = 'Password is a required field';
+        $errors[] = 'Password is a required field';
       }
 
       // cache the posted USERNAME in our viewmodel to hydrate the field
@@ -61,7 +86,7 @@
       if (!empty($username) && !empty($password)) {
 
         if (strlen($password) > 72) {
-          $eMessage[] = "Password must be 72 characters or less";
+          $errors[] = "Password must be 72 characters or less";
         } else {
 
           // Get our user data from the DB
@@ -106,17 +131,86 @@
             redirect('/admin');
 
           } else {
-            $eMessage[] = 'The username or password did not match our records';
+            $errors[] = 'The username or password did not match our records';
           }
         }
       }
     }
 
     // add error messaging to our view model
-    if (!empty($eMessage)) {
-      $appModel['loginError'] = [
-        'message' => $eMessage
+    if (!empty($errors)) {
+      $appModel['formError'] = $errors;
+    }
+
+    return null;
+  }
+
+
+
+  /**
+   * [registerAdmin description]
+   * @return [type] [description]
+   */
+  function registerAdmin() {
+
+    global $appModel, $handlebars, $db, $passHash;
+
+    // alias our error messages container
+    $errors = [];
+
+    // if the an admin hasn't been registered...
+    if (defined('FLAG_REGISTER_ADMIN')) {
+
+      // clean up $_POST data before filtering it
+      array_filter($_POST, function(&$arg) {
+        $arg = trim($arg);
+      });
+
+
+      // define FILTER reqs for $_POST data
+      $filterArgs = [
+        'fname' => FILTER_SANITIZE_STRING
+      , 'lname' => FILTER_SANITIZE_STRING
+      , 'emailAddress' => FILTER_SANITIZE_EMAIL
+      , 'website' => FILTER_SANITIZE_URL
+      , 'username' => FILTER_SANITIZE_STRING
+      , 'password' => FILTER_SANITIZE_STRING
+      , 'confirmPassword' => FILTER_SANITIZE_STRING
       ];
+
+      // filter post input...
+      $formData = filter_var_array($_POST, $filterArgs);
+
+      console($formData, '$formData', 'debug');
+
+
+      // Run validation on input fields
+      // TODO: find a validation library that handles this well
+
+
+      // Update $appModel before submitting it to be rendered
+      $appModel = array_replace_recursive(
+        $appModel
+      , [
+          'page' => [
+            'title' => 'Register Admin'
+          ]
+        , 'registerInfo' => $formData
+        ]
+      );
+
+
+      // add error messaging to our view model
+      if (!empty($errors)) {
+        $appModel['formError'] = $errors;
+      }
+
+
+      // Render admin register template
+      echo $handlebars->render('register-admin', $appModel);
+
+    } else {
+      return redirect('/login');
     }
 
     return null;

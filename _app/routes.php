@@ -4,11 +4,26 @@
   // HOME ROUTE
   //
   map(BASE_URL.'/', function() {
+
+    // if the an admin hasn't been registered...
+    if (defined('FLAG_REGISTER_ADMIN')) {
+      return redirect('/register');
+    }
+
     checkUserSession();
 
     // TODO: Fix this problem with BASE_URL
     // return redirect('/login');
   });
+
+
+
+  map(BASE_URL.'/register', function() {
+
+    registerAdmin();
+
+  });
+
 
 
   //
@@ -30,7 +45,7 @@
 
 
 
-  map(BASE_URL.'/admin/register-client', function($db) {
+  map(BASE_URL.'/admin/register', function($db) {
 
     checkUserSession();
 
