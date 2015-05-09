@@ -5,16 +5,6 @@
   header("Access-Control-Allow-Origin: null");
 
 
-  // Init the user session
-  session_start();
-
-
-  // Prevent PHP garbage collection from deleting our session
-  if(!isset($_SESSION['gc_last_access']) || (time() - $_SESSION['gc_last_access']) > 60) {
-    $_SESSION['gc_last_access'] = time();
-  }
-
-
   // Define constants
   define('DS',              DIRECTORY_SEPARATOR);
   define('BASE_DIR',        __DIR__);
@@ -23,6 +13,17 @@
   define('PROJECT_DIR',     __DIR__.DS.'_projects');
   define('DB_FOLDER',       __DIR__.DS.'_data');
   define('HANDLEBARS_EXT',  '.handlebars');
+
+
+  // Init the user session
+  session_save_path(realpath(BASE_DIR.DS.'..'.DS.'.tmp'));
+  session_start();
+
+
+  // Prevent PHP garbage collection from deleting our session
+  if(!isset($_SESSION['gc_last_access']) || (time() - $_SESSION['gc_last_access']) > 60) {
+    $_SESSION['gc_last_access'] = time();
+  }
 
 
   // Get base url for project (allows us to nest the app within a subdir of our host)

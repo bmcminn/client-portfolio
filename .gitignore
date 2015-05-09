@@ -16,6 +16,7 @@ _projects/*/
 *.phar
 *.7z
 *.dmg
+*.exe
 *.gz
 *.iso
 *.jar
