@@ -198,25 +198,17 @@
 		$template = $twig->render($template, $model);
 
 
-		if (!DEBUG_MODE) {
+		$regex = [
+			// 'tabs'              => '/\t*/m'
+		// , 'space'             => '/\s{2,}(\s\w)/m'
+		  'space_after_tag'   => '/((?:title|div|header|footer|section|aside|a)>)\s{2,}(\s\w)/m'
+		, 'space_before_tag'  => '/\s{2,}(<\/(?:title|div|header|footer|section|a>|aside))/m'
+		];
 
-			$regex = [
-				// 'tabs'              => '/\t*/m'
-			// , 'space'             => '/\s{2,}(\s\w)/m'
-			  'space_after_tag'   => '/((?:title|div|header|footer|section|aside|a)>)\s{2,}(\s\w)/m'
-			, 'space_before_tag'  => '/\s{2,}(<\/(?:title|div|header|footer|section|a>|aside))/m'
-			];
-
-			// TODO: ... need to do some analysis on <pre> tags
-
-			// $template = preg_replace($regex['space'], ' ', $template);
-			$template = preg_replace($regex['space_after_tag'], '$1$2', $template);
-			$template = preg_replace($regex['space_before_tag'], '$1', $template);
-			// $template = preg_replace($regex['tabs'], '', $template);
-
-			// TODO: replace <pre> tag contents into delimited parts
-
-		}
+		// $template = preg_replace($regex['space'], ' ', $template);
+		$template = preg_replace($regex['space_after_tag'], '$1$2', $template);
+		$template = preg_replace($regex['space_before_tag'], '$1', $template);
+		// $template = preg_replace($regex['tabs'], '', $template);
 
 
 		return $template;

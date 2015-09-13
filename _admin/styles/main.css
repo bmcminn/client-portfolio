@@ -1,1 +1,1287 @@
-html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;box-sizing:border-box}body{margin:0}*,*:before,*:after{box-sizing:inherit}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}html{line-height:1.5rem}code{padding:.25rem}pre code{background-color:transparent;padding:0}h1,.h1{line-height:2.5rem}h2,.h2{line-height:2rem}h3,.h3{line-height:1.8rem}h4,.h4{line-height:1.5rem}h5,.h5,h6,.h6{line-height:1.3rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.hr,.spacer{margin:2rem 0}.hr{height:0;border-bottom:2px solid $graylight}.container{padding:1rem}.container,.row{box-sizing:border-box;display:block;width:100%;font-size:0;line-height:0;}.container.max,.row.max{max-width:1200px;margin-left:auto;margin-right:auto}.container.center,.row.center{text-align:center}.col{box-sizing:border-box;display:inline-block;position:relative;margin:0;width:100%;vertical-align:top;font-size:initial;line-height:1.5rem;text-align:initial;}.col.vcenter{vertical-align:center}.col.vbaseline{vertical-align:baseline}.col.whole{width:100%}.col.half{width:50%}.col.third{width:33.33333333%}.col.two-third{width:66.66666666%}.col.fourth{width:25%}.col.three-fourth{width:75%}.col.fifth{width:20%}.col.two-fifth{width:40%}.col.three-fifth{width:60%}.col.four-fifth{width:80%}.col.sixth{width:16.66666667%}.col.five-sixth{width:83.33333335%}.col.seventh{width:14.28571429%}.col.two-seventh{width:28.57142858%}.col.three-seventh{width:42.85714287%}.col.four-seventh{width:57.14285716%}.col.five-seventh{width:71.42857145%}.col.six-seventh{width:85.71428574%}.col.eighth{width:12.5%}.col.three-eighth{width:37.5%}.col.five-eighth{width:62.5%}.col.seven-eighth{width:87.5%}.col.tenth{width:10%}.col.three-tenth{width:30%}.col.four-tenth{width:40%}.col.sixth-tenth{width:60%}.col.seven-tenth{width:70%}.col.nine-tenth{width:90%}@media all and (min-width:0){.col[mobile="whole"]{width:100%}.col[mobile="half"]{width:50%}.col[mobile="third"]{width:33.33333333%}.col[mobile="two-third"]{width:66.66666666%}.col[mobile="fourth"]{width:25%}.col[mobile="three-fourth"]{width:75%}.col[mobile="fifth"]{width:20%}.col[mobile="two-fifth"]{width:40%}.col[mobile="three-fifth"]{width:60%}.col[mobile="four-fifth"]{width:80%}.col[mobile="sixth"]{width:16.66666667%}.col[mobile="five-sixth"]{width:83.33333335%}.col[mobile="seventh"]{width:14.28571429%}.col[mobile="two-seventh"]{width:28.57142858%}.col[mobile="three-seventh"]{width:42.85714287%}.col[mobile="four-seventh"]{width:57.14285716%}.col[mobile="five-seventh"]{width:71.42857145%}.col[mobile="six-seventh"]{width:85.71428574%}.col[mobile="eighth"]{width:12.5%}.col[mobile="three-eighth"]{width:37.5%}.col[mobile="five-eighth"]{width:62.5%}.col[mobile="seven-eighth"]{width:87.5%}.col[mobile="tenth"]{width:10%}.col[mobile="three-tenth"]{width:30%}.col[mobile="four-tenth"]{width:40%}.col[mobile="sixth-tenth"]{width:60%}.col[mobile="seven-tenth"]{width:70%}.col[mobile="nine-tenth"]{width:90%}}@media all and (min-width:480px){.col[tablet="whole"]{width:100%}.col[tablet="half"]{width:50%}.col[tablet="third"]{width:33.33333333%}.col[tablet="two-third"]{width:66.66666666%}.col[tablet="fourth"]{width:25%}.col[tablet="three-fourth"]{width:75%}.col[tablet="fifth"]{width:20%}.col[tablet="two-fifth"]{width:40%}.col[tablet="three-fifth"]{width:60%}.col[tablet="four-fifth"]{width:80%}.col[tablet="sixth"]{width:16.66666667%}.col[tablet="five-sixth"]{width:83.33333335%}.col[tablet="seventh"]{width:14.28571429%}.col[tablet="two-seventh"]{width:28.57142858%}.col[tablet="three-seventh"]{width:42.85714287%}.col[tablet="four-seventh"]{width:57.14285716%}.col[tablet="five-seventh"]{width:71.42857145%}.col[tablet="six-seventh"]{width:85.71428574%}.col[tablet="eighth"]{width:12.5%}.col[tablet="three-eighth"]{width:37.5%}.col[tablet="five-eighth"]{width:62.5%}.col[tablet="seven-eighth"]{width:87.5%}.col[tablet="tenth"]{width:10%}.col[tablet="three-tenth"]{width:30%}.col[tablet="four-tenth"]{width:40%}.col[tablet="sixth-tenth"]{width:60%}.col[tablet="seven-tenth"]{width:70%}.col[tablet="nine-tenth"]{width:90%}}@media all and (min-width:1000px){.col[desktop="whole"]{width:100%}.col[desktop="half"]{width:50%}.col[desktop="third"]{width:33.33333333%}.col[desktop="two-third"]{width:66.66666666%}.col[desktop="fourth"]{width:25%}.col[desktop="three-fourth"]{width:75%}.col[desktop="fifth"]{width:20%}.col[desktop="two-fifth"]{width:40%}.col[desktop="three-fifth"]{width:60%}.col[desktop="four-fifth"]{width:80%}.col[desktop="sixth"]{width:16.66666667%}.col[desktop="five-sixth"]{width:83.33333335%}.col[desktop="seventh"]{width:14.28571429%}.col[desktop="two-seventh"]{width:28.57142858%}.col[desktop="three-seventh"]{width:42.85714287%}.col[desktop="four-seventh"]{width:57.14285716%}.col[desktop="five-seventh"]{width:71.42857145%}.col[desktop="six-seventh"]{width:85.71428574%}.col[desktop="eighth"]{width:12.5%}.col[desktop="three-eighth"]{width:37.5%}.col[desktop="five-eighth"]{width:62.5%}.col[desktop="seven-eighth"]{width:87.5%}.col[desktop="tenth"]{width:10%}.col[desktop="three-tenth"]{width:30%}.col[desktop="four-tenth"]{width:40%}.col[desktop="sixth-tenth"]{width:60%}.col[desktop="seven-tenth"]{width:70%}.col[desktop="nine-tenth"]{width:90%}}@media all and (min-width:1200px){.col[larger="whole"]{width:100%}.col[larger="half"]{width:50%}.col[larger="third"]{width:33.33333333%}.col[larger="two-third"]{width:66.66666666%}.col[larger="fourth"]{width:25%}.col[larger="three-fourth"]{width:75%}.col[larger="fifth"]{width:20%}.col[larger="two-fifth"]{width:40%}.col[larger="three-fifth"]{width:60%}.col[larger="four-fifth"]{width:80%}.col[larger="sixth"]{width:16.66666667%}.col[larger="five-sixth"]{width:83.33333335%}.col[larger="seventh"]{width:14.28571429%}.col[larger="two-seventh"]{width:28.57142858%}.col[larger="three-seventh"]{width:42.85714287%}.col[larger="four-seventh"]{width:57.14285716%}.col[larger="five-seventh"]{width:71.42857145%}.col[larger="six-seventh"]{width:85.71428574%}.col[larger="eighth"]{width:12.5%}.col[larger="three-eighth"]{width:37.5%}.col[larger="five-eighth"]{width:62.5%}.col[larger="seven-eighth"]{width:87.5%}.col[larger="tenth"]{width:10%}.col[larger="three-tenth"]{width:30%}.col[larger="four-tenth"]{width:40%}.col[larger="sixth-tenth"]{width:60%}.col[larger="seven-tenth"]{width:70%}.col[larger="nine-tenth"]{width:90%}}button,.button,[type="button"],[type="submit"],[type="reset"]{display:inline-block;border:0;padding:.5rem .8rem;line-height:1.5rem;vertical-align:middle;-webkit-appearance:none;-moz-appearance:none;appearance:none;}button:active,.button:active,[type="button"]:active,[type="submit"]:active,[type="reset"]:active{background-color:#c7c7c7}button.rounded,.button.rounded,[type="button"].rounded,[type="submit"].rounded,[type="reset"].rounded{border-radius:3px}button.circle,.button.circle,[type="button"].circle,[type="submit"].circle,[type="reset"].circle{border-radius:100%;padding:1rem}.rounded button,.rounded .button,.rounded [type="button"],.rounded [type="submit"],.rounded [type="reset"]{border-radius:3px}form,.form{display:block;width:100%;border-top:0;border-left:0;}form h1,.form h1,form h2,.form h2,form h3,.form h3,form h4,.form h4,form h5,.form h5,form h6,.form h6,form .h1,.form .h1,form .h2,.form .h2,form .h3,.form .h3,form .h4,.form .h4,form .h5,.form .h5,form .h6,.form .h6{padding:.75rem}label{padding:.75rem;vertical-align:middle;}label [type="text"],label [type="url"],label [type="number"],label [type="email"],label [type="tel"],label select{-webkit-appearance:none;-moz-appearance:none;appearance:none;box-sizing:border-box;width:100%;border:1px solid buttonface;line-height:1.5rem;padding:.5rem 0}select option{min-height:1rem;line-height:1.5rem}.col > label{display:block}
+
+/* line 286 : D:\github\client-portfolio\_assets\stylus\admin.styl */
+
+/* line 1 : D:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
+
+/* line 35 : D:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
+
+/* line 6 : D:\github\client-portfolio\_assets\stylus\_variables.styl */
+
+/* line 21 : D:\github\client-portfolio\_assets\stylus\_variables.styl */
+
+/* line 4 : D:\github\client-portfolio\_assets\stylus\title-belt\main.styl */
+
+/* line 15 : D:\github\client-portfolio\_assets\stylus\title-belt\main.styl */
+
+/* line 12 : D:\github\client-portfolio\_assets\stylus\title-belt\_colors.styl */
+
+/* line 38 : D:\github\client-portfolio\_assets\stylus\title-belt\_colors.styl */
+
+/* line 1 : D:\github\client-portfolio\_assets\stylus\title-belt\_mixins.styl */
+
+/* line 325 : D:\github\client-portfolio\_assets\stylus\title-belt\_mixins.styl */
+
+/* line 5 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+
+/* line 6 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+}
+
+/* line 14 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+body {
+  margin: 0;
+}
+
+/* line 19 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* line 33 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/* line 51 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* line 61 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/* line 68 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+[hidden],
+template {
+  display: none;
+}
+
+/* line 78 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+a {
+  background-color: transparent;
+}
+
+/* line 84 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* line 94 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/* line 99 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+b,
+strong {
+  font-weight: bold;
+}
+
+/* line 105 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+dfn {
+  font-style: italic;
+}
+
+/* line 111 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* line 117 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/* line 123 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+small {
+  font-size: 80%;
+}
+
+/* line 128 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 136 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+sup {
+  top: -0.5em;
+}
+
+/* line 140 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+sub {
+  bottom: -0.25em;
+}
+
+/* line 149 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+img {
+  border: 0;
+}
+
+/* line 154 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* line 163 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+figure {
+  margin: 1em 40px;
+}
+
+/* line 168 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/* line 174 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+pre {
+  overflow: auto;
+}
+
+/* line 179 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* line 198 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+/* line 209 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+button {
+  overflow: visible;
+}
+
+/* line 217 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+button,
+select {
+  text-transform: none;
+}
+
+/* line 227 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* line 236 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/* line 242 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 250 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+input {
+  line-height: normal;
+}
+
+/* line 259 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* line 268 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/* line 275 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+
+/* line 283 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* line 289 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/* line 297 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+legend {
+  border: 0;
+  padding: 0;
+}
+
+/* line 303 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+textarea {
+  overflow: auto;
+}
+
+/* line 309 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+optgroup {
+  font-weight: bold;
+}
+
+/* line 318 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 323 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+td,
+th {
+  padding: 0;
+}
+
+/* line 58 : D:\github\client-portfolio\_assets\stylus\title-belt\_normalize.styl */
+
+/* line 13 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+
+/* line 17 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+html {
+  line-height: 1.5rem;
+}
+
+/* line 21 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+code {
+  padding: 0.25rem;
+}
+
+/* line 25 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+pre {
+  tab-size: 2;
+}
+
+/* line 28 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* line 34 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+h1,
+.h1 {
+  line-height: 2.5rem;
+}
+
+/* line 36 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+h2,
+.h2 {
+  line-height: 2rem;
+}
+
+/* line 38 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+h3,
+.h3 {
+  line-height: 1.8rem;
+}
+
+/* line 40 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+h4,
+.h4 {
+  line-height: 1.5rem;
+}
+
+/* line 42 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+h5,
+.h5,
+h6,
+.h6 {
+  line-height: 1.3rem;
+}
+
+/* line 51 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+.text-left {
+  text-align: left;
+}
+
+/* line 54 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+.text-center {
+  text-align: center;
+}
+
+/* line 57 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+.text-right {
+  text-align: right;
+}
+
+/* line 318 : D:\github\client-portfolio\_assets\stylus\title-belt\_typography.styl */
+
+/* line 17 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+
+/* line 50 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.hr,
+.spacer {
+  margin: 2rem 0;
+}
+
+/* line 55 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.hr {
+  height: 0;
+  border-bottom: 2px solid $graylight;
+}
+
+/* line 64 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.container {
+  padding: 1rem;
+}
+
+/* line 68 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.container,
+.row {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  font-size: 0;
+  line-height: 0;
+}
+
+/* line 76 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.container.max,
+.row.max {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 81 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.container.center,
+.row.center {
+  text-align: center;
+}
+
+/* line 85 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col {
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  width: 100%;
+  vertical-align: top;
+  font-size: initial;
+  line-height: 1.5rem;
+  text-align: initial;
+}
+
+/* line 96 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.vcenter {
+  vertical-align: center;
+}
+
+/* line 99 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.vbaseline {
+  vertical-align: baseline;
+}
+
+/* line 103 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.whole {
+  width: 100%;
+}
+
+/* line 108 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.half {
+  width: 50%;
+}
+
+/* line 113 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.third {
+  width: 33.33333333%;
+}
+
+/* line 116 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.two-third {
+  width: 66.66666666%;
+}
+
+/* line 121 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.fourth {
+  width: 25%;
+}
+
+/* line 124 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.three-fourth {
+  width: 75%;
+}
+
+/* line 129 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.fifth {
+  width: 20%;
+}
+
+/* line 132 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.two-fifth {
+  width: 40%;
+}
+
+/* line 135 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.three-fifth {
+  width: 60%;
+}
+
+/* line 138 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.four-fifth {
+  width: 80%;
+}
+
+/* line 143 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.sixth {
+  width: 16.66666667%;
+}
+
+/* line 146 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.five-sixth {
+  width: 83.33333335%;
+}
+
+/* line 151 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.seventh {
+  width: 14.28571429%;
+}
+
+/* line 154 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.two-seventh {
+  width: 28.57142858%;
+}
+
+/* line 157 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.three-seventh {
+  width: 42.85714287%;
+}
+
+/* line 160 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.four-seventh {
+  width: 57.14285716%;
+}
+
+/* line 163 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.five-seventh {
+  width: 71.42857145%;
+}
+
+/* line 166 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.six-seventh {
+  width: 85.71428574%;
+}
+
+/* line 171 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.eighth {
+  width: 12.5%;
+}
+
+/* line 174 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.three-eighth {
+  width: 37.5%;
+}
+
+/* line 177 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.five-eighth {
+  width: 62.5%;
+}
+
+/* line 180 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.seven-eighth {
+  width: 87.5%;
+}
+
+/* line 185 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.tenth {
+  width: 10%;
+}
+
+/* line 188 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.three-tenth {
+  width: 30%;
+}
+
+/* line 191 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.four-tenth {
+  width: 40%;
+}
+
+/* line 194 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.sixth-tenth {
+  width: 60%;
+}
+
+/* line 197 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.seven-tenth {
+  width: 70%;
+}
+
+/* line 200 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+.col.nine-tenth {
+  width: 90%;
+}
+@media all and (min-width: 0) {
+
+/* line 211 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+
+/* line 212 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="whole"] {
+    width: 100%;
+  }
+
+/* line 215 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="half"] {
+    width: 50%;
+  }
+
+/* line 218 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="third"] {
+    width: 33.33333333%;
+  }
+
+/* line 221 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="two-third"] {
+    width: 66.66666666%;
+  }
+
+/* line 224 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="fourth"] {
+    width: 25%;
+  }
+
+/* line 227 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="three-fourth"] {
+    width: 75%;
+  }
+
+/* line 230 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="fifth"] {
+    width: 20%;
+  }
+
+/* line 233 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="two-fifth"] {
+    width: 40%;
+  }
+
+/* line 236 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="three-fifth"] {
+    width: 60%;
+  }
+
+/* line 239 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="four-fifth"] {
+    width: 80%;
+  }
+
+/* line 242 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="sixth"] {
+    width: 16.66666667%;
+  }
+
+/* line 245 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="five-sixth"] {
+    width: 83.33333335%;
+  }
+
+/* line 248 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="seventh"] {
+    width: 14.28571429%;
+  }
+
+/* line 251 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="two-seventh"] {
+    width: 28.57142858%;
+  }
+
+/* line 254 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="three-seventh"] {
+    width: 42.85714287%;
+  }
+
+/* line 257 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="four-seventh"] {
+    width: 57.14285716%;
+  }
+
+/* line 260 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="five-seventh"] {
+    width: 71.42857145%;
+  }
+
+/* line 263 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="six-seventh"] {
+    width: 85.71428574%;
+  }
+
+/* line 266 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="eighth"] {
+    width: 12.5%;
+  }
+
+/* line 269 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="three-eighth"] {
+    width: 37.5%;
+  }
+
+/* line 272 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="five-eighth"] {
+    width: 62.5%;
+  }
+
+/* line 275 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="seven-eighth"] {
+    width: 87.5%;
+  }
+
+/* line 278 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="tenth"] {
+    width: 10%;
+  }
+
+/* line 281 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="three-tenth"] {
+    width: 30%;
+  }
+
+/* line 284 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="four-tenth"] {
+    width: 40%;
+  }
+
+/* line 287 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="sixth-tenth"] {
+    width: 60%;
+  }
+
+/* line 290 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="seven-tenth"] {
+    width: 70%;
+  }
+
+/* line 293 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[mobile="nine-tenth"] {
+    width: 90%;
+  }
+}
+@media all and (min-width: 480px) {
+
+/* line 211 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+
+/* line 212 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="whole"] {
+    width: 100%;
+  }
+
+/* line 215 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="half"] {
+    width: 50%;
+  }
+
+/* line 218 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="third"] {
+    width: 33.33333333%;
+  }
+
+/* line 221 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="two-third"] {
+    width: 66.66666666%;
+  }
+
+/* line 224 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="fourth"] {
+    width: 25%;
+  }
+
+/* line 227 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="three-fourth"] {
+    width: 75%;
+  }
+
+/* line 230 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="fifth"] {
+    width: 20%;
+  }
+
+/* line 233 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="two-fifth"] {
+    width: 40%;
+  }
+
+/* line 236 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="three-fifth"] {
+    width: 60%;
+  }
+
+/* line 239 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="four-fifth"] {
+    width: 80%;
+  }
+
+/* line 242 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="sixth"] {
+    width: 16.66666667%;
+  }
+
+/* line 245 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="five-sixth"] {
+    width: 83.33333335%;
+  }
+
+/* line 248 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="seventh"] {
+    width: 14.28571429%;
+  }
+
+/* line 251 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="two-seventh"] {
+    width: 28.57142858%;
+  }
+
+/* line 254 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="three-seventh"] {
+    width: 42.85714287%;
+  }
+
+/* line 257 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="four-seventh"] {
+    width: 57.14285716%;
+  }
+
+/* line 260 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="five-seventh"] {
+    width: 71.42857145%;
+  }
+
+/* line 263 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="six-seventh"] {
+    width: 85.71428574%;
+  }
+
+/* line 266 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="eighth"] {
+    width: 12.5%;
+  }
+
+/* line 269 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="three-eighth"] {
+    width: 37.5%;
+  }
+
+/* line 272 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="five-eighth"] {
+    width: 62.5%;
+  }
+
+/* line 275 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="seven-eighth"] {
+    width: 87.5%;
+  }
+
+/* line 278 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="tenth"] {
+    width: 10%;
+  }
+
+/* line 281 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="three-tenth"] {
+    width: 30%;
+  }
+
+/* line 284 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="four-tenth"] {
+    width: 40%;
+  }
+
+/* line 287 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="sixth-tenth"] {
+    width: 60%;
+  }
+
+/* line 290 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="seven-tenth"] {
+    width: 70%;
+  }
+
+/* line 293 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[tablet="nine-tenth"] {
+    width: 90%;
+  }
+}
+@media all and (min-width: 1000px) {
+
+/* line 211 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+
+/* line 212 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="whole"] {
+    width: 100%;
+  }
+
+/* line 215 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="half"] {
+    width: 50%;
+  }
+
+/* line 218 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="third"] {
+    width: 33.33333333%;
+  }
+
+/* line 221 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="two-third"] {
+    width: 66.66666666%;
+  }
+
+/* line 224 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="fourth"] {
+    width: 25%;
+  }
+
+/* line 227 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="three-fourth"] {
+    width: 75%;
+  }
+
+/* line 230 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="fifth"] {
+    width: 20%;
+  }
+
+/* line 233 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="two-fifth"] {
+    width: 40%;
+  }
+
+/* line 236 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="three-fifth"] {
+    width: 60%;
+  }
+
+/* line 239 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="four-fifth"] {
+    width: 80%;
+  }
+
+/* line 242 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="sixth"] {
+    width: 16.66666667%;
+  }
+
+/* line 245 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="five-sixth"] {
+    width: 83.33333335%;
+  }
+
+/* line 248 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="seventh"] {
+    width: 14.28571429%;
+  }
+
+/* line 251 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="two-seventh"] {
+    width: 28.57142858%;
+  }
+
+/* line 254 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="three-seventh"] {
+    width: 42.85714287%;
+  }
+
+/* line 257 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="four-seventh"] {
+    width: 57.14285716%;
+  }
+
+/* line 260 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="five-seventh"] {
+    width: 71.42857145%;
+  }
+
+/* line 263 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="six-seventh"] {
+    width: 85.71428574%;
+  }
+
+/* line 266 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="eighth"] {
+    width: 12.5%;
+  }
+
+/* line 269 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="three-eighth"] {
+    width: 37.5%;
+  }
+
+/* line 272 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="five-eighth"] {
+    width: 62.5%;
+  }
+
+/* line 275 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="seven-eighth"] {
+    width: 87.5%;
+  }
+
+/* line 278 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="tenth"] {
+    width: 10%;
+  }
+
+/* line 281 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="three-tenth"] {
+    width: 30%;
+  }
+
+/* line 284 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="four-tenth"] {
+    width: 40%;
+  }
+
+/* line 287 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="sixth-tenth"] {
+    width: 60%;
+  }
+
+/* line 290 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="seven-tenth"] {
+    width: 70%;
+  }
+
+/* line 293 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[desktop="nine-tenth"] {
+    width: 90%;
+  }
+}
+@media all and (min-width: 1200px) {
+
+/* line 211 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+
+/* line 212 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="whole"] {
+    width: 100%;
+  }
+
+/* line 215 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="half"] {
+    width: 50%;
+  }
+
+/* line 218 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="third"] {
+    width: 33.33333333%;
+  }
+
+/* line 221 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="two-third"] {
+    width: 66.66666666%;
+  }
+
+/* line 224 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="fourth"] {
+    width: 25%;
+  }
+
+/* line 227 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="three-fourth"] {
+    width: 75%;
+  }
+
+/* line 230 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="fifth"] {
+    width: 20%;
+  }
+
+/* line 233 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="two-fifth"] {
+    width: 40%;
+  }
+
+/* line 236 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="three-fifth"] {
+    width: 60%;
+  }
+
+/* line 239 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="four-fifth"] {
+    width: 80%;
+  }
+
+/* line 242 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="sixth"] {
+    width: 16.66666667%;
+  }
+
+/* line 245 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="five-sixth"] {
+    width: 83.33333335%;
+  }
+
+/* line 248 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="seventh"] {
+    width: 14.28571429%;
+  }
+
+/* line 251 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="two-seventh"] {
+    width: 28.57142858%;
+  }
+
+/* line 254 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="three-seventh"] {
+    width: 42.85714287%;
+  }
+
+/* line 257 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="four-seventh"] {
+    width: 57.14285716%;
+  }
+
+/* line 260 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="five-seventh"] {
+    width: 71.42857145%;
+  }
+
+/* line 263 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="six-seventh"] {
+    width: 85.71428574%;
+  }
+
+/* line 266 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="eighth"] {
+    width: 12.5%;
+  }
+
+/* line 269 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="three-eighth"] {
+    width: 37.5%;
+  }
+
+/* line 272 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="five-eighth"] {
+    width: 62.5%;
+  }
+
+/* line 275 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="seven-eighth"] {
+    width: 87.5%;
+  }
+
+/* line 278 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="tenth"] {
+    width: 10%;
+  }
+
+/* line 281 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="three-tenth"] {
+    width: 30%;
+  }
+
+/* line 284 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="four-tenth"] {
+    width: 40%;
+  }
+
+/* line 287 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="sixth-tenth"] {
+    width: 60%;
+  }
+
+/* line 290 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="seven-tenth"] {
+    width: 70%;
+  }
+
+/* line 293 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+  .col[larger="nine-tenth"] {
+    width: 90%;
+  }
+}
+
+/* line 46 : D:\github\client-portfolio\_assets\stylus\title-belt\_grid.styl */
+
+/* line 12 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+
+/* line 15 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+button,
+.button,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  display: inline-block;
+  border: 0;
+  padding: 0.5rem 0.8rem;
+  line-height: 1.5rem;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* line 28 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+button:active,
+.button:active,
+[type="button"]:active,
+[type="submit"]:active,
+[type="reset"]:active {
+  background-color: #c7c7c7;
+}
+
+/* line 31 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+button.rounded,
+.button.rounded,
+[type="button"].rounded,
+[type="submit"].rounded,
+[type="reset"].rounded {
+  border-radius: 3px;
+}
+
+/* line 34 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+button.circle,
+.button.circle,
+[type="button"].circle,
+[type="submit"].circle,
+[type="reset"].circle {
+  border-radius: 100%;
+  padding: 1rem;
+}
+
+/* line 40 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+
+/* line 41 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+.rounded button,
+.rounded .button,
+.rounded [type="button"],
+.rounded [type="submit"],
+.rounded [type="reset"] {
+  border-radius: 3px;
+}
+
+/* line 86 : D:\github\client-portfolio\_assets\stylus\title-belt\_button.styl */
+
+/* line 15 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+
+/* line 18 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+form,
+.form {
+  display: block;
+  width: 100%;
+  border-top: 0;
+  border-left: 0;
+}
+
+/* line 26 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+form h1,
+.form h1,
+form h2,
+.form h2,
+form h3,
+.form h3,
+form h4,
+.form h4,
+form h5,
+.form h5,
+form h6,
+.form h6,
+form .h1,
+.form .h1,
+form .h2,
+.form .h2,
+form .h3,
+.form .h3,
+form .h4,
+.form .h4,
+form .h5,
+.form .h5,
+form .h6,
+.form .h6 {
+  padding: 0.75rem;
+}
+
+/* line 41 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+label {
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+/* line 46 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+label [type="text"],
+label [type="url"],
+label [type="number"],
+label [type="email"],
+label [type="tel"],
+label select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid buttonface;
+  line-height: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+/* line 78 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+
+/* line 79 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+select option {
+  min-height: 1rem;
+  line-height: 1.5rem;
+}
+
+/* line 84 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+
+/* line 85 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+.col > label {
+  display: block;
+}
+
+/* line 43 : D:\github\client-portfolio\_assets\stylus\title-belt\_form.styl */
+
+/* line 1 : D:\github\client-portfolio\_assets\stylus\title-belt\_arrows.styl */

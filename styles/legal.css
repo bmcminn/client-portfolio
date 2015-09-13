@@ -1,1 +1,58 @@
-.legal-page .page-header{padding-bottom:0}.legal-page .page-content{color:#212121;padding:0 1.5rem;max-width:960px;margin-left:auto;margin-right:auto}.legal-page h1,.legal-page h2,.legal-page h3,.legal-page h4{text-transform:uppercase}.legal-page h2{margin-top:3rem;padding-bottom:.5rem;border-bottom:3px solid #0d0d0d}.legal-page hr{margin:2.5rem 0;height:0;width:100%;border:0;border-bottom:3px solid #0d0d0d}.legal-page a{text-decoration:underline;}.legal-page a:hover{color:#fff}
+
+/* line 286 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+
+/* line 1 : D:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
+
+/* line 35 : D:\github\client-portfolio\node_modules\grunt-contrib-stylus\node_modules\stylus\lib\functions\index.styl */
+
+/* line 6 : D:\github\client-portfolio\_assets\stylus\_variables.styl */
+
+/* line 5 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+
+/* line 7 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+.legal-page .page-header {
+  padding-bottom: 0;
+}
+
+/* line 11 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+.legal-page .page-content {
+  color: #212121;
+  padding: 0 1.5rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 20 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+.legal-page h1,
+.legal-page h2,
+.legal-page h3,
+.legal-page h4 {
+  text-transform: uppercase;
+}
+
+/* line 26 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+.legal-page h2 {
+  margin-top: 3rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #0d0d0d;
+}
+
+/* line 32 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+.legal-page hr {
+  margin: 2.5rem 0;
+  height: 0;
+  width: 100%;
+  border: 0;
+  border-bottom: 3px solid #0d0d0d;
+}
+
+/* line 39 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+.legal-page a {
+  text-decoration: underline;
+}
+
+/* line 43 : D:\github\client-portfolio\_assets\stylus\legal.styl */
+.legal-page a:hover {
+  color: #fff;
+}
