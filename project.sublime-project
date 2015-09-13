@@ -3,17 +3,24 @@
 	[
 		{
 			"path": ".",
-      "file_exclude_patterns": [
-        "*.lock",
-        "*.zip",
-        "license"
-      ],
-      "folder_exclude_patterns": [
-        "node_modules",
-        "vendor",
-        // "resources",
-        "bower_components"
-      ]
+			"file_exclude_patterns": [
+				"*.lock"
+			, "*.zip"
+			, "*.jpg"
+			, "*.jpeg"
+			, "*.pdf"
+			, "*.doc"
+			, "*.docx"
+			, "license"
+			],
+			"folder_exclude_patterns": [
+				"node_modules"
+			, "vendor"
+			, "bower_components"
+			, "_cache"
+			, "_data"
+			// , "resources"
+			]
 		}
 	]
 }

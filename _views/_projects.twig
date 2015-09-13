@@ -1,0 +1,32 @@
+{% extends "page.twig" %}
+
+
+{% block page_content %}
+
+  <div class="container center page-content">
+
+    {% for category in page.projects %}
+      <section class="row project-category">
+        <a id="{{ category.name|slugify }}" id="{{ category.name }}"></a>
+
+        <h2 class="col category-title">
+          <span>{{ category.name|title }}</span>
+        </h2>
+
+        {% for project in category.projects %}
+          <div class="col project-listing" tablet="half" desktop="fourth" larger="fifth">
+            <div class="project-listing-content" data-project-listing data-project-images="{{ project.images|json_encode() }}">
+              <div class="project-image-container">
+                {{ project.images|first|image_tag }}
+              </div>
+
+              <h3 class="project-title">{{ project.name }}</h3>
+            </div>
+          </div>
+        {% endfor %}
+
+      </section>
+    {% endfor %}
+  </div>
+
+{% endblock %}

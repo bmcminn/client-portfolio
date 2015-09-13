@@ -1,87 +1,122 @@
 <?php
 
-  /**
-   * Returns an associative array from a JSON file
-   * @param  string $path Path to JSON file
-   * @return array        decoded JSON data as associative array
-   */
-  function requireJSON($path=null) {
-    if (!$path) {
-      throw new Exception("\"requireJSON()\" requires a path argument", 1);
-    }
-
-    $path = pathify($path);
-
-    // get file relative to BASE_DIR
-    $json = file_get_contents(BASE_DIR.DS.$path);
-
-    // remove all comments
-    $json = preg_replace('/[^:]\/\/[\s\S]+?(\r|\n)/', '', $json); // remove comments
-
-    return json_decode($json, true);
-  }
+	use Symfony\Component\Yaml\Yaml;
 
 
-  /**
-   * Dumps data into a JS console.log command
-   * @param  [type] $data [description]
-   * @return [type]       [description]
-   */
-  function console($data, $type="log") {
-    echo "<script>console.$type(JSON.parse('", json_encode($data), "'));</script>";
-  }
+	/**
+	 * Retrieves all config files of a given type from a flat directory
+	 * @param  string   $location Absolute file URL of the directory
+	 * @param  string   $ext      File extension for glob pattern
+	 * @param  (array)  $ext      File extensions for glob pattern
+	 * @return array              System model data
+	 */
+	function get_directory_files($location, $ext) {
+
+		$model = [];
+
+		// make sure the extension isn't a number
+		if (is_numeric($ext)) {
+			throw new Exception("GTFO! Don't be putting numbers in the \$ext value...");
+		}
+
+		// if the extension is an array, convert to glob brackets string
+		if (is_array($ext)) {
+			$ext = '{' . implode(',', $ext) . '}';
+		}
 
 
-  /**
-   * Gets all handlebar partial files from the globally defined VIEWS directory
-   * @param  string $viewsPath path to the views directory where partials are kept
-   * @return array             key->val array of partials file contents
-   */
-  function getPartials() {
-    $files = glob(VIEWS.DS.'_*'.HANDLEBARS_EXT);
-    $partials = [];
+		// collect and parse all configuration files
+		$configFiles = glob($location . DS . '*.' . $ext, GLOB_BRACE);
 
-    foreach ($files as $index => $filepath) {
-      $name = array_pop(explode(DS, $filepath));
-      $name = preg_replace('/\.[^.]+$/','',$name);
+		foreach ($configFiles as $key => $value) {
 
-      $markdown = new ParsedownExtra();
-      $file = file_get_contents($filepath);
+			$value = explode(DS, $value);
+			$value = $value[count($value)-1];
+			$value = preg_replace('/\.[\s\S]*/', '', $value);
 
-      $partials[$name] = $markdown->text($file);
-    }
+			$model[$value]  = Yaml::parse(file_get_contents($location.DS.$value.'.'.$ext));
 
-    return $partials;
-  }
+		}
+
+		return $model;
+	}
 
 
-  /**
-   * [pathify description]
-   * @param  [type] $path [description]
-   * @return [type]       [description]
-   */
-  function pathify($path) {
-    // remove leading directory separator
-    $path = preg_replace('/^[\\\\\/]/', '', $path);
-
-    // sub all directory separators with proper separator
-    $path = preg_replace('/[\\\\\/]/', DS, $path);
-
-    return $path;
-  }
+	// ===========================================================================
 
 
-  /**
-   * [urlify description]
-   * @param  [type] $path [description]
-   * @return [type]       [description]
-   */
-  function urlify($path) {
-    // remove leading directory separator
-    $path = preg_replace('/^[\\\\\/]/', '', $path);
+	/**
+	 * [get_json description]
+	 * @param  [type] $file [description]
+	 * @return [type]       [description]
+	 */
+	function get_json($file) {
 
-    // sub all directory separators with proper separator
-    $path = preg_replace('/[\\\\\/]/', '/', $path);
+		$regex = [
+		  'block_comment' => '/\/\*+[\s\S]*\*\//'
+		, 'line_comment'  => '/\/+[\s\S]*?(\r|\n)/'
+		];
 
-    return $path;
-  }
+		$json = file_get_contents($file);
+
+		foreach ($regex as $key => $reg) {
+			$json = preg_replace($reg, '', $json);
+		}
+
+		return json_decode($json, true);
+
+	}
+
+
+	// ===========================================================================
+
+
+	/**
+	 * [put_json description]
+	 * @param  [type] $file [description]
+	 * @return [type]       [description]
+	 */
+	function put_json($file, $data, $pretty=false) {
+
+		// pretty print the file?
+		if ($pretty) {
+			file_put_contents($file, json_encode($data), JSON_PRETTY_PRINT);
+
+		// dump the minified file
+		} else {
+			file_put_contents($file, json_encode($data));
+		}
+
+	}
+
+
+
+	// ===========================================================================
+
+
+	/**
+	 * Determines if the target files modtime is greater than the time to cache value in .env
+	 * @param  (string) $cachedFile Absolute system path of file to check the modtime
+	 * @return (bool)
+	 */
+	function time_to_bust_cache($cachedFile) {
+		if (filemtime($cachedFile) >= (TIME_SYSTEM - (ENV_CACHE_TIME * TIME_HOUR))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
+	// ===========================================================================
+
+
+
+	/**
+	 * [get_projects description]
+	 * @return [type] [description]
+	 */
+	function get_projects() {
+		return [];
+	}

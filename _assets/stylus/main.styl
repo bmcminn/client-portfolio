@@ -1,0 +1,291 @@
+
+
+@import "_variables"
+
+
+//
+// Library imports
+//
+
+@import "title-belt/main"
+@import "jquery.yalb/yalb"
+
+
+//
+// State
+//
+
+.hidden
+  display: none
+
+
+
+//
+// Boiler plate stuff
+//
+
+// *,
+// *::before,
+// *::after
+//   box-sizing: border-box
+
+
+html
+  background-color: $background-color
+  font-family: sans-serif
+  box-sizing: inherit
+
+
+a
+  &,
+  &:link
+    color: $link-color
+    text-decoration: none
+    transition: all 0.2s linear
+  &:visited
+    color: $link-color
+  &:hover
+    color: $link-hover-color
+  &:active
+    color: $link-color
+
+
+
+
+//
+// Site Header
+//
+
+.page-header
+  padding-top: 1rem
+  padding-bottom: 60px
+
+
+//
+// Site Logo
+//
+
+.site-logo
+  width: 200px
+  height: 50px
+  margin: 0 auto;
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  position: relative;
+  display: block;
+
+  fill: $white
+  color: $white
+
+
+  &:hover
+    fill: $white
+    color: $white
+
+  path
+    transition: all 0.2s linear
+    fill: $white
+    color: $white
+
+
+  svg
+    display: block
+    height: 100%
+    width: 100%
+    fill: $white
+    color: $white
+
+
+//
+// Nav reset
+//
+
+  .nav-list-container
+    margin: 0
+    padding: 0
+    font-size: 0
+    border-bottom: 1px solid $black;
+
+    li
+      display: inline-block
+      font-size: initial
+
+      a
+        display: block
+        position: relative
+        padding: 0.75rem 1rem
+        text-decoration: none
+
+//
+// Site Navigation
+//
+
+.site-nav
+
+  ul
+    text-align: center
+
+
+
+//
+// Page Navigation
+//
+
+.page-nav
+  background-color: $black
+  position: absolute
+  width: 100%
+  z-index: 1000
+
+  &.sticky
+    position: fixed
+    top: 0
+    // width: 100%
+    z-index: 1000
+    box-shadow: 0 0 3px rgba(0,0,0,0.5)
+
+  ul
+    li
+      a
+        &::before
+          content: ""
+          display: block
+          width: 100%
+          height: 20%
+          position: absolute
+          bottom: 0
+          left: 0
+          transition: all 0.2s linear
+          border-bottom: 0 solid $red
+
+        &.active,
+        &:hover
+          background-color: rgba(255,255,255,0.04)
+
+          &::before
+            border-bottom-width: 3px
+
+
+
+//
+// Page Content Styles
+//
+
+.page-content
+  padding: 0.5rem
+
+
+
+//
+// Footer Styles
+//
+
+.page-footer
+  text-align: center
+  padding: 1rem
+  color: $text-color
+
+  a
+    color: $gray
+
+    &:hover
+      color: $white
+
+
+
+[data-action="back-to-top"]
+  background-color: rgba(0,0,0,0.5)
+  position: fixed
+  bottom: 1rem
+  right: 1rem
+  padding: 0
+  width: 3rem
+  height: 3rem
+  border-radius: 3px
+
+  &::after
+    content: ""
+    border: 10px #fff solid
+    position: absolute
+    height: 0
+    width: 0
+    top: -0.9rem
+    left: 0
+    right: 0
+    bottom: 0
+    margin: auto
+    arrowUp()
+    arrowHeight(12px)
+    arrowWidth(8px)
+
+
+
+
+//
+// Category Styles
+//
+
+.project-category
+  margin-bottom: 2rem
+
+
+.category-title
+  padding: 0.75rem 0.5rem 0.5rem
+  color: $text-color
+  font-size: 1.7rem
+  font-weight: initial
+
+  span
+    display: block
+    padding-bottom: 0.75rem
+    border-bottom: 3px solid $red
+    // border-bottom: 3px solid $gray
+
+
+//
+// PROJECT CONTAINER STYLES
+//
+
+.project-listing
+  padding: 0.5rem
+  overflow: hidden
+
+
+.project-listing-content
+  border-radius: 3px
+  overflow: hidden
+
+  &:hover
+    cursor: pointer
+
+
+.project-image-container
+  height: 250px
+  padding: 0
+  overflow: hidden
+  box-shadow: inset 0 0 1rem rgba(0,0,0,0.4)
+
+  img
+    object-fit: cover
+    width: 100%
+    height: 100%
+    position: relative
+    z-index: -1
+
+.project-title
+  background-color: $black
+  margin: 0
+  padding: 0.75rem 1rem
+  color: $text-color
+  font-size: 1.25rem
+  font-weight: normal
+
+
+
+
+//
+// TYPOGRAPHY
+//
+

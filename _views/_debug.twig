@@ -1,0 +1,4 @@
+  {% if debugMode %}
+    <div data-model="{{ site|json_encode() }}"></div>
+    <div data-model="{{ page|json_encode() }}"></div>
+  {% endif %}

@@ -1,0 +1,38 @@
+
+////////////////////////////////////////////////////////////
+//    ________________.-----------.___________________    //
+//   |                |   //^\\   |               \   |   //
+//   |   T I T L E    |  < CSS >  |   B  E  L  T   )  |   //
+//   |________________|   \\.//   |_______________/___|   //
+//                    `-----------'                       //
+//   Zot, Brandtley                                       //
+////////////////////////////////////////////////////////////
+
+
+
+appearance($arg)
+  -webkit-appearance: $arg
+  -moz-appearance: $arg
+  appearance: $arg
+
+
+boxSizing($arg)
+  box-sizing: $arg
+
+
+boxShadow($arg)
+  -webkit-box-shadow: $arg
+  -moz-box-shadow: $arg
+  box-shadow: $arg
+
+
+borderRadius($arg)
+  -webkit-border-radius: $arg
+  -moz-border-radius: $arg
+  border-radius: $arg
+
+
+topGradient($start, $end)
+  background-color: $start
+  background-image: -webkit-linear-gradient(top, $start 0%, $end 100%)
+  background-image: linear-gradient(to bottom, $start 0%, $end 100%)

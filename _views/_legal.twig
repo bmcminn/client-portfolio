@@ -1,0 +1,39 @@
+{% extends "page.twig" %}
+
+
+{% block body_classes %}{{ parent() }} legal-page{% endblock %}
+
+
+{% block page_content %}
+
+  <div class="container center page-content">
+
+    <div class="col">
+
+      {{ page.content|replace({ '%name%': author.name, '%email%': author.email|mailto_link })|raw|markdown }}
+
+      <h2>Questions &amp; Concerns</h2>
+
+      <p>
+        If you have any additional questions or concerns about this {{ page.title }}, please feel free to contact Dimfist any time via email {{ author.email|mailto_link }}. Further contact information is available at <a href="{{ "/about"|url }}">{{ author.name|lower }}.com/about</a>.
+      </p>
+
+      <hr>
+
+      <p class="text-center">
+        This page was last updated {{ page.lastUpdated|date('M d, Y') }}.
+      </p>
+
+      <hr>
+
+    </div>
+
+  </div>
+
+{% endblock %}
+
+
+{% block page_styles %}
+  {{ parent() }}
+  {{ "legal.css"|stylesheet_tag }}
+{% endblock %}

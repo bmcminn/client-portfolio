@@ -1,1 +1,0 @@
-!function(a){a('[data-container="photos"]').imagesLoaded()}(jQuery);

@@ -1,122 +1,91 @@
 <?php
 
-  //
-  // HOME ROUTE
-  //
-  map(BASE_URL.'/', function() {
-    // TODO: Add 404 page here
-  });
+	use KzykHys\FrontMatter\FrontMatter;
+
+
+	//
+	// HOMEPAGE
+	//
+	map('GET', BASE_URL, function() {
+
+		// get the model array
+		$model = config('model');
+
+		// get page data
+		$file = PAGES_DIR.DS.'home.md';
+
+		$pageData = FrontMatter::parse(file_get_contents($file));
+		$template = $pageData->getConfig()['template'];
+
+		$model['page'] = $pageData ? $pageData : $model['site'];
+
+		// get projects models
+		$model['page']['projects'] = get_projects(PROJECTS_DIR);
+		// print_r($model);
+
+		// render the page
+		echo render($template, $model);
+	});
 
 
 
-  //
-  // PROJECT ROUTES
-  //
-  map(BASE_URL.'/<projectname>', function($params) {
-    global $appModel, $handlebars;
-
-    $projectPath = $params['projectname'];
-
-    if (!file_exists(PROJECT_DIR.DS.$projectPath)) {
-      error(404);
-      return;
-    }
-
-
-    // Get .zip folders
-    $zip = glob("_projects/{$projectPath}/*.zip");
-
-    if (!count($zip) > 0) {
-      $zip = null;
-    } else {
-      foreach ($zip as $file => $filePath) {
-        $zip[$file] = [
-          'name' => preg_replace('/-/', ' ', basename($filePath, '.zip'))
-        , 'path' => $filePath
-        , 'size' => round(filesize($filePath)/1024/1024, 1) . 'Mb'
-        ];
-      }
-    }
-
-
-    // Get our thumbnails
-    $thumbs = glob("_projects/{$projectPath}/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
-
-    if (!count($thumbs) > 0) {
-      $thumbs = null;
-    } else {
-      foreach ($thumbs as $thumb => $path) {
-
-        // Get image size and orientation
-        $sizes = getimagesize($path);
-        $orientation = 'portrait';
-
-        if ($sizes[0] > $sizes[1]) {
-          $orientation = 'landscape';
-        }
-
-        // Get image nicename
-        $name = preg_replace('/\.[\w\d]+/i', '', basename($path));
-
-        $thumbs[$thumb] = [
-          'path'        => BASE_URL . "/{$path}"
-        , 'name'        => $name
-        , 'nicename'    => ucwords(preg_replace('/[-_\s]/', ' ', $name))
-        , 'orientation' => $orientation
-        , 'width'       => $sizes[0]
-        , 'height'      => $sizes[1]
-        ];
-      }
-    }
-
-
-    // recompile app model with project model data
-    $appModel = array_replace_recursive(
-      $appModel
-    , requireJSON("_projects/{$projectPath}/project.json")
-    , [
-        'projectPath' =>  BASE_URL . "/{$projectPath}/"
-      , 'resources'   =>  BASE_URL.'/resources/'
-      , 'download'    =>  $zip
-      , 'thumbnails'  =>  $thumbs
-      ]
-    );
-
-
-    // handle download limits on our project
-    // if (isset($appModel['limit'])) {
-    //   echo $appModel['limit'];
-
-    //   if (!file_exists("_projects/{$projectPath}/counter.php")) {
-    //     file_put_contents("_projects/{$projectPath}/counter.php", "<?php return 1;");
-    //   }
-
-    //   $counter = require "_projects/{$projectPath}/counter.php";
-    //   $counter += 1;
-    //   file_put_contents("_projects/{$projectPath}/counter.php", "<?php return {$counter};");
-
-    //   $appModel['counter']
-
-    //   if ($counter > $appModel['limit']) {
-    //     echo $handlebars->render('limit', $appModel);
-    //     return false;
-    //   }
-    // }
-
-
-    // render template
-    echo $handlebars->render('photo', $appModel);
-  });
+	// ===========================================================================
 
 
 
-  //
-  // 404 PAGE
-  //
-  map(404, function ($code) {
-    global $appModel, $handlebars;
+	//
+	// OTHER PAGES
+	//
+	map('GET', BASE_URL.'<id>', function($params) {
+		// get the model array
+		$model = config('model');
+		$file  = PAGES_DIR.DS.$params['id'].'.md';
 
-    $appModel['code'] = $code;
 
-    echo $handlebars->render('httpcode', $appModel);
-  });
+		if (file_exists($file)) {
+			$frontMatter = FrontMatter::parse(file_get_contents($file));
+
+			$model['page'] = $frontMatter->getConfig();
+			$model['page']['content'] = $frontMatter->getContent();
+			$model['page']['lastUpdated'] = filemtime($file);
+
+		} else {
+			error(404);
+			return;
+
+		}
+
+
+		// render the page
+		echo render($model['page']['template'], $model);
+	});
+
+
+
+	// ===========================================================================
+
+
+
+	//
+	// HTTP CODE PAGES
+	//
+
+	map([
+		300, 301, 302, 303,
+		400, 401, 403, 404,
+		500, 501, 503, 504
+	], function($code, $res=null) {
+
+		// get the model
+		$model    = config('model');
+		$template = 'httpcode';
+
+		// get page data
+		$model['page'] = [
+			'title' => $code
+		];
+
+		// render the page
+		echo render($template, $model);
+
+	});

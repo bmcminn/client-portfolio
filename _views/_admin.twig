@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin | {{ site.title }}</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {{ "/favicon.png"|favicon }}
+
+  {{ "/_admin/css/main.css"|stylesheet_tag }}
+
+  {{ "/js/libs/modernizr.min.js"|script_tag }}
+
+</head>
+<body>
+
+  <div class="container" admin-view>
+
+    <div class="col" admin-sidebar>
+
+
+    </div>
+
+    <div class="col" admin-content>
+
+
+    </div>
+
+  </div>
+
+
+  {# {{ preload_json model "model" }} #}
+
+  {{ "/js/libs/jquery.min.js"|script_tag }}
+  {{ "/js/libs/jquery.scrollTo.min.js"|script_tag }}
+  {{ "/_admin/js/main.js"|script_tag }}
+
+</body>
+</html>

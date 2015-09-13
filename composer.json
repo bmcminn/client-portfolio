@@ -1,27 +1,21 @@
 {
-    "name": "Brandtley/gbox-photos",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "bmcminn",
-            "email": "labs@gbox.name"
-        }
-    ],
-
-    "autoload": {
-      "files": [
-        "_app/funcs.php"
-      ],
-
-      "psr-4": {
-
-      }
-    },
-
-    "require": {
-      "badphp/dispatch": "8.*@dev",
-      "filp/whoops": "1.2.*@dev",
-      "xamin/handlebars.php": "dev-master",
-      "erusev/parsedown-extra": "dev-master"
-    }
+	"name": "Brandtley/gbox-photos",
+	"type": "project",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "bmcminn",
+			"email": "labs@gbox.name"
+		}
+	],
+	"require": {
+		"php": "^5.4.0",
+		"badphp/dispatch": "^8.0",
+		"filp/whoops": "^1.1",
+		"modularr/yaml-front-matter": "^1.2.0",
+		"kzykhys/yaml-front-matter": ">=1.0",
+		"kzykhys/ciconia": ">=1.0",
+		"kzykhys/twig-extensions": "dev-master",
+		"twig/twig": "^1.18"
+	}
 }

@@ -1,0 +1,103 @@
+{% spaceless %}
+{% autoescape 'html' %}
+<!DOCTYPE html>
+<html lang="{{ site.locale }}">
+<head>
+
+	<meta charset="UTF-8">
+
+	<title>
+		{% block page_title %}
+			{% if page.title %}
+				{{ page.title|escape('html')|raw }} {{ site.headerSeparator }}
+			{% endif %}
+			{{ site.title|escape('html')|raw }}
+		{% endblock %}
+	</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{% block page_meta %}
+		{% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+		{% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}">{% endif %}
+		{% if page.author %}<meta name="author" content="{{ page.author }}">{% endif %}
+		{% if page.canonical %}<meta name="canonical" content="{{ page.canonical }}">{% endif %}
+	{% endblock %}
+
+
+	{% block page_favicons %}
+		{{ "/favicon.png"|favicon }}
+		{# {{ "/favicon.png"|favicon('apple-touch-icon') }} #}
+	{% endblock %}
+
+
+	{% if site.backgroundColor %}
+	<style>html { background-color: {{ site.backgroundColor|raw }} }</style>
+	{% endif %}
+
+
+	{% block page_styles %}
+		{{ "main.css"|stylesheet_tag }}
+	{% endblock %}
+
+	{{ "libs/modernizr.min.js"|script_tag }}
+
+</head>
+<body class="{% block body_classes %}{% endblock %}">
+
+	{% block page_header %}
+		<header class="page-header">
+			<a class="site-logo" href="{{ "/"|url }}" title="{{ site.name }}">
+				{# {{ "#dimfist-logo"|svg() }} #}
+				{{ site.title }}
+			</a>
+
+			<nav class="site-nav">
+				<ul class="nav-list-container">
+					{% for link in navigation.headerLinks %}
+					<li><a href="{{ link.href|url }}">{{ link.name|title }}</a></li>
+					{% endfor %}
+				</ul>
+			</nav>
+
+			<nav class="page-nav">
+				<ul class="nav-list-container">
+					{% for category in page.projects %}
+					<li><a href="#{{ category.name|slugify }}">{{ category.name|title }}</a></li>
+					{% endfor %}
+				</ul>
+			</nav>
+		</header>
+	{% endblock %}
+
+
+	{% block page_content %}
+	{% endblock %}
+
+
+	{% block page_footer %}
+		<footer class="page-footer text-center">
+			<div>
+				Copyright &copy; {{ "now"|date("Y") }} &mdash; {{ site.author }} &mdash; All rights reserved.
+			</div>
+			<div>
+				<a href="{{ "/terms-and-conditions"|url }}">Terms</a> | <a href="{{ "/privacy-policy"|url }}">Privacy</a>
+			</div>
+
+		</footer>
+	{% endblock %}
+
+
+	<div id="svg-includes" class="hidden" data-svg-includes></div>
+
+
+	{% block page_scripts %}
+	{% endblock %}
+
+
+	{% include "_debug.twig" %}
+
+</body>
+</html>
+{% endautoescape %}
+{% endspaceless %}

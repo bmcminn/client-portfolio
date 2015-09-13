@@ -1,0 +1,322 @@
+
+////////////////////////////////////////////////////////////
+//    ________________.-----------.___________________    //
+//   |                |   //^\\   |               \   |   //
+//   |   T I T L E    |  < CSS >  |   B  E  L  T   )  |   //
+//   |________________|   \\.//   |_______________/___|   //
+//                    `-----------'                       //
+//   Zot, Brandtley                                       //
+////////////////////////////////////////////////////////////
+
+
+
+//
+// BREAKPOINT DEFINITIONS
+//
+
+$larger   = 1200px
+$desktop  = 1000px
+$tablet   = 480px
+$mobile   = 0
+
+
+
+//
+// DIMENSIONAL VARIABLES
+//
+
+$precision = 8
+
+
+$max-width = 1200px
+
+
+$whole    = 100%
+$half     = 50%
+$third    = round(100%/3, $precision)
+$fourth   = 25%
+$fifth    = 20%
+$sixth    = round(100%/6, $precision)
+$seventh  = round(100%/7, $precision)
+$eighth   = round(100%/8, $precision)
+
+$tenth    = 10%
+
+
+//
+// GRID HELPERS
+//
+
+.hr,
+.spacer
+  margin: 2rem 0
+
+
+.hr
+  height: 0
+  border-bottom: 2px solid $graylight
+
+
+
+//
+// BASE GRID STYLES
+//
+.container
+  padding: 1rem
+
+
+.container,   // These are used identically, though use whichever makes the most
+.row          // sense semantically
+  boxSizing(border-box)
+  display: block
+  width: $whole
+  font-size: 0
+  line-height: 0
+
+  &.max
+    max-width: $max-width
+    margin-left: auto
+    margin-right: auto
+
+  &.center
+    text-align: center;
+
+
+.col
+  boxSizing(border-box)
+  display: inline-block
+  position: relative
+  margin: 0
+  width: $whole
+  vertical-align: top
+  font-size: initial
+  line-height: $line-height
+  text-align: initial
+
+  &.vcenter
+    vertical-align: center
+
+  &.vbaseline
+    vertical-align: baseline
+
+
+  &.whole
+    width: $whole
+
+
+  // HALFS
+  &.half
+    width: $half
+
+
+  // THIRDS
+  &.third
+    width: $third
+
+  &.two-third
+    width: ($third * 2)
+
+
+  // FOURTHS
+  &.fourth
+    width: $fourth
+
+  &.three-fourth
+    width: ($fourth * 3)
+
+
+  // FIFTHS
+  &.fifth
+    width: $fifth
+
+  &.two-fifth
+    width: ($fifth * 2)
+
+  &.three-fifth
+    width: ($fifth * 3)
+
+  &.four-fifth
+    width: ($fifth * 4)
+
+
+  // SIXTHS
+  &.sixth
+    width: $sixth
+
+  &.five-sixth
+    width: round($sixth * 5, $precision)
+
+
+  // SEVENTHS
+  &.seventh
+    width: $seventh
+
+  &.two-seventh
+    width: round($seventh * 2, $precision)
+
+  &.three-seventh
+    width: round($seventh * 3, $precision)
+
+  &.four-seventh
+    width: round($seventh * 4, $precision)
+
+  &.five-seventh
+    width: round($seventh * 5, $precision)
+
+  &.six-seventh
+    width: round($seventh * 6, $precision)
+
+
+  // EIGTHS
+  &.eighth
+    width: $eighth
+
+  &.three-eighth
+    width: ($eighth * 3)
+
+  &.five-eighth
+    width: ($eighth * 5)
+
+  &.seven-eighth
+    width: ($eighth * 7)
+
+
+  // TENTHS
+  &.tenth
+    width: $tenth
+
+  &.three-tenth
+    width: ($tenth * 3)
+
+  &.four-tenth
+    width: ($tenth * 4)
+
+  &.sixth-tenth
+    width: ($tenth * 6)
+
+  &.seven-tenth
+    width: ($tenth * 7)
+
+  &.nine-tenth
+    width: ($tenth * 9)
+
+
+
+
+
+customGridGenerator($size, $label)
+
+
+  @media all and (min-width: $size)
+    .col
+      &[{$label}="whole"]
+        width: $whole
+
+      &[{$label}="half"]
+        width: $half
+
+      &[{$label}="third"]
+        width: $third
+
+      &[{$label}="two-third"]
+        width: ($third * 2)
+
+      &[{$label}="fourth"]
+        width: $fourth
+
+      &[{$label}="three-fourth"]
+        width: ($fourth * 3)
+
+      &[{$label}="fifth"]
+        width: $fifth
+
+      &[{$label}="two-fifth"]
+        width: ($fifth * 2)
+
+      &[{$label}="three-fifth"]
+        width: ($fifth * 3)
+
+      &[{$label}="four-fifth"]
+        width: ($fifth * 4)
+
+      &[{$label}="sixth"]
+        width: $sixth
+
+      &[{$label}="five-sixth"]
+        width: round($sixth * 5, $precision)
+
+      &[{$label}="seventh"]
+        width: $seventh
+
+      &[{$label}="two-seventh"]
+        width: round($seventh * 2, $precision)
+
+      &[{$label}="three-seventh"]
+        width: round($seventh * 3, $precision)
+
+      &[{$label}="four-seventh"]
+        width: round($seventh * 4, $precision)
+
+      &[{$label}="five-seventh"]
+        width: round($seventh * 5, $precision)
+
+      &[{$label}="six-seventh"]
+        width: round($seventh * 6, $precision)
+
+      &[{$label}="eighth"]
+        width: $eighth
+
+      &[{$label}="three-eighth"]
+        width: ($eighth * 3)
+
+      &[{$label}="five-eighth"]
+        width: ($eighth * 5)
+
+      &[{$label}="seven-eighth"]
+        width: ($eighth * 7)
+
+      &[{$label}="tenth"]
+        width: $tenth
+
+      &[{$label}="three-tenth"]
+        width: ($tenth * 3)
+
+      &[{$label}="four-tenth"]
+        width: ($tenth * 4)
+
+      &[{$label}="sixth-tenth"]
+        width: ($tenth * 6)
+
+      &[{$label}="seven-tenth"]
+        width: ($tenth * 7)
+
+      &[{$label}="nine-tenth"]
+        width: ($tenth * 9)
+
+
+
+
+//
+// MOBILE OVERRIDES
+//
+
+customGridGenerator($mobile, 'mobile')  /* {$mobile} */
+
+
+//
+// TABLET OVERRIDES
+//
+
+customGridGenerator($tablet, 'tablet')  /* {$mobile} */
+
+//
+// DESKTOP OVERRIDES
+//
+
+customGridGenerator($desktop, 'desktop')/* {$mobile} */
+
+customGridGenerator($larger, 'larger')  /* {$mobile} */
+
+
+
+

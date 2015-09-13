@@ -1,0 +1,6 @@
+module.exports = {
+  username: "FTP_USERNAME",
+  password: "FTP_PASSWORD",
+  host: "FTP_HOST",
+  dest: "/"
+};

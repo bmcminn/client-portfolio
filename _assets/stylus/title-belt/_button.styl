@@ -1,0 +1,46 @@
+
+////////////////////////////////////////////////////////////
+//    ________________.-----------.___________________    //
+//   |                |   //^\\   |               \   |   //
+//   |   T I T L E    |  < CSS >  |   B  E  L  T   )  |   //
+//   |________________|   \\.//   |_______________/___|   //
+//                    `-----------'                       //
+//   Zot, Brandtley                                       //
+////////////////////////////////////////////////////////////
+
+
+$button-radius = 3px
+
+
+button,
+.button,
+[type="button"],
+[type="submit"],
+[type="reset"]
+  display: inline-block
+  border: 0
+  padding: 0.5rem 0.8rem
+  line-height: $line-height
+  vertical-align: middle
+  appearance(none)
+
+
+  &:active
+    background-color: darken(#ddd, 10%)
+
+  &.rounded
+    border-radius: $button-radius
+
+  &.circle
+    border-radius: 100%
+    padding: 1rem
+
+
+// shorthand container method for rounded buttons
+.rounded
+  button,
+  .button,
+  [type="button"],
+  [type="submit"],
+  [type="reset"]
+    border-radius: $button-radius

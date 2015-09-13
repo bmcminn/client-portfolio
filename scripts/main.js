@@ -1,0 +1,1 @@
+!function(a){"use strict";var b=(a(document),a("body")),c=(a(".page-nav"),{host:"//"+window.location.host});a("#svg-includes").load(c.host+"/images/dimfist.svg"),b.append('<button data-action="back-to-top"></button>');var d=a('[data-action="back-to-top"]');d.hide().on("click",function(a){a.preventDefault(),b.scrollTo(0)})}(jQuery);

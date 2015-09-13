@@ -1,0 +1,86 @@
+
+////////////////////////////////////////////////////////////
+//    ________________.-----------.___________________    //
+//   |                |   //^\\   |               \   |   //
+//   |   T I T L E    |  < CSS >  |   B  E  L  T   )  |   //
+//   |________________|   \\.//   |_______________/___|   //
+//                    `-----------'                       //
+//   Zot, Brandtley                                       //
+////////////////////////////////////////////////////////////
+
+
+// INFO:
+// - http://html5doctor.com/html5-forms-input-types/
+
+$cell-padding = 0.75rem
+
+
+form,
+.form
+  display: block
+  width: $whole
+  border-top: 0
+  border-left: 0
+
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6
+    padding: $cell-padding
+
+
+label
+  padding: $cell-padding
+  vertical-align: middle
+
+
+  [type="text"],
+  [type="url"],
+  [type="number"],
+  [type="email"],
+  [type="tel"],
+  select
+    appearance(none)
+    box-sizing: border-box
+    width: $whole
+    border: 1px solid buttonface
+    line-height: $line-height
+    padding: 0.5rem 0
+
+
+
+  // TODO: figure out how to make radios work better
+
+  // [type="radio"]
+  //   appearance(none)
+  //   border: 1px solid buttonface
+  //   padding: 0.35rem
+  //   vertical-align: middle
+  //   border-radius: 100%
+
+  //   &:focus
+  //     outline: 0
+  //     box-shadow: 0 0 2px $orange
+
+  //   &:checked
+  //     background-color: buttonface
+
+
+select
+  option
+    min-height: 1rem
+    line-height: $line-height
+
+
+.col
+  > label
+    display: block
