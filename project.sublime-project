@@ -1,20 +1,29 @@
 {
-	"folders":
-	[
-		{
-			"path": ".",
-      "file_exclude_patterns": [
-        "*.lock",
-        "*.zip",
-        "license",
-        "*.sublime-workspace"
-      ],
-      "folder_exclude_patterns": [
-        "node_modules",
-        "vendor",
-        // "resources",
-        "bower_components"
-      ]
-		}
-	]
+    "folders":
+    [
+        {
+            "path": ".",
+            "file_exclude_patterns": [
+                "*.lock",
+                "*.zip",
+                "license",
+                "*.sublime-workspace",
+                "*.jpg",
+                "*.jpeg",
+                "*.pdf",
+                "*.doc",
+                "*.docx",
+                "license"
+            ],
+            "folder_exclude_patterns": [
+                "node_modules",
+                "vendor",
+                ".phpintel",
+                "bower_components",
+                "app/views/cache",
+                "_data",
+            //  "resources"
+            ]
+        }
+    ]
 }
