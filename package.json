@@ -1,39 +1,12 @@
 {
-  "name": "photofolio",
-  "version": "0.0.0",
-  "description": "A client portfolio for photographers to manage and share asset previews and downloads.",
+  "name": "client-portfolio",
+  "version": "1.0.0",
+  "description": "App for managing and distributing client deliverables.",
   "main": "index.js",
+  "repository": "https://github.com/bmcminn/client-portfolio",
+  "author": "bmcminn <labs@gbox.name>",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  , "server": "php -S localhost:3005 index.php"
+    "start": "php -S localhost:3005 index.php"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bmcminn/client-portfolio"
-  },
-  "keywords": [
-    "photography",
-    "client",
-    "previews",
-    "portfolio"
-  ],
-  "author": "Brandtley McMinn <labs@gbox.name>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bmcminn/client-portfolio/issues"
-  },
-  "homepage": "https://github.com/bmcminn/client-portfolio",
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-jshint": "^0.11.2",
-    "grunt-contrib-stylus": "^0.21.0",
-    "grunt-contrib-uglify": "^0.9.1",
-    "grunt-jsonlint": "^1.0.4",
-    "load-grunt-tasks": "^3.1.0",
-    "lodash": "^3.8.0",
-    "chalk": "^1.0.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-php": "~1.5.0"
-  }
+  "license": "MIT"
 }
