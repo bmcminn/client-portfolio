@@ -2,16 +2,14 @@
   "name": "client-portfolio",
   "version": "1.0.0",
   "description": "App for managing and distributing client deliverables.",
+  "author": "Brandtley McMinn <labs@gbox.name>",
   "main": "index.js",
+  "license": "MIT",
+  "homepage": "https://github.com/bmcminn/client-portfolio",
   "repository": "https://github.com/bmcminn/client-portfolio",
   "author": "bmcminn <labs@gbox.name>",
   "scripts": {
     "start": "php -S localhost:3005 index.php"
-  },
-  "license": "MIT"
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bmcminn/client-portfolio"
   },
   "keywords": [
     "photography",
@@ -19,11 +17,13 @@
     "previews",
     "portfolio"
   ],
-  "author": "Brandtley McMinn <labs@gbox.name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmcminn/client-portfolio"
+  },
   "bugs": {
     "url": "https://github.com/bmcminn/client-portfolio/issues"
   },
-  "homepage": "https://github.com/bmcminn/client-portfolio",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
