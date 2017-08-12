@@ -1,0 +1,42 @@
+{% extends 'layout.twig' %}
+
+
+{% block content %}
+
+<h1 class="h1">Register Client</h1>
+
+<form class="box" action="{{ routes.home }}" method="post">
+
+
+    {% for input in inputs %}
+        <div class="field">
+            <label class="label">{{ input.label }}</label>
+            <p class="control">
+                {% if input.type == 'select' %}
+                    <div class="select">
+                    <select name="{{ input.name }}"{% if input.required %} required{% endif %}>
+                        <option>Select</option>
+                        {% for opt in input.opts %}
+                            <option value="{{ opt.id }}">{{ opt.name }}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+
+                {% else %}
+                    <input class="input" type="{{ input.type }}" placeholder="{{ input.label }}" name="{{ input.name }}"{% if input.required %} required{% endif %}>
+
+                {% endif %}
+            </p>
+        </div>
+    {% endfor %}
+
+
+    <div class="field is-grouped">
+        <p class="control">
+            <button class="button is-primary">Register</button>
+        </p>
+    </div>
+
+
+</form>
+{% endblock %}

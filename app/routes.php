@@ -3,7 +3,11 @@
 // Create a Router
 // --------------------------------------------------
 
+use Webmozart\PathUtil\Path;
+
+
 $router = new \Bramus\Router\Router();
+
 
 // Custom 404 Handler
 $router->set404(function() use ($twig) {
@@ -21,7 +25,60 @@ $router->get(ROUTES['home'], function() use ($twig) {
 
     validateUser();
 
+    echo "homepage";
+
     return;
+});
+
+
+// ROUTE: register
+$router->get(ROUTES['client-register'], function() use ($model, $twig) {
+
+    $db = require Path::join(APP_DIR, 'db.php');
+
+    $stmt = $db->prepare('
+        SELECT *
+        FROM clients
+        ORDER BY name
+    ');
+
+    $stmt->execute();
+
+    $clients = $stmt->fetchAll();
+
+    $model['inputs'] = [
+        [
+            'label' => 'Email'
+        ,   'name'  => 'username'
+        ,   'type'  => 'email'
+        ,   'required' => true
+        ]
+    ,   [
+            'label' => 'Password'
+        ,   'name'  => 'password'
+        ,   'type'  => 'password'
+        ,   'required' => true
+        ]
+    ,   [
+            'label' => 'Confirm Password'
+        ,   'name'  => 'password-confirm'
+        ,   'type'  => 'password'
+        ,   'required' => true
+        ]
+    ,   [
+            'label' => 'Client'
+        ,   'name'  => 'client'
+        ,   'type'  => 'select'
+        ,   'opts'  => $clients
+        ,   'required' => true
+        ]
+    ];
+
+    $stmt   = null;
+    $db     = null;
+
+    echo $twig->render('register.twig', $model);
+
 });
 
 
@@ -29,21 +86,64 @@ $router->get(ROUTES['home'], function() use ($twig) {
 // ROUTE: register
 $router->post(ROUTES['register'], function() use ($model) {
 
-    // check if user doesn't exist
-    if (userExists()) {
-        // if user exists, return 'bleh'
+    // // check if user doesn't exist
+    // if (userExists()) {
+    //     // if user exists, return 'bleh'
+    //     return;
+    // }
+
+    $db = require Path::join(APP_DIR, 'db.php');
+
+    $stmt = $db->prepare('
+        SELECT * FROM users WHERE username=:username AND is_deleted=false
+    ');
+
+    $res = $stmt->execute([ ':username' => $_POST['username']]);
+
+    $stmt   = null;
+
+    if ($res) {
+        echo message("user already exists", 500);
         return;
     }
 
 
-    $data = validateData($data, $contract);
+    // move on to putting the user in the DB
+    $user = [
+        ':username'         => filter_var(trim($_POST['username']), FILTER_VALIDATE_STRING)
+    ,   ':password'         => filter_var(trim($_POST['password']), FILTER_VALIDATE_STRING)
+    ,   ':password-confirm' => filter_var(trim($_POST['password-confirm']), FILTER_VALIDATE_STRING)
+    ];
+
+
+    $stmt = $db->prepare('
+        INSERT INTO users (username, password, client)
+            VALUES (:username, :password, :client)
+            ;
+        ');
+
+    $stmt->execute($user);
+
+    $
+
+
+
+
+
+
+
+    // close DB connection
+    $db = null;
+
+    return;
+
 
 
     // hash user password
-    $pass   = $_POST['password'];
-    $hash   = password_hash($pass, PASSWORD_BCRYPT);
-    $res    = password_verify($pass, $hash);
+    // $hash   = password_hash($pass, PASSWORD_BCRYPT);
+    // $res    = password_verify($pass, $hash);
 
+    // registerUser($user);
 
     //
 
@@ -96,13 +196,13 @@ $router->get(ROUTES['logout'], function() use ($twig) {
 
 
 
-//
-$router->get('[a-z0-9_-]+', function($clientRoute) {
+// //
+// $router->get('[a-z0-9_-]+', function($clientRoute) {
 
-    echo $client;
-    return;
+//     echo $clientRoute;
+//     return;
 
-});
+// });
 
 
 

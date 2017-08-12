@@ -10,6 +10,7 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|less|zip)$/', REQUEST_URI)) {
 }
 
 
+
 // SET TIME/DATA PARAMETERS
 // --------------------------------------------------
 
@@ -33,7 +34,6 @@ require __DIR__ . '/../vendor/autoload.php';
 // --------------------------------------------------
 
 use Webmozart\PathUtil\Path;
-
 
 
 
@@ -69,10 +69,11 @@ if (!isset($_SESSION['gc_last_access']) || (time() - $_SESSION['gc_last_access']
 // Define routes list
 // --------------------------------------------------
 define('ROUTES', [
-    'home'      => '/'
-,   'login'     => '/login'
-,   'logout'    => '/logout'
-,   'register'  => '/register'
+    'home'              => '/'
+,   'login'             => '/login'
+,   'logout'            => '/logout'
+,   'register'          => '/register'
+,   'client-register'   => '/client/register'
 ]);
 
 
@@ -83,10 +84,19 @@ define('ROUTES', [
 require Path::join(APP_DIR, 'methods.php');
 
 
+
 // SETUP DB CONNECTION
 // --------------------------------------------------
 
 require Path::join(APP_DIR, 'db.php');
+
+
+
+// SETUP TABLES AS NEEDED
+// --------------------------------------------------
+
+require Path::join(APP_DIR, 'db-init.php');
+
 
 
 // Create Twig instance
@@ -95,24 +105,19 @@ require Path::join(APP_DIR, 'db.php');
 require Path::join(APP_DIR, 'views.php');
 
 
+
 // Define base model
 // --------------------------------------------------
 
 $model = [
-    'routes' => ROUTES
+    'routes'    => ROUTES
+// ,   'clients'   => registerClients()
 ];
 
 
 
-
-$_POST['username'] = 'bob';
-$_POST['password'] = 'Testing!';
-
-userExists();
-
-return;
-
-
+// Setup user login and registration system
+// https://daveismyname.blog/login-and-registration-system-with-php
 
 
 

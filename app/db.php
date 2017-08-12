@@ -1,7 +1,8 @@
 <?php
 
-
-define('DB_PATH', DATA_DIR.'/db.sqlite');
+if (!defined('DB_PATH')) {
+    define('DB_PATH', DATA_DIR.'/db.sqlite');
+}
 
 
 try {
@@ -10,8 +11,9 @@ try {
 
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
+    return $db;
 
 } catch(PDOException $e) {
-    echo $e->getMessage();
+    return message($e->getMessage());
+
 }
