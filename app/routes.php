@@ -98,13 +98,6 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
         ]
     ];
 
-
-    $model['inputs'][0]['value'] = 'Brandtley McMinn';
-    $model['inputs'][1]['value'] = 'labs@gbox.name';
-    $model['inputs'][2]['value'] = 'Imasassyhammich2';
-    $model['inputs'][3]['value'] = 'Imasassyhammich2';
-
-
     echo $twig->render('new-admin.twig', $model);
 
     return;
@@ -112,7 +105,7 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
 });
 
 
-
+// POST: register admin queries for setting up new admin users
 $router->post(ROUTES['register_admin'], function() use ($db) {
 
     $user_fullname          = filter_var($_POST['user_fullname'],           FILTER_SANITIZE_STRING);
