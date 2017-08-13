@@ -9,11 +9,19 @@ $twig = new Twig_Environment($loader, array(
 ));
 
 
-$filter = new Twig_SimpleFilter('asset', function($str) {
-    return "/public/{$str}";
-});
 
-$twig->addFilter($filter);
+$twig->addFilter(new Twig_SimpleFilter('asset', function($str) {
+    return "/public/{$str}";
+}));
+
+
+$twig->addFilter(new Twig_SimpleFilter('md', function($str) {
+    return $str;
+}));
+
+
+
+
 
 
 return $twig;

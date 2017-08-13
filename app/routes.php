@@ -57,6 +57,10 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
         redirect(ROUTES['login']);
         echo 'ADMIN EXISTS';
         return;
+
+    } else {
+        $model['new_setup_message'] = "Welcome to [CLIENT-PORTFOLIO]!\nSince this appears to be a brand new instance, you must first setup your admin user profile to get started.";
+
     }
 
 
@@ -173,6 +177,14 @@ $router->post(ROUTES['register_admin'], function() use ($db) {
         echo json_encode($res);
         return;
     }
+
+
+    // HASH OUR USER PASSWORD
+    $options = [
+        'cost' => 12,
+    ];
+
+    $user_password = password_hash($user_password, PASSWORD_BCRYPT, $options);
 
 
     // PREPARE OUR SQL FOR INSERTING NEW USER

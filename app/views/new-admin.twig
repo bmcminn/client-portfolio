@@ -5,6 +5,12 @@
 
 <h1 class="h1">New Admin User</h1>
 
+{% if new_setup_message %}
+    <div class="notification is-primary">
+        {{ new_setup_message|md }}
+    </div>
+{% endif %}
+
 <form class="box" action="{{ routes.register_admin }}" method="post">
 
     {% for input in inputs %}
