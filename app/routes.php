@@ -98,6 +98,7 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
         ]
     ];
 
+
     echo $twig->render('new-admin.twig', $model);
 
     return;
