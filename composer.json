@@ -9,7 +9,6 @@
 		}
 	],
 	"require": {
-		"php": "^5.4.0",
         "bramus/router": "^1.1",
 		"filp/whoops": "^1.1",
         "modularr/yaml-front-matter": "^1.3",
