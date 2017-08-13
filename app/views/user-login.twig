@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+
+{% block content %}
+
+    <h1 class="h1">User Login</h1>
+
+    {% set formSubmitLabel      = 'Login' %}
+    {% set formId               = 'user-login' %}
+    {% set formForgotPassword   = true %}
+    {% set formActionRoute      = routes.login %}
+
+    {% include 'partials/form.twig' %}
+
+{% endblock %}
+
+
+
+{% block scripts %}
+    {{ parent() }}
+    {% include 'partials/form-handler.twig' %}
+{% endblock %}

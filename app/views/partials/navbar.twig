@@ -1,0 +1,124 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a class="navbar-item is-primary" href="{{ routes.home }}">
+            Client Portfolio
+            {# <img src="/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> #}
+        </a>
+        <div class="navbar-burger burger" data-target="navMenuExample">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div id="navMenuExample" class="navbar-menu">
+        <div class="navbar-start">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link  is-active" href="/documentation/overview/start/">
+                    Docs
+                </a>
+                <div class="navbar-dropdown ">
+                    <a class="navbar-item " href="/documentation/overview/start/">
+                        Overview
+                    </a>
+                    <a class="navbar-item " href="/documentation/modifiers/syntax/">
+                        Modifiers
+                    </a>
+                    <a class="navbar-item " href="/documentation/grid/columns/">
+                        Grid
+                    </a>
+                    <a class="navbar-item " href="/documentation/layout/container/">
+                        Layout
+                    </a>
+                    <a class="navbar-item " href="/documentation/form/general/">
+                        Form
+                    </a>
+                    <a class="navbar-item " href="/documentation/elements/box/">
+                        Elements
+                    </a>
+                    <a class="navbar-item is-active" href="/documentation/components/breadcrumb/">
+                        Components
+                    </a>
+                    <hr class="navbar-divider">
+                    <div class="navbar-item">
+                        <div>
+                            <p class="is-size-6-desktop">
+                                <strong class="has-text-info">0.5.1</strong>
+                            </p>
+                            <small>
+                            <a class="view-all-versions" href="/versions">View all versions</a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-link">
+                    More
+                </div>
+                <div id="moreDropdown" class="navbar-dropdown ">
+                    <a class="navbar-item " href="/extensions/">
+                        <div class="level is-mobile">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <p>
+                                        <strong>Extensions</strong>
+                                        <br>
+                                        <small>Side projects to enhance Bulma</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <span class="icon has-text-info">
+                                        <i class="fa fa-plug"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="field is-grouped">
+
+                    {% if not user %}
+                        <p class="control">
+                            <a class="button is-link" href="{{ routes.login }}">
+                                <span class="icon">
+                                    <i class="fa fa-login"></i>
+                                </span>
+                                <span>
+                                    Login
+                                </span>
+                            </a>
+                        </p>
+
+                    {% else %}
+                        <p class="control">
+                            <a class="button is-link" href="{{ routes.logout }}">
+                                <span class="icon">
+                                    <i class="fa fa-logout"></i>
+                                </span>
+                                <span>
+                                    Logout
+                                </span>
+                            </a>
+                        </p>
+
+                    {% endif %}
+                    <p class="control">
+                        <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+                            <span class="icon">
+                                <i class="fa fa-download"></i>
+                            </span>
+                            <span>Download</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -33,11 +33,9 @@ $router->get('/public/(.*)', function($path) {
 
 
 // ROUTE: Homepage
-$router->get(ROUTES['home'], function() use ($twig) {
+$router->get(ROUTES['home'], function() use ($db, $twig, $model) {
 
-    validateUser();
-
-    echo "homepage";
+    echo $twig->render('homepage.twig', $model);
 
     return;
 });
@@ -98,8 +96,7 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
         ]
     ];
 
-
-    echo $twig->render('new-admin.twig', $model);
+    echo $twig->render('register-admin.twig', $model);
 
     return;
 
@@ -109,11 +106,12 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
 // POST: register admin queries for setting up new admin users
 $router->post(ROUTES['register_admin'], function() use ($db) {
 
-    $user_fullname          = filter_var($_POST['user_fullname'],           FILTER_SANITIZE_STRING);
-    $user_email             = filter_var($_POST['user_email'],              FILTER_SANITIZE_EMAIL);
-    $user_password          = filter_var($_POST['user_password'],           FILTER_SANITIZE_STRING);
-    $user_password_confirm  = filter_var($_POST['user_password_confirm'],   FILTER_SANITIZE_STRING);
-    $user_type              = filter_var($_POST['user_type'],               FILTER_SANITIZE_STRING);
+    // Sanitize form submission data
+    $user_fullname          = trim(filter_var($_POST['user_fullname'],           FILTER_SANITIZE_STRING));
+    $user_email             = trim(filter_var($_POST['user_email'],              FILTER_SANITIZE_EMAIL));
+    $user_password          = trim(filter_var($_POST['user_password'],           FILTER_SANITIZE_STRING));
+    $user_password_confirm  = trim(filter_var($_POST['user_password_confirm'],   FILTER_SANITIZE_STRING));
+    $user_type              = trim(filter_var($_POST['user_type'],               FILTER_SANITIZE_STRING));
 
     $res = [];
 
@@ -148,7 +146,7 @@ $router->post(ROUTES['register_admin'], function() use ($db) {
 
     // CHECK IF EMAIL IS VALID
     if (!preg_match('/.*@.*\..*/i', $user_email)) {
-        $res['user_email'] = 'Email address is not correct format';
+        $res['user_email'] = 'Email address is not correct format: <code>example@email.com</code>';
     }
 
 
@@ -156,7 +154,7 @@ $router->post(ROUTES['register_admin'], function() use ($db) {
     header('content-type: json');
 
     // IF THERE ARE ERRORS, SEND THE INFO BACK TO THE USER
-    if (count($res) > 0) {
+    if (!empty($res)) {
         echo json_encode($res);
         return;
     }
@@ -174,21 +172,17 @@ $router->post(ROUTES['register_admin'], function() use ($db) {
 
 
     // HASH OUR USER PASSWORD
-    $options = [
-        'cost' => 12,
-    ];
-
-    $user_password = password_hash($user_password, PASSWORD_BCRYPT, $options);
+    $user_password = hashPassword($user_password);
 
 
     // PREPARE OUR SQL FOR INSERTING NEW USER
     $stmt = $db->prepare("INSERT INTO `users`(user_email, user_fullname, user_password, user_type) VALUES(:user_email, :user_fullname, :user_password, :user_type)");
 
     // Assign user values, but trim trailing whitespace on each of them
-    $stmt->bindValue(':user_email',     trim($user_email));
-    $stmt->bindValue(':user_fullname',  trim($user_fullname));
-    $stmt->bindValue(':user_password',  trim($user_password));
-    $stmt->bindValue(':user_type',      trim($user_type));
+    $stmt->bindValue(':user_email',     $user_email);
+    $stmt->bindValue(':user_fullname',  $user_fullname);
+    $stmt->bindValue(':user_password',  $user_password);
+    $stmt->bindValue(':user_type',      $user_type);
 
     $stmt->execute();
 
@@ -202,6 +196,144 @@ $router->post(ROUTES['register_admin'], function() use ($db) {
 });
 
 
+// =========================================================================================================
+//  USER SESSION PROCESSES
+// =========================================================================================================
+
+// GET ROUTE: user login
+
+$router->get(ROUTES['login'], function() use ($db, $model, $twig) {
+
+    $model['inputs'] = [
+        [
+            'label'     => 'User Email'
+        ,   'type'      => 'email'
+        ,   'required'  => true
+        ,   'name'      => 'user_email'
+        ]
+    ,   [
+            'label'         => 'Password'
+        ,   'type'          => 'password'
+        ,   'required'      => true
+        ,   'name'          => 'user_password'
+        ]
+    ];
+
+
+    echo $twig->render('user-login.twig', $model);
+
+});
+
+
+// POST ROUTE: user login
+$router->post(ROUTES['login'], function() use ($db) {
+
+    // Set response header
+    header('content-type: application/json');
+
+
+    // Sanitize form submission data
+    $user_email     = trim(filter_var($_POST['user_email'],      FILTER_SANITIZE_EMAIL));
+    $user_password  = trim(filter_var($_POST['user_password'],   FILTER_SANITIZE_STRING));
+
+
+    $res = [];
+
+    // Validate form data
+    if (empty($user_email)) {
+        $res['user_email'] = 'Field cannot be empty';
+    }
+
+    if (empty($user_password)) {
+        $res['user_password'] = 'Field cannot be empty';
+    }
+
+
+    // Valide email formatting
+    if (!preg_match('/.*@.*\..*/i', $user_email)) {
+        $res['user_email'] = 'Email address is not correct format: <code>example@email.com</code>';
+    }
+
+
+    // if we have errors, return said errors
+    if (!empty($res)) {
+        echo json_encode($res);
+        return;
+    }
+
+
+    // No erros means we look up the user
+    $stmt = $db->query("SELECT * FROM `users` WHERE user_email='{$user_email}'");
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // if the user is not found
+    if (empty($user)) {
+        $res['notice'] = 'User login credentials are not valid.';
+        echo json_encode($res);
+        return;
+    }
+
+
+    // if the passwords don't match, bug out
+    if (!password_verify($user_password, $user['user_password'])) {
+        $res['notice'] = 'User login credentials are not valid.';
+        echo json_encode($res);
+        return;
+    }
+
+
+    // cleanup user model
+    unset($user['user_password']);
+
+
+    // add usermodel to session
+    $_SESSION['user'] = $user;
+
+
+    // reroute user to [user_type]_dashboard route
+    $res['redirect'] = ROUTES["{$user['user_type']}_dashboard"];
+
+    echo json_encode($res);
+    return;
+
+});
+
+
+// ROUTE: user logout
+$router->get(ROUTES['logout'], function() use ($twig) {
+    session_destroy();
+    redirect(ROUTES['login']);
+    return;
+});
+
+
+
+
+// =========================================================================================================
+//  USER/ADMIN DASHBOARD VIEWS
+// =========================================================================================================
+
+
+// ROUTE: user dashboard
+$router->get(ROUTES['user_dashboard'], function() use ($db, $twig, $model) {
+
+    $user = $_SESSION['user'];
+
+    $twig->render("{$user['user_type']}-dashboard.twig", $model);
+
+});
+
+
+// ROUTE: admin dashboard
+$router->get(ROUTES['admin_dashboard'], function() use ($db, $twig, $model) {
+
+    $user = $_SESSION['user'];
+
+    echo $twig->render('admin-dashboard.twig', $model);
+
+    return;
+});
 
 
 
@@ -327,46 +459,46 @@ $router->post(ROUTES['register_admin'], function() use ($db) {
 // });
 
 
-// ROUTE: login
-$router->get(ROUTES['login'], function() use ($twig, $model) {
+// // ROUTE: login
+// $router->get(ROUTES['login'], function() use ($twig, $model) {
 
-    $pass   = "rasmuslerdorf";
-    $hash   = password_hash($pass, PASSWORD_BCRYPT);
-    $res    = password_verify($pass, $hash);
+//     $pass   = "rasmuslerdorf";
+//     $hash   = password_hash($pass, PASSWORD_BCRYPT);
+//     $res    = password_verify($pass, $hash);
 
-    echo $res;
-    return;
+//     echo json_encode($res);
+//     return;
 
-    $model = [];
+//     $model = [];
 
-    echo $twig->render('login.twig', $model);
-});
-
-
-$router->post(ROUTES['login'], function() use ($model) {
-
-    print_r($_POST);
-
-    // look up user in users collection
+//     echo $twig->render('login.twig', $model);
+// });
 
 
+// $router->post(ROUTES['login'], function() use ($model) {
 
-    // get users hash
+//     print_r($_POST);
 
-    // verify password against use rhash
-
-    // if verified -> navigate to homepage and list all projects
-
-    // else -> redirect to login page with error messsage
-});
+//     // look up user in users collection
 
 
-// ROUTE: logout
-$router->get(ROUTES['logout'], function() use ($twig) {
-    validateUser();
-    logoutUser();
-    return;
-});
+
+//     // get users hash
+
+//     // verify password against use rhash
+
+//     // if verified -> navigate to homepage and list all projects
+
+//     // else -> redirect to login page with error messsage
+// });
+
+
+// // ROUTE: logout
+// $router->get(ROUTES['logout'], function() use ($twig) {
+//     validateUser();
+//     logoutUser();
+//     return;
+// });
 
 
 

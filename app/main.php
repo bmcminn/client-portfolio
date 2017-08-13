@@ -6,6 +6,37 @@
 define('REQUEST_URI',   preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
 
 if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|less|zip)$/', REQUEST_URI)) {
+
+    $ext = preg_match('/\.(.+)$/', REQUEST_URI, $matches);
+
+    switch($matches[1]) {
+        case 'css':
+            header('content-type: text/css');
+            break;
+
+        case 'png':
+            header('content-type: image/png');
+            break;
+
+        case 'gif':
+            header('content-type: image/gif');
+            break;
+
+        case 'jpg':
+        case 'jpeg':
+            header('content-type: image/jpeg');
+            break;
+
+        case 'xml':
+            header('content-type: text/xml');
+            break;
+
+        case 'zip':
+            header('content-type: application/zip');
+            break;
+
+    }
+
     echo file_get_contents(__DIR__ . '/..' . REQUEST_URI);
     return;
 }
@@ -84,12 +115,14 @@ if (!isset($_SESSION['gc_last_access']) || (time() - $_SESSION['gc_last_access']
 // Define routes list
 // --------------------------------------------------
 define('ROUTES', [
-    'home'              => '/'
-,   'login'             => '/login'
-,   'logout'            => '/logout'
-,   'register_client'   => '/register-client'
-,   'register_admin'    => '/register-admin'
-,   'admin_dashboard'   => '/admin/dashboard'
+    'home'                  => '/'
+,   'login'                 => '/user/login'
+,   'logout'                => '/user/logout'
+,   'forgot_password'       => '/user/forgot-password'
+,   'register_client'       => '/register-client'
+,   'register_admin'        => '/register-admin'
+,   'user_dashboard'        => '/user/dashboard'
+,   'admin_dashboard'       => '/admin/dashboard'
 ]);
 
 
@@ -127,6 +160,7 @@ require Path::join(APP_DIR, 'views.php');
 
 $model = [
     'routes'    => ROUTES
+,   'user'      => isset($_SESSION['user']) ? $_SESSION['user'] : null
 // ,   'clients'   => registerClients()
 ];
 

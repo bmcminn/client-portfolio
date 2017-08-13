@@ -1,0 +1,58 @@
+<script>
+    (function($) {
+        var $form = $('form');
+
+        $form.on('submit', function(e) {
+            e.preventDefault();
+
+            $inputs = $form.find('input, select');
+
+            var formData = {};
+
+            $inputs.each(function(index, input) {
+
+                let $self = $(input);
+
+                formData[$self.attr('name')] = $self.val();
+            });
+
+
+            $.post(
+                $form.attr('action')
+            ,   formData
+            ,   function(data, res) {
+                    console.log('res', data);
+
+                    // reset error fields
+                    $form.find('[name="notice"]').addClass('is-hidden');
+                    $form.find('input').removeClass('is-danger');
+                    $('.help').html('');
+
+                    if (data.redirect) {
+                        window.location = data.redirect;
+                        console.log('redirecting to', data.redirect);
+
+                    } else {
+                        Object.keys(data).forEach(function(field, index) {
+                            if (field === 'notice') {
+                                return;
+                            }
+                            console.log(field);
+                            $('[name="' + field + '"]')
+                                .addClass('is-danger')
+                                .next()
+                                .html(data[field])
+                                ;
+                        });
+
+                        if (data.notice) {
+                            $form.find('[name="notice"]').removeClass('is-hidden').text(data.notice);
+                        }
+                    }
+                }
+            );
+
+        });
+
+    })(jQuery);
+</script>

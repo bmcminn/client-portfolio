@@ -1,0 +1,28 @@
+{% extends 'layout.twig' %}
+
+
+{% block content %}
+
+    <h1 class="h1">New Admin User</h1>
+
+    {% if new_setup_message %}
+        <div class="notification is-primary">
+            {{ new_setup_message|md }}
+        </div>
+    {% endif %}
+
+
+    {% set formSubmitLabel  = 'Register Admin' %}
+    {% set formId           = 'user-forgot-password' %}
+    {% set formActionRoute  = routes.register_admin %}
+
+    {% include 'partials/form.twig' %}
+
+{% endblock %}
+
+
+
+{% block scripts %}
+    {{ parent() }}
+    {% include 'partials/form-handler.twig' %}
+{% endblock %}

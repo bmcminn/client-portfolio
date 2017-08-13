@@ -15,6 +15,7 @@ $twig->addFilter(new Twig_SimpleFilter('asset', function($str) {
 }));
 
 
+// TODO: hookup parsedown library here
 $twig->addFilter(new Twig_SimpleFilter('md', function($str) {
     return $str;
 }));
