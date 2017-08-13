@@ -6,7 +6,8 @@
 define('REQUEST_URI',   preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
 
 if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|less|zip)$/', REQUEST_URI)) {
-    return false;
+    echo file_get_contents(__DIR__ . '/..' . REQUEST_URI);
+    return;
 }
 
 
@@ -30,10 +31,19 @@ require __DIR__ . '/../vendor/autoload.php';
 
 
 
+// SETUP WHOOPS!
+// --------------------------------------------------
+
+$whoops = new \Whoops\Run;
+$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+$whoops->register();
+
+
+
 // DEFINE APP INSTANCES
 // --------------------------------------------------
 
-use Webmozart\PathUtil\Path;
+use \Webmozart\PathUtil\Path;
 
 
 
@@ -44,7 +54,12 @@ define('ROOT_DIR',      Path::canonicalize(__DIR__.'/..'));
 define('PROJECT_DIR',   Path::join(ROOT_DIR, '_projects'));
 define('APP_DIR',       Path::join(ROOT_DIR, '/app'));
 define('VIEWS_DIR',     Path::join(APP_DIR, '/views'));
-define('DATA_DIR',      Path::join(APP_DIR, '/__data'));
+define('DATA_DIR',      Path::join(APP_DIR, '/data'));
+
+
+if (!is_dir(DATA_DIR)) {
+    mkdir(DATA_DIR);
+}
 
 
 
@@ -72,8 +87,9 @@ define('ROUTES', [
     'home'              => '/'
 ,   'login'             => '/login'
 ,   'logout'            => '/logout'
-,   'register'          => '/register'
-,   'client-register'   => '/client/register'
+,   'register_client'   => '/register-client'
+,   'register_admin'    => '/register-admin'
+,   'admin_dashboard'   => '/admin/dashboard'
 ]);
 
 

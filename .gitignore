@@ -4,6 +4,7 @@ bower_components/
 .grunt/
 __*/
 
+
 _projects/*/
 
 *.sublime-workspace

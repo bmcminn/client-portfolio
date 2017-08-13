@@ -82,6 +82,12 @@ function validateUserParams() {
 
 
 
+function redirect($route = '/') {
+    header("location: {$route}");
+}
+
+
+
 function registerClients() {
 
     $filepath = Path::join(DATA_DIR, 'data.clients.json');
@@ -108,11 +114,9 @@ function registerClients() {
 
         print_r($files);
 
-
         $client['downloads'] = [];
         $client['images'] = [];
         $client['config'] = [];
-
 
         foreach ($files as $key => $file) {
             if (preg_match('/\.zip$/i', $file)) {
@@ -123,16 +127,15 @@ function registerClients() {
             }
         }
 
-
         array_push($clients, $client);
     }
 
     print_r($clients);
 
-
     file_put_contents($filepath, json_encode($clients));
 
 }
+
 
 
 function glob_recursive($pattern, $flags=0) {
