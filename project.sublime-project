@@ -13,6 +13,7 @@
                 "*.pdf",
                 "*.doc",
                 "*.docx",
+                "*.sqlite",
                 "license"
             ],
             "folder_exclude_patterns": [
