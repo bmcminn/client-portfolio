@@ -10,11 +10,34 @@
 
 {% block content %}
 
-    <h1 class="h1">Admin Dashboard</h1>
+    <section class="section">
+        <div class="container">
+            <h1 class="h1">Admin Dashboard</h1>
 
 
+        </div>
+    </section>
 
-    sfefkljselfjselkfjseklj
+
+    {% if not clients %}
+        <section class="hero is-medium is-light">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title">
+                        No clients in the system.
+                    </p>
+                    <br>
+                    <p class="subtitle">
+                        <a class="button is-primary" href="{{ routes.register_client }}">Add Clients!</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    {% else %}
+
+
+    {% endif %}
 
 {% endblock %}
 

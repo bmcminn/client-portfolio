@@ -3,12 +3,16 @@
 
 {% block content %}
 
-    <h1 class="h1">User Login</h1>
+    <section class="section">
+        <div class="content">
+        </div>
+    </section>
 
+{#     {% set formTitle            = 'User Login' %}
     {% set formSubmitLabel      = 'Login' %}
     {% set formId               = 'user-login' %}
     {% set formForgotPassword   = true %}
-    {% set formActionRoute      = routes.login %}
+    {% set formActionRoute      = routes.login %} #}
 
     {% include 'partials/form.twig' %}
 

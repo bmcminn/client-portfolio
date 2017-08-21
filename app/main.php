@@ -114,17 +114,7 @@ if (!isset($_SESSION['gc_last_access']) || (time() - $_SESSION['gc_last_access']
 
 // Define routes list
 // --------------------------------------------------
-define('ROUTES', [
-    'home'                  => '/'
-,   'login'                 => '/user/login'
-,   'logout'                => '/user/logout'
-,   'forgot_password'       => '/user/forgot-password'
-,   'register_client'       => '/register-client'
-,   'register_admin'        => '/register-admin'
-,   'user_dashboard'        => '/user/dashboard'
-,   'admin_dashboard'       => '/admin/dashboard'
-]);
-
+require 'app/config/routes.config.php';
 
 
 // LOAD METHOD HELPERS
@@ -159,8 +149,10 @@ require Path::join(APP_DIR, 'views.php');
 // --------------------------------------------------
 
 $model = [
-    'routes'    => ROUTES
-,   'user'      => isset($_SESSION['user']) ? $_SESSION['user'] : null
+    'app'           => require('app/config/app.config.php')
+,   'routes'        => ROUTES
+,   'current_route' => $_SERVER['REQUEST_URI']
+,   'user'          => isset($_SESSION['user']) ? $_SESSION['user'] : null
 // ,   'clients'   => registerClients()
 ];
 

@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="navbar-brand">
         <a class="navbar-item is-primary" href="{{ routes.home }}">
-            Client Portfolio
+            {{ app.title }}
             {# <img src="/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> #}
         </a>
         <div class="navbar-burger burger" data-target="navMenuExample">
@@ -86,9 +86,9 @@
 
                     {% if not user %}
                         <p class="control">
-                            <a class="button is-link" href="{{ routes.login }}">
+                            <a class="button" href="{{ routes.login }}">
                                 <span class="icon">
-                                    <i class="fa fa-login"></i>
+                                    <i class="fa fa-sign-in"></i>
                                 </span>
                                 <span>
                                     Login
@@ -100,7 +100,7 @@
                         <p class="control">
                             <a class="button is-link" href="{{ routes.logout }}">
                                 <span class="icon">
-                                    <i class="fa fa-logout"></i>
+                                    <i class="fa fa-sign-out"></i>
                                 </span>
                                 <span>
                                     Logout

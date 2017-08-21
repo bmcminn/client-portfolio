@@ -5,12 +5,27 @@
 
 
 // IMPORT ANIMATE CSS
-$shake = true
+// ----------------------------------------------------------------------
 
-@import "_animate.styl"
+$anim-shake = true
+// $anim-pulse = true
+$anim-flash = true
+
+@import "_animate"
 
 
 
+// IMPORT FONTAWESOME
+// ----------------------------------------------------------------------
+
+$fa-user = true
+
+@import "_fontawesome"
+
+
+
+// MAIN LAYOUT STYLES
+// ----------------------------------------------------------------------
 
 body
     min-height: 100vh
@@ -18,7 +33,7 @@ body
 
 
 // FORM STYLES
-// ------------------------------------------------------------------------
+// ----------------------------------------------------------------------
 
 .required
     color: red
@@ -27,7 +42,6 @@ body
 .user-form
     max-width: 440px
     margin: auto
-
 
 
 

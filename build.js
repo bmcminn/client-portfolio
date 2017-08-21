@@ -32,33 +32,42 @@ const svgo      = new SVGO({
 const isProduction = process.env.NODE_ENV === 'production' ? true : false;
 
 
-const STATIC_DIR   = path.join(process.cwd(), 'static');
-const ASSET_DIR    = path.join(process.cwd(), 'resources');
-
-const CSS_SRC   = path.join(ASSET_DIR, 'css');
-const CSS_DEST  = path.join(STATIC_DIR, 'css');
-
-const JS_SRC   = path.join(ASSET_DIR, 'js');
-const JS_DEST  = path.join(STATIC_DIR, 'js');
-
-const IMG_SRC   = path.join(ASSET_DIR, 'img');
-const IMG_DEST  = path.join(STATIC_DIR, 'img');
-
-const FONT_SRC   = path.join(ASSET_DIR, 'font');
-const FONT_DEST  = path.join(STATIC_DIR, 'font');
-
 
 // Ensure public directory structures exist
 const ASSET_DIRS = {
     CSS:    'css'
 ,   IMG:    'images'
 ,   JS:     'js'
-,   FONTS:  'fonts'
+,   FONT:   'fonts'
 };
 
+// Define paths for asset directories
+const STATIC_DIR   = path.join(process.cwd(), 'static');
+const ASSET_DIR    = path.join(process.cwd(), 'resources');
 
+
+const CSS_SRC   = path.join(ASSET_DIR, ASSET_DIRS.CSS);
+const CSS_DEST  = path.join(STATIC_DIR, ASSET_DIRS.CSS);
+
+const JS_SRC   = path.join(ASSET_DIR, ASSET_DIRS.JS);
+const JS_DEST  = path.join(STATIC_DIR, ASSET_DIRS.JS);
+
+const IMG_SRC   = path.join(ASSET_DIR, ASSET_DIRS.IMG);
+const IMG_DEST  = path.join(STATIC_DIR, ASSET_DIRS.IMG);
+
+const FONT_SRC   = path.join(ASSET_DIR, ASSET_DIRS.FONT);
+const FONT_DEST  = path.join(STATIC_DIR, ASSET_DIRS.FONT);
+
+
+// Ensure each asset directory exists
 _.each(ASSET_DIRS, function(pubDir, id) {
     let dir = path.join(STATIC_DIR, pubDir);
+
+    if (!fs.exists(dir)) {
+        fs.mkdir(dir);
+    }
+
+    dir = path.join(ASSET_DIR, pubDir);
 
     if (!fs.exists(dir)) {
         fs.mkdir(dir);

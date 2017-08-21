@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+
+
+{% block content %}
+
+    <section class="section">
+        {% if new_setup_message %}
+            <div class="notification is-primary">
+                <div class="container">
+                    {{ new_setup_message|md }}
+                </div>
+            </div>
+        {% endif %}
+
+
+        {% set formSubmitLabel  = 'Register' %}
+        {% set formId           = 'user-forgot-password' %}
+        {% set formActionRoute  = routes.register_admin %}
+
+        {% include 'partials/form.twig' %}
+    </section>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+    {{ parent() }}
+    {% include 'partials/form-handler.twig' %}
+{% endblock %}

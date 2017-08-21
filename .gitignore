@@ -2,10 +2,11 @@ vendor/
 node_modules/
 bower_components/
 .grunt/
-__*/
+__*
 
 
 _projects/*/
+static/
 
 *.sublime-workspace
 *.lock

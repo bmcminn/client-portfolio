@@ -16,28 +16,27 @@
                 formData[$self.attr('name')] = $self.val();
             });
 
+            var $notice = $form.find('[name="notice"]');
+
 
             $.post(
                 $form.attr('action')
             ,   formData
             ,   function(data, res) {
-                    console.log('res', data);
 
                     // reset error fields
-                    $form.find('[name="notice"]').addClass('is-hidden');
+                    $notice.addClass('is-hidden');
                     $form.find('input').removeClass('is-danger');
                     $('.help').html('');
 
                     if (data.redirect) {
                         window.location = data.redirect;
-                        console.log('redirecting to', data.redirect);
 
                     } else {
                         Object.keys(data).forEach(function(field, index) {
                             if (field === 'notice') {
                                 return;
                             }
-                            console.log(field);
                             $('[name="' + field + '"]')
                                 .addClass('is-danger')
                                 .next()
@@ -46,7 +45,15 @@
                         });
 
                         if (data.notice) {
-                            $form.find('[name="notice"]').removeClass('is-hidden').text(data.notice);
+                            $notice
+                                .removeClass('is-hidden')
+                                .addClass('is-' + data.notice.level)
+                                .text(data.notice.message)
+                                ;
+
+                            if ($notice.attr('data-animate') !== '') {
+                                animateNotice($notice);
+                            }
                         }
                     }
                 }
@@ -54,5 +61,20 @@
 
         });
 
+
+        function animateNotice($target) {
+            var classList       = $target.attr('data-animate') + ' animated';
+            var eAnimationEnd   = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+            $target
+                .addClass(classList)
+                .one(eAnimationEnd, function() {
+                    $(this).removeClass(classList);
+                })
+            ;
+        }
+
+
     })(jQuery);
 </script>
+
+

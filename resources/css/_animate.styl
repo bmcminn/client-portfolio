@@ -108,79 +108,79 @@
 
 
 
-if $effects == true
-    $shake                  = true
-    $headShake              = true
-    $hinge                  = true
-    $jackInTheBox           = true
-    $jello                  = true
-    $lightSpeedIn           = true
-    $lightSpeedOut          = true
-    $pulse                  = true
+if $anim-effects == true
+    $anim-shake                  = true
+    $anim-headShake              = true
+    $anim-hinge                  = true
+    $anim-jackInTheBox           = true
+    $anim-jello                  = true
+    $anim-lightSpeedIn           = true
+    $anim-lightSpeedOut          = true
+    $anim-pulse                  = true
 
 
 
-if $bounces == true
-    $bounceIn               = true
-    $bounceInDown           = true
-    $bounceInLeft           = true
-    $bounceInRight          = true
-    $bounceInUp             = true
-    $bounceOut              = true
-    $bounceOutDown          = true
-    $bounceOutLeft          = true
-    $bounceOutRight         = true
-    $bounceOutUp            = true
+if $anim-bounces == true
+    $anim-bounceIn               = true
+    $anim-bounceInDown           = true
+    $anim-bounceInLeft           = true
+    $anim-bounceInRight          = true
+    $anim-bounceInUp             = true
+    $anim-bounceOut              = true
+    $anim-bounceOutDown          = true
+    $anim-bounceOutLeft          = true
+    $anim-bounceOutRight         = true
+    $anim-bounceOutUp            = true
 
 
-if $flips == true
-    $flip                   = true
-    $flipInX                = true
-    $flipInY                = true
-    $flipOutX               = true
-    $flipOutY               = true
+if $anim-flips == true
+    $anim-flip                   = true
+    $anim-flipInX                = true
+    $anim-flipInY                = true
+    $anim-flipOutX               = true
+    $anim-flipOutY               = true
 
 
-if $rotates == true
-    $rotateIn               = true
-    $rotateInDownLeft       = true
-    $rotateInDownRight      = true
-    $rotateInUpLeft         = true
-    $rotateInUpRight        = true
-    $rotateOut              = true
-    $rotateOutDownLeft      = true
-    $rotateOutDownRight     = true
-    $rotateOutUpLeft        = true
-    $rotateOutUpRight       = true
+if $anim-rotates == true
+    $anim-rotateIn               = true
+    $anim-rotateInDownLeft       = true
+    $anim-rotateInDownRight      = true
+    $anim-rotateInUpLeft         = true
+    $anim-rotateInUpRight        = true
+    $anim-rotateOut              = true
+    $anim-rotateOutDownLeft      = true
+    $anim-rotateOutDownRight     = true
+    $anim-rotateOutUpLeft        = true
+    $anim-rotateOutUpRight       = true
 
 
-if $rolls == true
-    $rollIn                 = true
-    $rollOut                = true
+if $anim-rolls == true
+    $anim-rollIn                 = true
+    $anim-rollOut                = true
 
 
-if $zooms == true
-    $zoomIn                 = true
-    $zoomInDown             = true
-    $zoomInLeft             = true
-    $zoomInRight            = true
-    $zoomInUp               = true
-    $zoomOut                = true
-    $zoomOutDown            = true
-    $zoomOutLeft            = true
-    $zoomOutRight           = true
-    $zoomOutUp              = true
+if $anim-zooms == true
+    $anim-zoomIn                 = true
+    $anim-zoomInDown             = true
+    $anim-zoomInLeft             = true
+    $anim-zoomInRight            = true
+    $anim-zoomInUp               = true
+    $anim-zoomOut                = true
+    $anim-zoomOutDown            = true
+    $anim-zoomOutLeft            = true
+    $anim-zoomOutRight           = true
+    $anim-zoomOutUp              = true
 
 
-if $slides == true
-    $slideInDown            = true
-    $slideInLeft            = true
-    $slideInRight           = true
-    $slideInUp              = true
-    $slideOutDown           = true
-    $slideOutLeft           = true
-    $slideOutRight          = true
-    $slideOutUp             = true
+if $anim-slides == true
+    $anim-slideInDown            = true
+    $anim-slideInLeft            = true
+    $anim-slideInRight           = true
+    $anim-slideInUp              = true
+    $anim-slideOutDown           = true
+    $anim-slideOutLeft           = true
+    $anim-slideOutRight          = true
+    $anim-slideOutUp             = true
 
 
 
@@ -207,7 +207,7 @@ if $slides == true
 
 
 // ----------------------------------------------------------------------
-if $bounce == true
+if $anim-bounce == true
     @keyframes bounce
         from, 20%, 53%, 80%, to
             animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000)
@@ -231,7 +231,7 @@ if $bounce == true
 
 
 // ----------------------------------------------------------------------
-if $flash == true
+if $anim-flash == true
     @keyframes flash
 
         from, 50%, to
@@ -246,7 +246,7 @@ if $flash == true
 
 
 // ----------------------------------------------------------------------
-if $pulse == true
+if $anim-pulse == true
     // originally authored by Nick Pettit - https://github.com/nickpettit/glide
     @keyframes pulse
         from
@@ -264,7 +264,7 @@ if $pulse == true
 
 
 // ----------------------------------------------------------------------
-if $rubberBand == true
+if $anim-rubberBand == true
     @keyframes rubberBand
 
         from
@@ -294,7 +294,7 @@ if $rubberBand == true
 
 
 // ----------------------------------------------------------------------
-if $shake == true
+if $anim-shake == true
     @keyframes shake
         from, to
             transform: translate3d(0, 0, 0)
@@ -311,7 +311,7 @@ if $shake == true
 
 
 // ----------------------------------------------------------------------
-if $headShake == true
+if $anim-headShake == true
     @keyframes headShake
         0%
             transform: translateX(0)
@@ -338,7 +338,7 @@ if $headShake == true
 
 
 // ----------------------------------------------------------------------
-if $swing == true
+if $anim-swing == true
     @keyframes swing
         20%
             transform: rotate3d(0, 0, 1, 15deg)
@@ -362,7 +362,7 @@ if $swing == true
 
 
 // ----------------------------------------------------------------------
-if $tada == true
+if $anim-tada == true
     @keyframes tada
         from
             transform: scale3d(1, 1, 1)
@@ -385,7 +385,7 @@ if $tada == true
 
 
 // ----------------------------------------------------------------------
-if $wobble == true
+if $anim-wobble == true
     // originally authored by Nick Pettit - https://github.com/nickpettit/glide
     @keyframes wobble
         from
@@ -415,7 +415,7 @@ if $wobble == true
 
 
 // ----------------------------------------------------------------------
-if $jello == true
+if $anim-jello == true
     @keyframes jello
         from, 11.1%, to
             transform: none
@@ -448,7 +448,7 @@ if $jello == true
 
 
 // ----------------------------------------------------------------------
-if $bounceIn == true
+if $anim-bounceIn == true
     @keyframes bounceIn
 
         from, 20%, 40%, 60%, 80%, to
@@ -481,7 +481,7 @@ if $bounceIn == true
 
 
 // ----------------------------------------------------------------------
-if $bounceInDown == true
+if $anim-bounceInDown == true
     @keyframes bounceInDown
 
         from, 60%, 75%, 90%, to
@@ -510,7 +510,7 @@ if $bounceInDown == true
 
 
 // ----------------------------------------------------------------------
-if $bounceInLeft == true
+if $anim-bounceInLeft == true
     @keyframes bounceInLeft
 
         from, 60%, 75%, 90%, to
@@ -539,7 +539,7 @@ if $bounceInLeft == true
 
 
 // ----------------------------------------------------------------------
-if $bounceInRight == true
+if $anim-bounceInRight == true
     @keyframes bounceInRight
 
         from, 60%, 75%, 90%, to
@@ -568,7 +568,7 @@ if $bounceInRight == true
 
 
 // ----------------------------------------------------------------------
-if $bounceInUp == true
+if $anim-bounceInUp == true
     @keyframes bounceInUp
 
         from, 60%, 75%, 90%, to
@@ -597,7 +597,7 @@ if $bounceInUp == true
 
 
 // ----------------------------------------------------------------------
-if $bounceOut == true
+if $anim-bounceOut == true
     @keyframes bounceOut
 
         20%
@@ -617,7 +617,7 @@ if $bounceOut == true
 
 
 // ----------------------------------------------------------------------
-if $bounceOutDown == true
+if $anim-bounceOutDown == true
     @keyframes bounceOutDown
 
         20%
@@ -637,7 +637,7 @@ if $bounceOutDown == true
 
 
 // ----------------------------------------------------------------------
-if $bounceOutLeft == true
+if $anim-bounceOutLeft == true
     @keyframes bounceOutLeft
 
         20%
@@ -654,7 +654,7 @@ if $bounceOutLeft == true
 
 
 // ----------------------------------------------------------------------
-if $bounceOutRight == true
+if $anim-bounceOutRight == true
     @keyframes bounceOutRight
 
         20%
@@ -671,7 +671,7 @@ if $bounceOutRight == true
 
 
 // ----------------------------------------------------------------------
-if $bounceOutUp == true
+if $anim-bounceOutUp == true
     @keyframes bounceOutUp
 
         20%
@@ -691,7 +691,7 @@ if $bounceOutUp == true
 
 
 // ----------------------------------------------------------------------
-if $fadeIn == true
+if $anim-fadeIn == true
     @keyframes fadeIn
 
         from
@@ -706,7 +706,7 @@ if $fadeIn == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInDown == true
+if $anim-fadeInDown == true
     @keyframes fadeInDown
 
         from
@@ -723,7 +723,7 @@ if $fadeInDown == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInDownBig == true
+if $anim-fadeInDownBig == true
     @keyframes fadeInDownBig
 
         from
@@ -740,7 +740,7 @@ if $fadeInDownBig == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInLeft == true
+if $anim-fadeInLeft == true
     @keyframes fadeInLeft
 
         from
@@ -757,7 +757,7 @@ if $fadeInLeft == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInLeftBig == true
+if $anim-fadeInLeftBig == true
     @keyframes fadeInLeftBig
 
         from
@@ -774,7 +774,7 @@ if $fadeInLeftBig == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInRight == true
+if $anim-fadeInRight == true
     @keyframes fadeInRight
 
         from
@@ -791,7 +791,7 @@ if $fadeInRight == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInRightBig == true
+if $anim-fadeInRightBig == true
     @keyframes fadeInRightBig
 
         from
@@ -808,7 +808,7 @@ if $fadeInRightBig == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInUp == true
+if $anim-fadeInUp == true
     @keyframes fadeInUp
 
         from
@@ -825,7 +825,7 @@ if $fadeInUp == true
 
 
 // ----------------------------------------------------------------------
-if $fadeInUpBig == true
+if $anim-fadeInUpBig == true
     @keyframes fadeInUpBig
 
         from
@@ -842,7 +842,7 @@ if $fadeInUpBig == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOut == true
+if $anim-fadeOut == true
     @keyframes fadeOut
 
         from
@@ -857,7 +857,7 @@ if $fadeOut == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutDown == true
+if $anim-fadeOutDown == true
     @keyframes fadeOutDown
 
         from
@@ -873,7 +873,7 @@ if $fadeOutDown == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutDownBig == true
+if $anim-fadeOutDownBig == true
     @keyframes fadeOutDownBig
 
         from
@@ -889,7 +889,7 @@ if $fadeOutDownBig == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutLeft == true
+if $anim-fadeOutLeft == true
     @keyframes fadeOutLeft
 
         from
@@ -905,7 +905,7 @@ if $fadeOutLeft == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutLeftBig == true
+if $anim-fadeOutLeftBig == true
     @keyframes fadeOutLeftBig
 
         from
@@ -921,7 +921,7 @@ if $fadeOutLeftBig == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutRight == true
+if $anim-fadeOutRight == true
     @keyframes fadeOutRight
 
         from
@@ -937,7 +937,7 @@ if $fadeOutRight == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutRightBig == true
+if $anim-fadeOutRightBig == true
     @keyframes fadeOutRightBig
 
         from
@@ -953,7 +953,7 @@ if $fadeOutRightBig == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutUp == true
+if $anim-fadeOutUp == true
     @keyframes fadeOutUp
 
         from
@@ -969,7 +969,7 @@ if $fadeOutUp == true
 
 
 // ----------------------------------------------------------------------
-if $fadeOutUpBig == true
+if $anim-fadeOutUpBig == true
     @keyframes fadeOutUpBig
 
         from
@@ -985,7 +985,7 @@ if $fadeOutUpBig == true
 
 
 // ----------------------------------------------------------------------
-if $flip == true
+if $anim-flip == true
     @keyframes flip
 
         from
@@ -1016,7 +1016,7 @@ if $flip == true
 
 
 // ----------------------------------------------------------------------
-if $flipInX == true
+if $anim-flipInX == true
     @keyframes flipInX
 
         from
@@ -1046,7 +1046,7 @@ if $flipInX == true
 
 
 // ----------------------------------------------------------------------
-if $flipInY == true
+if $anim-flipInY == true
     @keyframes flipInY
 
         from
@@ -1076,7 +1076,7 @@ if $flipInY == true
 
 
 // ----------------------------------------------------------------------
-if $flipOutX == true
+if $anim-flipOutX == true
     @keyframes flipOutX
 
         from
@@ -1098,7 +1098,7 @@ if $flipOutX == true
 
 
 // ----------------------------------------------------------------------
-if $flipOutY == true
+if $anim-flipOutY == true
     @keyframes flipOutY
 
         from
@@ -1120,7 +1120,7 @@ if $flipOutY == true
 
 
 // ----------------------------------------------------------------------
-if $lightSpeedIn == true
+if $anim-lightSpeedIn == true
     @keyframes lightSpeedIn
 
         from
@@ -1146,7 +1146,7 @@ if $lightSpeedIn == true
 
 
 // ----------------------------------------------------------------------
-if $lightSpeedOut == true
+if $anim-lightSpeedOut == true
     @keyframes lightSpeedOut
 
         from
@@ -1163,7 +1163,7 @@ if $lightSpeedOut == true
 
 
 // ----------------------------------------------------------------------
-if $rotateIn == true
+if $anim-rotateIn == true
     @keyframes rotateIn
 
         from
@@ -1182,7 +1182,7 @@ if $rotateIn == true
 
 
 // ----------------------------------------------------------------------
-if $rotateInDownLeft == true
+if $anim-rotateInDownLeft == true
     @keyframes rotateInDownLeft
 
         from
@@ -1201,7 +1201,7 @@ if $rotateInDownLeft == true
 
 
 // ----------------------------------------------------------------------
-if $rotateInDownRight == true
+if $anim-rotateInDownRight == true
     @keyframes rotateInDownRight
 
         from
@@ -1220,7 +1220,7 @@ if $rotateInDownRight == true
 
 
 // ----------------------------------------------------------------------
-if $rotateInUpLeft == true
+if $anim-rotateInUpLeft == true
     @keyframes rotateInUpLeft
 
         from
@@ -1239,7 +1239,7 @@ if $rotateInUpLeft == true
 
 
 // ----------------------------------------------------------------------
-if $rotateInUpRight == true
+if $anim-rotateInUpRight == true
     @keyframes rotateInUpRight
 
         from
@@ -1258,7 +1258,7 @@ if $rotateInUpRight == true
 
 
 // ----------------------------------------------------------------------
-if $rotateOut == true
+if $anim-rotateOut == true
     @keyframes rotateOut
 
         from
@@ -1276,7 +1276,7 @@ if $rotateOut == true
 
 
 // ----------------------------------------------------------------------
-if $rotateOutDownLeft == true
+if $anim-rotateOutDownLeft == true
     @keyframes rotateOutDownLeft
 
         from
@@ -1294,7 +1294,7 @@ if $rotateOutDownLeft == true
 
 
 // ----------------------------------------------------------------------
-if $rotateOutDownRight == true
+if $anim-rotateOutDownRight == true
     @keyframes rotateOutDownRight
 
         from
@@ -1312,7 +1312,7 @@ if $rotateOutDownRight == true
 
 
 // ----------------------------------------------------------------------
-if $rotateOutUpLeft == true
+if $anim-rotateOutUpLeft == true
     @keyframes rotateOutUpLeft
 
         from
@@ -1330,7 +1330,7 @@ if $rotateOutUpLeft == true
 
 
 // ----------------------------------------------------------------------
-if $rotateOutUpRight == true
+if $anim-rotateOutUpRight == true
     @keyframes rotateOutUpRight
 
         from
@@ -1348,7 +1348,7 @@ if $rotateOutUpRight == true
 
 
 // ----------------------------------------------------------------------
-if $hinge == true
+if $anim-hinge == true
     @keyframes hinge
 
         0%
@@ -1376,7 +1376,7 @@ if $hinge == true
 
 
 // ----------------------------------------------------------------------
-if $jackInTheBox == true
+if $anim-jackInTheBox == true
     @keyframes jackInTheBox
 
         from
@@ -1404,7 +1404,7 @@ if $jackInTheBox == true
 
 
 // ----------------------------------------------------------------------
-if $rollIn == true
+if $anim-rollIn == true
     @keyframes rollIn
 
         from
@@ -1425,7 +1425,7 @@ if $rollIn == true
 
 
 // ----------------------------------------------------------------------
-if $rollOut == true
+if $anim-rollOut == true
     @keyframes rollOut
 
         from
@@ -1441,7 +1441,7 @@ if $rollOut == true
 
 
 // ----------------------------------------------------------------------
-if $zoomIn == true
+if $anim-zoomIn == true
     @keyframes zoomIn
 
         from
@@ -1457,7 +1457,7 @@ if $zoomIn == true
 
 
 // ----------------------------------------------------------------------
-if $zoomInDown == true
+if $anim-zoomInDown == true
     @keyframes zoomInDown
 
         from
@@ -1476,7 +1476,7 @@ if $zoomInDown == true
 
 
 // ----------------------------------------------------------------------
-if $zoomInLeft == true
+if $anim-zoomInLeft == true
     @keyframes zoomInLeft
 
         from
@@ -1495,7 +1495,7 @@ if $zoomInLeft == true
 
 
 // ----------------------------------------------------------------------
-if $zoomInRight == true
+if $anim-zoomInRight == true
     @keyframes zoomInRight
 
         from
@@ -1514,7 +1514,7 @@ if $zoomInRight == true
 
 
 // ----------------------------------------------------------------------
-if $zoomInUp == true
+if $anim-zoomInUp == true
     @keyframes zoomInUp
 
         from
@@ -1533,7 +1533,7 @@ if $zoomInUp == true
 
 
 // ----------------------------------------------------------------------
-if $zoomOut == true
+if $anim-zoomOut == true
     @keyframes zoomOut
 
         from
@@ -1552,7 +1552,7 @@ if $zoomOut == true
 
 
 // ----------------------------------------------------------------------
-if $zoomOutDown == true
+if $anim-zoomOutDown == true
     @keyframes zoomOutDown
 
         40%
@@ -1572,7 +1572,7 @@ if $zoomOutDown == true
 
 
 // ----------------------------------------------------------------------
-if $zoomOutLeft == true
+if $anim-zoomOutLeft == true
     @keyframes zoomOutLeft
 
         40%
@@ -1590,7 +1590,7 @@ if $zoomOutLeft == true
 
 
 // ----------------------------------------------------------------------
-if $zoomOutRight == true
+if $anim-zoomOutRight == true
     @keyframes zoomOutRight
 
         40%
@@ -1608,7 +1608,7 @@ if $zoomOutRight == true
 
 
 // ----------------------------------------------------------------------
-if $zoomOutUp == true
+if $anim-zoomOutUp == true
     @keyframes zoomOutUp
 
         40%
@@ -1628,7 +1628,7 @@ if $zoomOutUp == true
 
 
 // ----------------------------------------------------------------------
-if $slideInDown == true
+if $anim-slideInDown == true
     @keyframes slideInDown
 
         from
@@ -1644,7 +1644,7 @@ if $slideInDown == true
 
 
 // ----------------------------------------------------------------------
-if $slideInLeft == true
+if $anim-slideInLeft == true
     @keyframes slideInLeft
 
         from
@@ -1660,7 +1660,7 @@ if $slideInLeft == true
 
 
 // ----------------------------------------------------------------------
-if $slideInRight == true
+if $anim-slideInRight == true
     @keyframes slideInRight
 
         from
@@ -1676,7 +1676,7 @@ if $slideInRight == true
 
 
 // ----------------------------------------------------------------------
-if $slideInUp == true
+if $anim-slideInUp == true
     @keyframes slideInUp
 
         from
@@ -1692,7 +1692,7 @@ if $slideInUp == true
 
 
 // ----------------------------------------------------------------------
-if $slideOutDown == true
+if $anim-slideOutDown == true
     @keyframes slideOutDown
 
         from
@@ -1708,7 +1708,7 @@ if $slideOutDown == true
 
 
 // ----------------------------------------------------------------------
-if $slideOutLeft == true
+if $anim-slideOutLeft == true
     @keyframes slideOutLeft
 
         from
@@ -1724,7 +1724,7 @@ if $slideOutLeft == true
 
 
 // ----------------------------------------------------------------------
-if $slideOutRight == true
+if $anim-slideOutRight == true
     @keyframes slideOutRight
 
         from
@@ -1740,7 +1740,7 @@ if $slideOutRight == true
 
 
 // ----------------------------------------------------------------------
-if $slideOutUp == true
+if $anim-slideOutUp == true
     @keyframes slideOutUp
 
         from

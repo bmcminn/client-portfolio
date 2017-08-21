@@ -40,6 +40,16 @@ $db->exec(Q::CREATE_TABLE('projects', [
 ]));
 
 
+$db->exec(Q::CREATE_TABLE('password_resets', [
+    'reset_id       INTEGER PRIMARY KEY'    // AUTO ID
+,   'reset_token    TEXT NOT NULL'          // TOKEN CREATED WHEN PASSWORD RESET WAS REQUESTED
+,   'user_id        INTEGER NOT NULL'       // USER ID FOR PASSWORD RESET
+,   'reset_expires  INTEGER NOT NULL'       // UNIX EPOCH TIMESTAMP
+,   'reset_expired  INTEGER'                // BOOLEAN FLAG
+]));
+
+
+
 // DETERMINE IF WE HAVE ADMIN USERS OR NOT
 $admins = $db->query("SELECT * FROM users WHERE user_type='admin'");
 

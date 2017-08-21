@@ -4,16 +4,15 @@
 */
 
 // RENDER FLAGS
-$animation      = false
-$modifiers      = false
-$sizes          = false
+// $animation      = false
+// $modifiers      = false
+// $sizes          = false
 
-$accessibility  = false
-$genders        = false
-$mediaControls  = false
-$brands         = false
-$users          = true
-
+// $accessibility  = false
+// $genders        = false
+// $mediaControls  = false
+// $brands         = false
+// $users          = true
 
 
 
@@ -32,7 +31,7 @@ $users          = true
 .fa-fa:before,.fa-font-awesome:before{content:"\f2b4"}
 
 
-if $sizes
+if $fa-sizes == true
     .fa-lg{font-size:1.33333333em;line-height:.75em;vertical-align:-15%}
     .fa-2x{font-size:2em}
     .fa-3x{font-size:3em}
@@ -41,7 +40,7 @@ if $sizes
     .fa-fw{width:1.28571429em;text-align:center}
 
 
-if $modifiers
+if $fa-modifiers == true
     .fa-ul{padding-left:0;margin-left:2.14285714em;list-style-type:none}
     .fa-ul>li{position:relative}
     .fa-li{position:absolute;left:-2.14285714em;width:2.14285714em;top:.14285714em;text-align:center}
@@ -73,7 +72,7 @@ if $modifiers
 
 
 
-if $animation
+if $fa-animation == true
     .fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}
     .fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}
     @-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}
@@ -94,7 +93,7 @@ if $animation
 // ======================================================================
 
 
-if $accessibility
+if $fa-accessibility == true
     .fa-asl-interpreting:before,.fa-american-sign-language-interpreting:before{content:"\f2a3"}
     .fa-assistive-listening-systems:before{content:"\f2a2"}
     .fa-audio-description:before{content:"\f29e"}
@@ -114,7 +113,7 @@ if $accessibility
 
 
 
-if $transportation
+if $fa-transportation == true
     .fa-ambulance:before{content:"\f0f9"}
     .fa-automobile:before,.fa-car:before{content:"\f1b9"}
     .fa-bicycle:before{content:"\f206"}
@@ -130,12 +129,12 @@ if $transportation
     .fa-train:before{content:"\f238"}
     .fa-truck:before{content:"\f0d1"}
 
-    if not $accessibility
+    if not $fa-accessibility
         .fa-wheelchair-alt:before{content:"\f29b"}
         .fa-wheelchair:before{content:"\f193"}
 
 
-if $genders
+if $fa-genders == true
     .fa-female:before{content:"\f182"}
     .fa-genderless:before{content:"\f22d"}
     .fa-intersex:before,.fa-transgender:before{content:"\f224"}
@@ -153,7 +152,7 @@ if $genders
 
 
 
-if $hands
+if $fa-hands == true
     .fa-hand-grab-o:before,.fa-hand-rock-o:before{content:"\f255"}
     .fa-hand-lizard-o:before{content:"\f258"}
     .fa-hand-o-down:before{content:"\f0a7"}
@@ -169,7 +168,7 @@ if $hands
 
 
 
-if $arrows
+if $fa-arrows == true
     .fa-angle-double-down:before{content:"\f103"}
     .fa-angle-double-left:before{content:"\f100"}
     .fa-angle-double-right:before{content:"\f101"}
@@ -212,7 +211,7 @@ if $arrows
     .fa-long-arrow-up:before{content:"\f176"}
 
 
-    if not $hands
+    if not $fa-hands
         .fa-hand-o-down:before{content:"\f0a7"}
         .fa-hand-o-left:before{content:"\f0a5"}
         .fa-hand-o-right:before{content:"\f0a4"}
@@ -220,7 +219,7 @@ if $arrows
 
 
 
-if $files
+if $fa-files == true
     .fa-file-code-o:before{content:"\f1c9"}
     .fa-file-excel-o:before{content:"\f1c3"}
     .fa-file-movie-o:before,.fa-file-video-o:before{content:"\f1c8"}
@@ -239,7 +238,7 @@ if $files
 
 
 
-if $commerce
+if $fa-commerce == true
     .fa-shopping-bag:before{content:"\f290"}
     .fa-shopping-basket:before{content:"\f291"}
     .fa-shopping-cart:before{content:"\f07a"}
@@ -250,7 +249,7 @@ if $commerce
 
 
 
-if $textEditor
+if $fa-textEditor == true
     .fa-align-center:before{content:"\f037"}
     .fa-align-justify:before{content:"\f039"}
     .fa-align-left:before{content:"\f036"}
@@ -288,7 +287,7 @@ if $textEditor
     .fa-unlink:before,.fa-chain-broken:before{content:"\f127"}
 
 
-    if not $files
+    if not $fa-files
         .fa-file-o:before{content:"\f016"}
         .fa-file-text-o:before{content:"\f0f6"}
         .fa-file-o:before{content:"\f016"}
@@ -298,7 +297,7 @@ if $textEditor
 
 
 
-if $food
+if $fa-food == true
     .fa-beer:before{content:"\f0fc"}
     .fa-coffee:before{content:"\f0f4"}
     .fa-spoon:before{content:"\f1b1"}
@@ -307,7 +306,7 @@ if $food
 
 
 
-if $formControls
+if $fa-formControls == true
     .fa-check-circle-o:before{content:"\f05d"}
     .fa-check-circle:before{content:"\f058"}
     .fa-check-square-o:before{content:"\f046"}
@@ -322,7 +321,7 @@ if $formControls
 
 
 
-if $user
+if $fa-user == true
     .fa-user-circle-o:before{content:"\f2be"}
     .fa-user-circle:before{content:"\f2bd"}
     .fa-user-md:before{content:"\f0f0"}
@@ -336,7 +335,7 @@ if $user
     .fa-sign-out:before{content:"\f08b"}
 
 
-if $mediaControls
+if $fa-mediaControls == true
     .fa-backward:before{content:"\f04a"}
     .fa-compress:before{content:"\f066"}
     .fa-eject:before{content:"\f052"}
@@ -360,19 +359,19 @@ if $mediaControls
     .fa-volume-off:before{content:"\f026"}
     .fa-volume-up:before{content:"\f028"}
 
-    if not $arrows
+    if not $fa-arrows
         .fa-arrows-alt:before{content:"\f0b2"}
 
-    if not $textEditor
+    if not $fa-textEditor
         .fa-rotate-right:before,.fa-repeat:before{content:"\f01e"}
 
 
 
-if $payments
+if $fa-payments == true
     .fa-credit-card-alt:before{content:"\f283"}
     .fa-credit-card:before{content:"\f09d"}
 
-    if not $brands
+    if not $fa-brands
         .fa-cc-amex:before{content:"\f1f3"}
         .fa-cc-diners-club:before{content:"\f24c"}
         .fa-cc-discover:before{content:"\f1f2"}
@@ -385,7 +384,7 @@ if $payments
 
 
 
-if $charts
+if $fa-charts == true
     .fa-area-chart:before{content:"\f1fe"}
     .fa-bar-chart-o:before,.fa-bar-chart:before{content:"\f080"}
     .fa-line-chart:before{content:"\f201"}
@@ -393,7 +392,7 @@ if $charts
 
 
 
-if $currency
+if $fa-currency == true
     .fa-bitcoin:before,.fa-btc:before{content:"\f15a"}
     .fa-cny:before,.fa-rmb:before,.fa-yen:before,.fa-jpy:before{content:"\f157"}
     .fa-dollar:before,.fa-usd:before{content:"\f155"}
@@ -410,7 +409,7 @@ if $currency
 
 
 
-if $social
+if $fa-social == true
     .fa-dribbble:before{content:"\f17d"}
     .fa-facebook-f:before,.fa-facebook:before{content:"\f09a"}
     .fa-facebook-official:before{content:"\f230"}
@@ -435,7 +434,7 @@ if $social
 
 
 
-if $technologies
+if $fa-technologies == true
     .fa-bluetooth-b:before{content:"\f294"}
     .fa-bluetooth:before{content:"\f293"}
     .fa-calculator:before{content:"\f1ec"}
@@ -461,7 +460,7 @@ if $technologies
 
 
 
-if $brands
+if $fa-brands == true
     .fa-500px:before{content:"\f26e"}
     .fa-adn:before{content:"\f170"}
     .fa-amazon:before{content:"\f270"}
@@ -605,7 +604,7 @@ if $brands
 
 
 
-if $copyright
+if $fa-copyright == true
     .fa-copyright:before{content:"\f1f9"}
     .fa-creative-commons:before{content:"\f25e"}
 
@@ -613,7 +612,7 @@ if $copyright
 
 
 
-if $travel
+if $fa-travel == true
     .fa-building-o:before{content:"\f0f7"}
     .fa-building:before{content:"\f1ad"}
     .fa-hospital-o:before{content:"\f0f8"}

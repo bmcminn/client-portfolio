@@ -18,6 +18,35 @@ function logoutUser() {
 }
 
 
+
+
+function logger($data, $level="info") {
+
+    $__DOC_ROOT__ = $_SERVER['DOCUMENT_ROOT'];
+    $db = debug_backtrace();
+    $date = date('Y-m-d');
+    $logPath = $__DOC_ROOT__ . '/logs';
+
+    if (!file_exists($logPath)) {
+        mkdir($logPath);
+    }
+
+    $filepath = $logPath . "/debug-${date}.log";
+
+    $data = implode(' | ', [
+        "[${level}]"
+    ,   date('Y-m-d H:s:m Z')
+    ,   $db[0]['file'] . ':' . $db[0]['line']
+    ,   print_r($data, true)
+    ]) . "\n";
+
+    file_put_contents($filepath, $data, FILE_APPEND);
+}
+
+
+
+
+
 function message($msg, $status=200) {
     $res = [];
 
@@ -41,7 +70,6 @@ function userExists() {
     $data = validateData($_POST, $contract);
 
     $userQuery = "SELECT * FROM users WHERE username=:username";
-
 
     try {
         $stmt = $db->prepare($userQuery);
@@ -82,6 +110,15 @@ function validateUserParams() {
 
 
 
+
+function seconds($num)  { return 1000 * $num; }
+function minutes($num)  { return seconds(60) * $num; }
+function hours($num)    { return minutes(60) * $num; }
+function days($num)     { return hours(24) * $num; }
+function weeks($num)    { return days(7) * $num; }
+
+
+
 function hashPassword($password, $opts = []) {
     $options = array_replace_recursive([
         'cost' => 12
@@ -89,7 +126,6 @@ function hashPassword($password, $opts = []) {
 
     return password_hash($password, PASSWORD_BCRYPT, $options);
 }
-
 
 
 
