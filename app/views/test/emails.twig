@@ -1,0 +1,22 @@
+{% extends "layout.twig" %}
+
+
+{% block content %}
+
+    <div class="section">
+        <div class="container">
+            <div class="content">
+                <h1>Test: Email Templates</h1>
+            </div>
+
+            <ul>
+                {% for template in templates %}
+                    <li>
+                        <a href="{{ template.route }}">{{ template.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

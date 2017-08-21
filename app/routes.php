@@ -43,13 +43,7 @@ $router->get(ROUTES['home'], function() use ($db, $twig, $model) {
         $model['page'] = [];
     }
 
-
     // $model['page']['title'] = 'New Client Registration';
-
-
-    echo $twig->render('emails/forgot-password.twig', $model);
-    return;
-
 
     echo $twig->render('homepage.twig', $model);
 
@@ -81,7 +75,7 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
 
 
     if (empty($users)) {
-        $model['new_setup_message'] = "Welcome to [CLIENT-PORTFOLIO]!\nSince this appears to be a brand new instance, you must first setup your admin user profile to get started.";
+        $model['new_setup_message'] = "Welcome to [CLIENT-PORTFOLIO]!<br><br>Since this appears to be a brand new instance, you must first setup your admin user profile to get started.";
     }
 
 
@@ -616,7 +610,7 @@ $router->get(ROUTES['forgot_password'], function() use ($model, $twig) {
 // USER FORGOT PASSWORD SUBMISSION
 // ------------------------------------------------------------
 
-$router->post(ROUTES['forgot_password'], function() use ($db, $model) {
+$router->post(ROUTES['forgot_password'], function() use ($db, $model, $twig) {
 
     // Set response header
     header('content-type: application/json');
@@ -646,19 +640,17 @@ $router->post(ROUTES['forgot_password'], function() use ($db, $model) {
 
 
     // No erros means we look up the user
-    $stmt = $db->query("SELECT * FROM `users` WHERE user_email='{$user_email}'");
+    $stmt = $db->query("SELECT user_id, user_email, user_type, user_fullname FROM `users` WHERE user_email='{$user_email}'");
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
     // Lets alert the user saying that we'll notify the email provided if it exists in our system
     $res['notice'] = [
-        'message'   => 'Thank you, an email will be sent to the email provided if the user exists in our system.'
+        'message'   => 'Thank you, an email will be sent to the address provided, if the user exists in our system.'
     ,   'level'     => 'info'
     ];
 
-
-    logger($user);
 
     // if we need to send a password reset email
     if (!empty($user)) {
@@ -666,19 +658,9 @@ $router->post(ROUTES['forgot_password'], function() use ($db, $model) {
         $range      = 1000000000;
         $timestamp  = time() + (1000*60*60*24*3);
         $hashid     = $timestamp + random_int($range, $range*10);
-        $resetToken = md5($hashid);
+        $resetToken = hash('sha256', $hashid);
 
         // logger(hash('sha256', $hashid));
-
-        // PREPARE OUR SQL FOR INSERTING NEW RESET RECORD
-        $ins = $db->prepare("INSERT INTO `password_resets`(user_id, reset_token, reset_expires) VALUES(:user_id, :reset_token, :reset_expires)");
-
-        // Assign user values, but trim trailing whitespace on each of them
-        $ins->bindValue(':user_id',        $user['user_id']);
-        $ins->bindValue(':reset_token',    $resetToken);
-        $ins->bindValue(':reset_expires',  $timestamp);
-
-        $ins->execute();
 
         $model['user'] = $user;
 
@@ -686,22 +668,45 @@ $router->post(ROUTES['forgot_password'], function() use ($db, $model) {
         $subject    = 'Password Reset';
 
         $model['email'] = [
-            'to'        => $to
-        ,   'subject'   => $subject
+            'to'            => $to
+        ,   'subject'       => $subject
+        ,   'reset_token'   => $resetToken
         ];
 
-        $model['reset_token'] = $resetToken;
+        $msg = $twig->render('emails/forgot-password.twig', $model);
 
-        // $msg = $twig->render('emails/forgot-password.twig', $model);
+        $headers = implode("\r\n", [
+            'MIME-Version: 1.0'
+        ,   'From: admin@client-portfolio.com'
+        ,   'Content-type: text/html; charset=iso-8859-1'
+        ]);
 
-        // $headers = implode("\r\n", [
-        //     'MIME-Version: 1.0'
-        // ,   'From: admin@client-portfolio.com'
-        // ,   'Content-type: text/html'
-        // ,   'Content-type: text/html; charset=iso-8859-1'
-        // ]);
+        // TODO: [SECURITY] remove email headers that could leak details about the sending server
+        mail($to, $subject, $msg, $headers);
 
-        // mail($to, $subject, $msg, $headers);
+
+        // file_put_contents(Path::canonicalize(DATA_DIR, "/resets/${timestamp}.php"), implode("\n", [
+        file_put_contents("app/data/resets/__${resetToken}.php", implode("\n", [
+            '<?php'
+        ,   'return ['
+        ,   "    'user_id' => '${user['user_id']}'"
+        ,   "    'reset_expires' => '${timestamp}'"
+        ,   "    'reset_token' => '${resetToken}'"
+        ,   '];'
+        ]));
+
+        // TODO: Still not sure why this particular query timesout so bad...
+        // // PREPARE OUR SQL FOR INSERTING NEW RESET RECORD
+        // $ins = $db->prepare("INSERT INTO `password_resets`(user_id, reset_token, reset_expires) VALUES(:user_id, :reset_token, :reset_expires)");
+
+        // // Assign user values, but trim trailing whitespace on each of them
+        // $ins->bindValue(':user_id',        $user['user_id']);
+        // $ins->bindValue(':reset_token',    $resetToken);
+        // $ins->bindValue(':reset_expires',  $timestamp);
+
+        // $ins->execute();
+
+        // $blah = $ins->lastInsertId();
     }
 
 
@@ -875,6 +880,35 @@ $router->get(ROUTES['admin_dashboard'], function() use ($db, $twig, $model) {
 //      - /emails : list of email templates available to view
 //      - /emails/(template-name)
 
+$router->get('/test/emails', function() use ($twig, $model) {
+
+    $files = glob('app/views/emails/*.twig');
+
+    $templates = [];
+
+    foreach ($files as $file) {
+        $filename = basename($file);
+        $filename = preg_replace('/\..+$/', '', $filename);
+
+        $templates[] = [
+            'route' => "/test/emails/${filename}"
+        ,   'title' => preg_replace('/[\-]/i', ' ', $filename)
+        ];
+    }
+
+    $model['templates'] = $templates;
+
+    echo $twig->render('test/emails.twig', $model);
+});
+
+
+
+
+$router->get('/test/emails/(.*)', function($template) use ($twig, $model) {
+
+    echo $twig->render("emails/${template}.twig", $model);
+
+});
 
 
 

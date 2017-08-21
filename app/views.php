@@ -27,13 +27,11 @@ $twig->addFilter(new Twig_SimpleFilter('md', function($str) {
 
 // TODO: hookup parsedown library here
 $twig->addFilter(new Twig_SimpleFilter('embed', function($str) {
-    $filepath = Path::canonicalize(__DIR__, '/static', $str);
+    $filepath = Path::join(__DIR__, '../static', $str);
 
-    echo $filepath;
-
-    // if (file_exists($filepath)) {
-    //     return file_get_contents($filepath);
-    // }
+    if (file_exists($filepath)) {
+        return file_get_contents($filepath);
+    }
 
     return $str;
 }));

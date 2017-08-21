@@ -267,14 +267,15 @@ function styles() {
         ,   "!" + path.join(CSS_SRC, '**/_*')
         ]);
 
-
     _.each(styles, function(style) {
-        let filename = path.basename(style)
-                .replace(/\s+/, '-')
-                .toLowerCase()
+
+        let filepath = style
+            .substr(CSS_SRC.length)
+            .replace(/\s+/, '-')
+            .toLowerCase()
             ;
 
-        let newStyle = path.join(CSS_DEST, filename.replace(/\.[\w\d]+/, '.css'));
+        let newStyle = path.join(CSS_DEST, filepath.replace(/\.[\w\d]+/, '.css'));
 
         let content = fs.read(style);
 

@@ -3,9 +3,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>{{ email.subject }}</title>
+        {% if stylesheet %}
         <style type="text/css">
-            {{ "css/email/forgot-password.css"|embed }}
+            {{ stylesheet|embed }}
         </style>
+        {% endif %}
     </head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
         <center>
