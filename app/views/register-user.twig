@@ -5,13 +5,12 @@
 
     <section class="section">
         {% if new_setup_message %}
-            <div class="notification is-primary">
-                <div class="container">
-                    {{ new_setup_message|md }}
+            <div class="notification is-primary has-text-centered">
+                <div class="content">
+                    {{ new_setup_message|md|raw }}
                 </div>
             </div>
         {% endif %}
-
 
         {% set formSubmitLabel  = 'Register' %}
         {% set formId           = 'user-forgot-password' %}
@@ -26,5 +25,8 @@
 
 {% block scripts %}
     {{ parent() }}
-    {% include 'partials/form-handler.twig' %}
+    <script src="{{ "js/form-handler.js"|asset }}"></script>
+    {#
+    <script>{{ "js/form-handler.js"|embed }}</script>
+    #}
 {% endblock %}

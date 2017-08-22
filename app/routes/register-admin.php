@@ -21,7 +21,7 @@ $router->get(ROUTES['register_admin'], function() use ($db, $model, $twig) {
 
 
     if (empty($users)) {
-        $model['new_setup_message'] = "Welcome to [CLIENT-PORTFOLIO]!<br><br>Since this appears to be a brand new instance, you must first setup your admin user profile to get started.";
+        $model['new_setup_message'] = '<span class="h1">Welcome to [CLIENT-PORTFOLIO]!</span><br><br>Since this appears to be a brand new instance, you must first setup your admin user profile to get started.';
     }
 
 

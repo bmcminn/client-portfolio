@@ -22,5 +22,5 @@
 
 {% block scripts %}
     {{ parent() }}
-    {% include 'partials/form-handler.twig' %}
+    <script src="{{ "js/form-handler.js"|asset }}"></script>
 {% endblock %}

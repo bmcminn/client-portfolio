@@ -97,7 +97,7 @@
                         </p>
 
                     {% else %}
-                        <p class="control">
+                        <p class="control is-marginless">
                             <a class="button is-link" href="{{ routes.logout }}">
                                 <span class="icon">
                                     <i class="fa fa-sign-out"></i>
@@ -107,8 +107,35 @@
                                 </span>
                             </a>
                         </p>
+                        <p class="control is-marginless">
+                            {% if user.user_type == 'admin' %}
+                                <a class="button is-link is-outlined" href="{{ routes.admin_dashboard }}">
+
+                            {% else %}
+                                <a class="button is-link is-outlined" href="{{ routes.client_dashboard }}">
+                            {% endif %}
+                                <span class="icon">
+                                    <i class="fa fa-dashboard"></i>
+                                </span>
+                                <span>
+                                    Dashboard
+                                </span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-link is-outlined" href="{{ routes.admin_dashboard }}">
+                                <span class="icon">
+                                    <i class="fa fa-gear"></i>
+                                </span>
+                                <span>
+                                    Account Settings
+                                </span>
+                            </a>
+                        </p>
 
                     {% endif %}
+
+                    {#
                     <p class="control">
                         <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
                             <span class="icon">
@@ -117,6 +144,7 @@
                             <span>Download</span>
                         </a>
                     </p>
+                    #}
                 </div>
             </div>
         </div>

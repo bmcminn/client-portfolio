@@ -122,8 +122,8 @@ $router->post(ROUTES['forgot_password'], function() use ($db, $model, $twig) {
             '<?php'
         ,   'return ['
         ,   "    'user_id' => '${user['user_id']}'"
-        ,   "    'reset_expires' => '${timestamp}'"
-        ,   "    'reset_token' => '${resetToken}'"
+        ,   ",   'reset_expires' => '${timestamp}'"
+        ,   ",   'reset_token' => '${resetToken}'"
         ,   '];'
         ]));
 

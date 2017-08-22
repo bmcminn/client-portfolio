@@ -1,5 +1,8 @@
 <?php
 
+use Webmozart\PathUtil\Path;
+
+
 
 // RESET PASSSWORD PAGE
 // ------------------------------------------------------------
@@ -23,22 +26,38 @@ $router->get(ROUTES['reset_password'], function() use ($model, $twig) {
     }
 
 
-    $model['page']['title'] = 'Password Reset';
+    $resetData = require(Path::join(__DIR__, '../data/resets', '__'.$_GET['reset_token'].'.php'));
+
+    // has the reset expired
+    if ($resetData['reset_expires'] < time()) {
+        redirect(ROUTES['password_reset']);
+    }
+
+    logger($resetData);
+
+
+    $model['page']['title'] = 'Set Password';
 
     $model['form'] = [];
 
     $model['form']['title']             = $model['page']['title'];
     $model['form']['submitLabel']       = 'Submit';
-    $model['form']['id']                = 'user-login';
+    $model['form']['id']                = 'password-reset';
     $model['form']['actionRoute']       = ROUTES['reset_password'];
     $model['form']['noticeAnimation']   = 'flash';
 
     $model['form']['fields'] = [
         [
-            'label'     => 'User Email'
-        ,   'type'      => 'email'
+            'label'     => 'New Password'
+        ,   'type'      => 'password'
         ,   'required'  => true
-        ,   'name'      => 'user_email'
+        ,   'name'      => 'user_password'
+        ]
+    ,   [
+            'label'     => 'Confirm New Password'
+        ,   'type'      => 'password'
+        ,   'required'  => true
+        ,   'name'      => 'user_password_confirm'
         ]
     ,   [
             'type'  => 'hidden'

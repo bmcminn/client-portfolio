@@ -29,12 +29,13 @@ $twig->addFilter(new Twig_SimpleFilter('md', function($str) {
 $twig->addFilter(new Twig_SimpleFilter('embed', function($str) {
     $filepath = Path::join(__DIR__, '../static', $str);
 
+    $content = $str;
     if (file_exists($filepath)) {
-        return file_get_contents($filepath);
+        $content = file_get_contents($filepath);
     }
 
-    return $str;
-}));
+    return $content;
+}, ['is_safe' => ['html', 'js']]));
 
 
 
