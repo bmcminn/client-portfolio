@@ -1,13 +1,20 @@
-vendor/
+/vendor
+.env
+.idea
+.env.testing
+
+.vagrant/
+
 node_modules/
-bower_components/
-.grunt/
 __*/
 
 _projects/*/
 
 *.sublime-workspace
 *.lock
+
+.phpintel
+.env
 
 # Packages #
 ############
