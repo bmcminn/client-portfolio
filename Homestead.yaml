@@ -1,3 +1,7 @@
+#
+# https://laravel.com/docs/5.5/homestead#per-project-installation
+#
+
 ip: 192.168.10.10
 
 memory: 2048
@@ -18,6 +22,7 @@ sites:
     -
         map: client.portfolio
         to: /home/vagrant/code/public
+        type: apache
 
 databases:
     - clientportfolio
