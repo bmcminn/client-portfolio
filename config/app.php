@@ -17,6 +17,15 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+
+    'providers' => [
+        TwigBridge\ServiceProvider::class,
+    ],
+
+    'aliases' => [
+        'Twig' => TwigBridge\Facade\Twig::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -27,6 +36,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
+
     'locale' => env('APP_LOCALE', 'en'),
     /*
     |--------------------------------------------------------------------------

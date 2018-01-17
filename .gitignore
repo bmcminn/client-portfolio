@@ -46,3 +46,9 @@ _projects/*/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+
+# compilted assets #
+######################
+public/css
+public/js

@@ -23,6 +23,7 @@ sites:
         map: client.portfolio
         to: /home/vagrant/code/public
         type: apache
+        php: "7.2"
 
 databases:
     - clientportfolio

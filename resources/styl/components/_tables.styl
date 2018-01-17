@@ -1,0 +1,61 @@
+
+
+$cell-padding   = 0.5rem
+$cell-bg-color  = lighten($border-color, 80%)
+
+
+.table
+    min-width: 100%
+
+    // MOBILE FIRST
+    thead
+        display: none
+
+    tr
+            padding: $cell-padding
+            border-bottom: 1px solid $border-color
+            display: block
+
+    td
+        display: block
+
+        &::before
+            content: attr(data-title)": "
+            font-weight: bold
+
+
+
+
+@media (min-width: $bp-tablet)
+    .table
+        thead
+            display: table-header-group
+
+
+        thead > tr
+            border-bottom: 2px solid $border-color
+
+        tr
+            display: table-row
+
+        th
+            font-weight: bold
+            text-align: left
+
+        td, th
+            padding: $cell-padding
+
+
+        td
+            display: table-cell
+
+            &::before
+                display: none
+
+        tbody
+            > tr
+                padding: 0
+
+            > tr:nth-child(even)
+                background-color: $cell-bg-color
+

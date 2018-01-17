@@ -26,14 +26,20 @@ $api->version('v1', function ($api) {
             'uses' => 'App\Http\Controllers\APIController@getIndex',
             'as' => 'api.index'
         ]);
+
+
         $api->get('/auth/user', [
             'uses' => 'App\Http\Controllers\Auth\AuthController@getUser',
             'as' => 'api.auth.user'
         ]);
+
+
         $api->patch('/auth/refresh', [
             'uses' => 'App\Http\Controllers\Auth\AuthController@patchRefresh',
             'as' => 'api.auth.refresh'
         ]);
+
+
         $api->delete('/auth/invalidate', [
             'uses' => 'App\Http\Controllers\Auth\AuthController@deleteInvalidate',
             'as' => 'api.auth.invalidate'

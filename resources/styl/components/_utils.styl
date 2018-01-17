@@ -1,0 +1,84 @@
+
+
+// @saauce: http://getbootstrap.com/docs/4.0/utilities/
+
+$min = 1
+$max = 4
+
+
+for num in ($min..$max)
+
+    // MARGINS
+    .mt-{num}
+        margin-top: "%srem" % num
+    .mr-{num}
+        margin-right: "%srem" % num
+    .mb-{num}
+        margin-bottom: "%srem" % num
+    .ml-{num}
+        margin-left: "%srem" % num
+
+    // PADDING
+    .pt-{num}
+        padding-top: "%srem" % num
+    .pr-{num}
+        padding-right: "%srem" % num
+    .pb-{num}
+        padding-bottom: "%srem" % num
+    .pl-{num}
+        padding-left: "%srem" % num
+
+
+
+
+// ========================================
+
+.round
+    border-radius: 100%
+    overflow: hidden
+    height: 0
+    width: 0
+    padding: 1rem
+
+    .fa
+        transform: translate(-50%, -50%)
+
+.square
+    // overflow: hidden
+    height: 0
+    padding-bottom: 100%
+
+
+
+
+// ========================================
+
+clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+.clearfix
+    clearfix()
+
+
+
+
+// ========================================
+.sticky
+    position: fixed
+
+    &.top
+        top: 0
+
+    &.bottom
+        bottom: 0
+
+    &.left
+        left: 0
+
+    &.right
+        right: 0

@@ -29,6 +29,8 @@
                 "__OLD",
                 "__design",
                 ".vagrant",
+                "public/css",
+                "public/js",
             ]
 		}
 	]

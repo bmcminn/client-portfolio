@@ -1,5 +1,11 @@
 <?php
 
+define('BASE_DIR', __DIR__ . '/..');
+define('APP_DIR', BASE_DIR . '/app');
+define('VIEWS_DIR', BASE_DIR . '/');
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Register The Composer Auto Loader
@@ -108,6 +114,11 @@ $app->register(Zeek\LumenDingoAdapter\Providers\LumenDingoAdapterServiceProvider
 // Lumen Generator disabled it on production if you want
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
+//
+$app->configure('twigbridge');
+$app->register('TwigBridge\ServiceProvider');
+
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -118,6 +129,11 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 | can respond to, as well as the controllers that may handle them.
 |
 */
+
+$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+    require __DIR__.'/../routes/app.php';
+});
+
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../routes/api.php';

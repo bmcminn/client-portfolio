@@ -3,29 +3,31 @@
   "version": "1.0.0",
   "description": "App for managing and distributing client deliverables.",
   "main": "index.js",
-  "repository": "https://github.com/bmcminn/client-portfolio",
-  "author": "bmcminn <labs@gbox.name>",
-  "scripts": {
-    "start": "php -S localhost:3005 -t ./public"
-  },
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/bmcminn/client-portfolio"
   },
+  "author": "Brandtley McMinn <labs@gbox.name>",
+  "scripts": {
+    "start": "php -S localhost:3005 -t ./public",
+    "build": "node .bin/build.js"
+  },
+  "license": "MIT",
   "keywords": [
     "photography",
     "client",
     "previews",
     "portfolio"
   ],
-  "author": "Brandtley McMinn <labs@gbox.name>",
   "bugs": {
     "url": "https://github.com/bmcminn/client-portfolio/issues"
   },
   "homepage": "https://github.com/bmcminn/client-portfolio",
   "devDependencies": {
-    "grunt": "^0.4.5",
+    "chalk": "^2.3.0",
+    "chokidar": "^2.0.0",
+    "csso": "^3.5.0",
+    "grunt": "^1.0.1",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-stylus": "^0.22.0",
@@ -34,8 +36,8 @@
     "grunt-jsonlint": "^1.0.4",
     "grunt-svgo": "^0.1.0",
     "load-grunt-config": "^0.17.2",
-    "time-grunt": "^1.2.1",
-    "lodash": "^3.8.0",
-    "chalk": "^1.0.0"
+    "lodash": "^4.17.4",
+    "stylus": "^0.54.5",
+    "time-grunt": "^1.2.1"
   }
 }
