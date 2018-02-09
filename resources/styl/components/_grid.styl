@@ -88,3 +88,14 @@ mq_grid("mobile-l", $bp-mobile,     $bp-tablet)
 mq_grid("tablet",   $bp-tablet,     $bp-lappy)
 mq_grid("lappy",    $bp-lappy,      $bp-desktop)
 mq_grid("desktop",  $bp-desktop)
+
+
+
+
+// Grid helpers
+@media (max-width: $bp-mobile)
+    .mobile-break
+        display: block
+
+    .mobile-hidden
+        display: none

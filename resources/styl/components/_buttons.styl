@@ -39,6 +39,7 @@ button,
     font-size: $base-font-size
     transition: all ease 0.3s
     outline: 0
+    line-height: 1rem
     // user-select: none
 
     &:hover
@@ -74,7 +75,9 @@ _btn($NAME, $COLOR, $TEXT_OVERRIDE=$white)
         border-color: initial
         color: $COLOR
 
-    .btn-{$NAME}:hover,
+    .btn-{$NAME}:hover
+        background-color: lighten($COLOR, $DARKEN_COLORS)
+
     .btn-{$NAME}.active,
     .btn-{$NAME}[aria-pressed="true"]
         background-color: darken($COLOR, $DARKEN_COLORS)

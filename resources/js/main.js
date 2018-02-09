@@ -3,12 +3,14 @@
     let $doc        = $(document)
     let $loginForm  = $('[login-form]');
 
-    $doc.on('click', 'form button', loginSubmit);
+    $doc.on('click', '[login-submit]', loginSubmit);
 
 
 
     function loginSubmit(e) {
         e.preventDefault();
+
+        let $this = $(this);
 
         // serialize inputs
 

@@ -1,52 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login Page</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" href="favicon.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="stylesheet" href="/css/main.css">
-    <style type="text/css">
-        form {
-            position: absolute;
-            width: 100%;
-            max-width: 300px;
-            top: 50%;
-            left: 50%;
-            margin: auto;
-            /*padding: 1rem 0.75rem;*/
-            transform: translate(-50%,-50%);
-            border: 1px solid #e3e3e3;
-            box-shadow: 0 0 0 100vw rgba(0,0,0,.2);
-        }
-    </style>
-</head>
-<body>
+<?php require('_head.twig'); ?>
 
-    <form action="/login/user">
 
-        <div class="form-group">
-            <h1>Client Login</h1>
-        </div>
+    <div class="login-form l-center content card grid">
+        <h1>Login</h1>
 
-        <div class="form-group">
-            <label></label>
-            <input autocomplete="email" type="email" placeholder="email">
-        </div>
+        <form class="grid" action="/auth/login" method="post">
 
-        <div class="form-group">
-            <label></label>
-            <input autocomplete="current-password" type="password" placeholder="password">
-        </div>
+            <div class="form-group">
+                <label for="useremail">Email address</label>
+                <input type="email" id="useremail" aria-describedby="emailHelp" minlength="5" autocomplete="email" placeholder="Enter email" required>
+                <small id="emailHelp" class="visually-hidden form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
 
-        <div class="form-group">
-            <button type="submit">Login</button>
-            <a href="/password/reset">Forgot password?</a>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="userpassword">Password</label>
+                <input type="password" id="userpassword" autocomplete="current-password" minlength="6" placeholder="Enter password" required>
+            </div>
+
+            <div class="form-group">
+                <button login-submit class="btn-primary btn-block" type="submit">Login</button>
+            </div>
+
+            <div>
+                <a href="/forgot/password">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+
+
+    <?php
+        $footerClass = 'login-footer';
+        require('_footer.twig');
+    ?>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>

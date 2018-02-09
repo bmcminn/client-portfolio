@@ -1,12 +1,11 @@
 
 
-
 a:link
     color: $primary-color
     transition: color $transition
 
 a:visited
-    color: $danger-color
+    color: $violet
 
 a:hover, a:focus
     color: lighten($primary-color, 50%)
@@ -27,8 +26,10 @@ a:active
 
 .text-left
     text-align: left
+
 .text-center
     text-align: center
+
 .text-right
     text-align: right
 
@@ -36,8 +37,36 @@ a:active
     opacity: 0.5
 
 
+// @sauce: https://a11yproject.com/posts/how-to-hide-content/
+// https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+.visually-hidden
+    position: absolute !important
+    height: 1px
+    width: 1px
+    overflow: hidden
+    clip: rect(1px 1px 1px 1px) /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px)
+
+    a:focus,
+    input:focus,
+    button:focus
+        position:static
+        width:auto
+        height:auto
+
+// TODO: test this
+// .my-component[aria-hidden="true"]
+//     display: none
+
+[hidden]
+    display: none
+
 
 $content-margin = $grid-gutter-width
+
+
+$h1-size = 1.6rem
+$h2-size = 1.3rem
 
 h1, h2, h3,
 .h1, .h2, .h3
@@ -45,11 +74,10 @@ h1, h2, h3,
     font-weight: bold
 
 h1, .h1
-    font-size: 1.6rem
+    font-size: $h1-size
 
 h2, .h2
-    font-size: 1.3rem
-
+    font-size: $h2-size
     &:after
         content: ''
         display: block
@@ -61,8 +89,13 @@ p
     margin: $content-margin 0
 
 
-
 .grid >
+    h1, .h1
+        font-size: $h1-size
+
+    h2, .h2
+        font-size: $h2-size
+
     h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6
         margin: 0
 

@@ -73,7 +73,7 @@ function login_redirect() {
 
 
 function login_page() {
-    echo file_get_contents(VIEWS_DIR.'/login.twig');
+    require(VIEWS_DIR.'/login.twig');
 }
 
 
