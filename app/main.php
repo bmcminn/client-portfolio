@@ -32,6 +32,8 @@ session_start();
 // define our route dispatcher
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
+    $r->addRoute('GET', '/', 'login_redirect');
+
     $r->addRoute('GET', ROUTE_LOGIN, 'login_page');
     $r->addRoute('GET', ROUTE_LOGIN_USER, 'login_handler');
 
@@ -61,6 +63,12 @@ function isLoggedIn() {
     }
 
     return $_SESSION(['user']);
+}
+
+
+
+function login_redirect() {
+    header('location:'.ROUTE_LOGIN);
 }
 
 

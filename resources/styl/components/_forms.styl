@@ -8,7 +8,10 @@
 
 $form-gutter        = 1rem unless $ml
 
-$component-padding  = 0.5rem 0.75rem
+$component-padding  = .5rem .65rem
+// $component-padding  = 0.5rem 0.75rem
+
+$base-font-size     = 1rem
 
 $disabled-opacity   = 0.5
 
@@ -32,14 +35,17 @@ form.card
 // FORM CONTROL GROUP STYLES
 // ==================================================
 
-.form-group, .form-check, .form-file
+.form-group,
+.form-check,
+.form-file
     width: 100%
     display: inline-block
-    font-size: initial
+    font-size: $base-font-size
     padding: 0.25rem $mt
     position: relative;
 
-    label, .label
+    label,
+    .label
         text-indent: 0.1rem
         display: block
 
@@ -56,7 +62,7 @@ form.card
 input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 select,
 textarea
-    padding: .5rem .65rem
+    padding: $component-padding
     border: 1px solid $border-color
     border-radius: $border-radius
     width: 100%
@@ -64,7 +70,8 @@ textarea
     transition: all 0.3s ease
     box-shadow: 0 0 transparent
 
-    &:focus, &:active
+    &:focus,
+    &:active
         outline: 0
         box-shadow: $input-drop-shadow
         border-color: lighten($primary-color, 60%)
@@ -135,11 +142,11 @@ select
         -webkit-appearance: checkbox
         display: inline-block
         vertical-align: baseline
-        font-size: initial
+        font-size: $base-font-size
 
     label
         display: inline-block
-        font-size: initial
+        font-size: $base-font-size
 
 
     label + input
@@ -168,7 +175,7 @@ select
         height: auto
         padding: 0 1rem
         line-height: 0
-        font-size: 85%
+        // font-size: 85%
         background-color: lighten($gray-light, 60%)
 
     // TODO: figure out how to make this less sucky
