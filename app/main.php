@@ -1,178 +1,108 @@
 <?php
 
-// serve the requested resource as-is.
-define('DIR',    DIRECTORY_SEPARATOR);
+// define base constants for the app
+define('ROOT_DIR',          __DIR__ . '/..');
+define('VIEWS_DIR',         ROOT_DIR . '/views');
 
-define('ROOT_DIR',      __DIR__);
-define('APP_DIR',       ROOT_DIR.DIR.'app'.DIR);
-define('VIEWS_DIR',     APP_DIR.DIR.'views');
-define('PROJECT_DIR',   ROOT_DIR.DIR.'_projects');
-// define('DB_FOLDER',     ROOT_DIR.DIR.'_data');
-define('VIEWS_EXT',     '.twig');
-
-define('SECONDS',   1000);
-define('MINUTES',   SECONDS * 60);
-define('HOURS',     MINUTES * 60);
-define('DAYS',      HOURS * 24);
+define('ROUTE_LOGIN',       '/login');
+define('ROUTE_LOGIN_USER',  '/login/user');
 
 
+// get the party started
+require '../vendor/autoload.php';
 
-// PREVENT STATIC FILES FROM GOING BEING BLOCKED
-// --------------------------------------------------
 
-define('REQUEST_URI',   preg_replace('/\?*+/',  '', filter_var($_SERVER['REQUEST_URI'], FILTER_UNSAFE_RAW, FILTER_NULL_ON_FAILURE)));
+// register env configs
+$dotenv = new Dotenv\Dotenv(ROOT_DIR);
+$dotenv->load();
 
-if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|less|zip)$/', REQUEST_URI)) {
-    return false;
+
+// register error helper when in dev
+if (getenv('APP_DEBUG')) {
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
 }
 
 
-// Set default timezone
-// --------------------------------------------------
-
-date_default_timezone_set('America/Chicago');
-
-
-
-// INIT THE USER SESSION
-// --------------------------------------------------
-
-define('SESSION_TIMEOUT', 10 * MINUTES);
-
-session_save_path(realpath(ROOT_DIR.DIR.'..'.DIR.'.tmp'));
+// init the user session
 session_start();
 
 
-// Prevent PHP garbage collection from deleting our session
-if(!isset($_SESSION['gc_last_access']) || (time() - $_SESSION['gc_last_access']) > 60) {
-    $_SESSION['gc_last_access'] = time();
+// define our route dispatcher
+$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+
+    $r->addRoute('GET', ROUTE_LOGIN, 'login_page');
+    $r->addRoute('GET', ROUTE_LOGIN_USER, 'login_handler');
+
+    $r->addRoute('GET', '/users', 'get_all_users_handler');
+
+    // {id} must be a number (\d+)
+    $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
+
+    // The /{title} suffix is optional
+    $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
+});
+
+
+// define our render method
+function render($templateName='default', $model = []) {
+
+}
+
+
+/**
+ * Middleware: checks if user session data is established and redirects to /login if not
+ * @return boolean [description]
+ */
+function isLoggedIn() {
+    if (!isset($_SESSION['user'])) {
+        header('location:'.ROUTE_LOGIN);
+    }
+
+    return $_SESSION(['user']);
+}
+
+
+function login_page() {
+    echo file_get_contents(VIEWS_DIR.'/login.twig');
+}
+
+
+function get_all_users_handler() {
+    $user = isLoggedIn();
 }
 
 
 
 
 
-// Define routes list
-// --------------------------------------------------
-define('ROUTES', [
-    'home'      => '/'
-,   'login'     => '/login'
-,   'logout'    => '/logout'
-]);
 
+// Fetch method and URI from somewhere
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+$uri = $_SERVER['REQUEST_URI'];
 
+// Strip query string (?foo=bar) and decode URI
+if (false !== $pos = strpos($uri, '?')) {
+    $uri = substr($uri, 0, $pos);
+}
+$uri = rawurldecode($uri);
 
-// Require composer autoloader
-// --------------------------------------------------
+$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        // ... 404 Not Found
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        // ... 405 Method Not Allowed
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        // ... call $handler with $vars
 
-require __DIR__ . '/../vendor/autoload.php';
-require './app/methods.php';
+        $handler($vars);
 
-
-
-// Create Twig instance
-// --------------------------------------------------
-
-$loader = new Twig_Loader_Filesystem('./app/views');
-$twig = new Twig_Environment($loader, array(
-    'cache' => './views/cache'
-,   'auto_reload' => true
-));
-
-
-
-// Define base model
-// --------------------------------------------------
-
-$model = [
-    'routes' => ROUTES
-];
-
-// Create a Router
-// --------------------------------------------------
-
-$router = new \Bramus\Router\Router();
-
-// Custom 404 Handler
-$router->set404(function() use ($twig) {
-    header('HTTP/1.1 404 Not Found');
-    echo '404, route not found!';
-});
-
-
-
-// Define routes
-// --------------------------------------------------
-
-// ROUTE: Homepage
-$router->get(ROUTES['home'], function() use ($twig) {
-
-    validateUser();
-
-
-    return;
-});
-
-
-// ROUTE: login
-$router->get(ROUTES['login'], function() use ($twig, $model) {
-
-    $pass = "rasmuslerdorf";
-    $hash = password_hash($pass, PASSWORD_BCRYPT);
-
-    $res = password_verify($pass, $hash);
-
-    echo $res;
-    return;
-
-    $model = [];
-
-    echo $twig->render('login.twig', $model);
-});
-
-
-$router->post(ROUTES['login]', function() use ($model) {
-
-    // look up user in users collection
-
-    // get users hash
-
-    // verify password against use rhash
-
-    // if verified -> navigate to homepage and list all projects
-
-    // else -> redirect to login page with error messsage
-
-});
-
-
-// ROUTE: logout
-$router->get(ROUTES['logout'], function() use ($twig) {
-    validateUser();
-    logoutUser();
-    return;
-});
-
-
-
-
-
-
-//
-$router->get('[a-z0-9_-]+', function($clientRoute) {
-
-    echo $client;
-    return;
-
-});
-
-
-
-// Run it!
-// --------------------------------------------------
-
-$router->run();
-
-
-
-
+        break;
+}

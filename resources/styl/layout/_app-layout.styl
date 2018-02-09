@@ -1,0 +1,101 @@
+
+$z      = 10
+$zz     = ($z * 10)
+$zzz    = ($zz * 10)
+$zzzz   = ($zzz * 10)
+
+
+$sidebar-width      = 320px
+$topbar-height      = 60px
+
+$scrollbar-width    = 15px
+
+
+
+.app-main-container
+    position: relative
+    z-index: $zz
+
+    margin-right: 0
+    margin-left: auto
+    padding-top: $topbar-height
+
+    transition: opacity ease .3s
+
+
+.app-top-bar
+    z-index: $zzz
+
+    width: 100%
+    // height: $topbar-height
+    height: "calc(%s + 1px)" % $topbar-height
+
+    border-bottom: 1px solid $border-color
+    background-color: $app-topbar-bg-color
+
+
+.app-sidebar
+    z-index: $zzzz
+
+    width: $sidebar-width
+    height: 100vh
+
+    transition: transform ease .3s
+    transform: translate(-100%, 0)
+
+    border-right: 1px solid $border-color
+    background-color: $white
+
+    &.open
+        transform: translate(0,0)
+
+        #main-nav-toggle
+            right: 1rem
+
+            i:before
+                content: "\f00d"
+
+#main-nav-toggle
+    position: absolute
+    right: -3rem
+    top: 0.8rem
+
+
+.app-logo-container
+    height: $topbar-height
+    vertical-align: middle
+
+
+
+.app-sidebar
+    footer
+        padding: 1rem
+
+
+
+@media (max-width: ($bp-lappy - 1))
+    .app-main-container.open
+        opacity: 0.3
+        filter: blur(2px)
+
+
+@media (min-width: $bp-lappy)
+    .app-sidebar
+        transform: none
+        transition: none
+
+    #main-nav-toggle
+        display: none
+
+
+    // NOTE: context hiccup, scroll bar does some gnarly stuff on windows where scrollbar width is not factored into the calc of 100vw
+    // .touch
+    //     .app-top-bar,
+    //     .app-main-container
+    //         width: "calc(100vw - %s)" % $scrollbar-width
+
+    .app-main-container,
+    .app-top-bar
+        width: "calc(100vw - %s - %s)" % ($sidebar-width $scrollbar-width)
+
+

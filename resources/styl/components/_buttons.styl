@@ -1,0 +1,123 @@
+
+// =============================================
+// VARIABLES
+// =============================================
+
+// NOTE: `unless` prioritizes the _variables.styl value when available
+
+$button-icon-spacing    = 0.4rem
+$border-radius          = 3px unless $border-radius
+$DARKEN_COLORS          = 20% unless $DARKEN_COLORS
+
+
+$white = #fff unless $white
+
+
+
+// TODO: test :hover bug on buttons for touch devices
+
+
+
+// =============================================
+// BUTTON STYLES
+// =============================================
+
+// NOTE: <a> tags to be styled like buttons require a modifier class to do so
+
+button,
+.btn
+    color: $white
+    border-radius: $border-radius
+    padding: $component-padding
+    border: 1px solid $primary-color
+    appearance: none
+    background-color: $primary-color
+    text-align: center
+    font-size: initial
+    transition: all ease 0.3s
+    outline: 0
+    // user-select: none
+
+    &:hover
+        cursor: pointer
+
+    &[disabled]
+    &[disabled]:hover
+        border-color: darken($disabled-color, 20%)
+        background-color: $white
+        color: darken($disabled-color, 20%)
+
+    &:active, &:focus
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+button + button,
+.btn + .btn
+    margin-bottom: $mt
+
+
+// MIXIN: _btn
+//  Generates a set of button styles using the provided defaults
+// ------------------------------
+_btn($NAME, $COLOR, $TEXT_OVERRIDE=$white)
+
+    .btn-{$NAME}
+        background-color: $COLOR
+        border-color: $COLOR
+        // text-shadow: 0 0 1px rgba(0, 0, 0, 0.6)
+        color: $TEXT_OVERRIDE
+
+    .btn-{$NAME}-outline
+        background-color: transparent
+        border-color: initial
+        color: $COLOR
+
+    .btn-{$NAME}:hover,
+    .btn-{$NAME}.active,
+    .btn-{$NAME}[aria-pressed="true"]
+        background-color: darken($COLOR, $DARKEN_COLORS)
+
+    .btn-{$NAME}-outline:hover,
+    .btn-{$NAME}-outline.active,
+    .btn-{$NAME}-outline[aria-pressed="true"]
+        color: $TEXT_OVERRIDE
+        border-color: darken($COLOR, $DARKEN_COLORS)
+        background-color: darken($COLOR, $DARKEN_COLORS)
+
+
+
+// =============================================
+// BUTTON STATE STYLES
+// =============================================
+
+_btn(primary, $primary-color)
+_btn(secondary, $secondary-color)
+_btn(info, $info-color)
+_btn(success, $success-color)
+// _btn(warning, $warning-color, $black)
+_btn(danger, $danger-color)
+
+
+
+// =============================================
+// BUTTON MODIFIERS
+// =============================================
+
+.btn-block
+    display: block
+    width: 100%
+
+.btn-block + .btn-block
+    margin-top: $mt
+
+
+
+// =============================================
+// BUTTON ICON STYLES
+// =============================================
+
+.btn-icon-left
+    margin-right: $button-icon-spacing
+
+.btn-icon-right
+    margin-left: $button-icon-spacing
+

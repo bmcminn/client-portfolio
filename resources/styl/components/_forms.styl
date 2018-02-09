@@ -1,0 +1,192 @@
+
+// .form-group
+//     width: 100%
+
+// .form-group + .form-group
+//     margin-top: $mt
+
+
+$form-gutter        = 1rem unless $ml
+
+$component-padding  = 0.5rem 0.75rem
+
+$disabled-opacity   = 0.5
+
+$input-drop-shadow  = 0 0 0 3px lighten($primary-color, 75%)
+
+
+// ==================================================
+// BASE FORM CONTAINER STYLES
+// ==================================================
+
+form
+    font-size: 0
+    padding: ($mt*2) $mt
+
+form.card
+    padding: ($mt*2) $mt
+
+
+
+// ==================================================
+// FORM CONTROL GROUP STYLES
+// ==================================================
+
+.form-group, .form-check, .form-file
+    width: 100%
+    display: inline-block
+    font-size: initial
+    padding: 0.25rem $mt
+    position: relative;
+
+    label, .label
+        text-indent: 0.1rem
+        display: block
+
+    &.row
+        margin: 0
+        padding: 0
+
+
+
+// ==================================================
+// TEXT BASED INPUT STYLES
+// ==================================================
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+select,
+textarea
+    padding: .5rem .65rem
+    border: 1px solid $border-color
+    border-radius: $border-radius
+    width: 100%
+    margin: 0 0 $mt
+    transition: all 0.3s ease
+    box-shadow: 0 0 transparent
+
+    &:focus, &:active
+        outline: 0
+        box-shadow: $input-drop-shadow
+        border-color: lighten($primary-color, 60%)
+
+[required]:after
+    content: '*'
+    color: $red
+
+
+textarea
+    min-width: 100%
+    max-width: 100%
+    min-height: var(--textarea-min-height)
+    max-height: var(--textarea-max-height)
+    font-family: inherit
+
+
+
+// ==================================================
+// SELECT STYLES
+// ==================================================
+
+select
+    padding: 0.44rem 0.8rem
+    background-color: $white
+
+
+
+// ==================================================
+// FILE INPUT STYLES
+// ==================================================
+
+[type="file"]
+    padding: $mt $mt 5rem
+    border: 1px solid $border-color
+    border-radius: $border-radius
+    width: 100%
+    margin: $mt 0
+    position: relative
+    overflow: hidden
+
+    // // TODO: background image of image icon: needs to be non-pseudo element based because FF
+
+
+
+// ==================================================
+// DISABLED STYLES
+// ==================================================
+
+[disabled]
+    opacity: $disabled-opacity
+    background-color: $disabled-bg-color
+
+.disabled,
+[disabled],
+[disabled] + label
+    cursor: not-allowed !important
+    opacity: $disabled-opacity
+
+
+
+// ==================================================
+// CHECKBOX/RADIO STYLES
+// ==================================================
+
+.form-check
+    [type="checkbox"]
+        -webkit-appearance: checkbox
+        display: inline-block
+        vertical-align: baseline
+        font-size: initial
+
+    label
+        display: inline-block
+        font-size: initial
+
+
+    label + input
+        margin-left: 1rem
+
+
+
+// ==================================================
+// INPUT GROUP STYLES
+// ==================================================
+
+// NOTE: do not nest multiple input fields in an .input-group
+// NOTE: do not use a checkbox or radio element in an .input-group
+
+.input-group
+    display: flex
+    border-radius: $border-radius
+    border: 1px solid $border-color
+    margin: $mt 0
+    overflow: hidden
+    transition: all 0.3s ease
+
+    > *:not(button)
+        display: flex
+        align-items: center
+        height: auto
+        padding: 0 1rem
+        line-height: 0
+        font-size: 85%
+        background-color: lighten($gray-light, 60%)
+
+    // TODO: figure out how to make this less sucky
+    input, button
+        border: 0 !important
+        border-radius: 0 !important
+        border-color: none
+
+    input
+        margin: 0 !important
+        background-color: $white
+
+    input, textarea
+        outline: 0
+        box-shadow: none !important
+
+    &.focus
+        outline: 0
+        box-shadow: $input-drop-shadow
+        border-color: lighten($primary-color, 60%)
+

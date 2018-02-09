@@ -1,8 +1,8 @@
 {
-    "folders":
-    [
-        {
-            "path": ".",
+	"folders":
+	[
+		{
+			"path": ".",
             "file_exclude_patterns": [
                 "*.lock",
                 "*.zip",
@@ -13,7 +13,11 @@
                 "*.pdf",
                 "*.doc",
                 "*.docx",
-                "license"
+                "license",
+                "aliases",
+                "after.sh",
+                "artisan",
+                "Vagrantfile",
             ],
             "folder_exclude_patterns": [
                 "node_modules",
@@ -22,8 +26,11 @@
                 "bower_components",
                 "app/views/cache",
                 "_data",
-            //  "resources"
+                "__*",
+                ".vagrant",
+                "public/css",
+                "public/js",
             ]
-        }
-    ]
+		}
+	]
 }
