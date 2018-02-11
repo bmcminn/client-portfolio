@@ -5,8 +5,8 @@ define('ROOT_DIR',          __DIR__ . '/..');
 define('APP_DIR',           ROOT_DIR . '/app');
 define('VIEWS_DIR',         APP_DIR . '/views');
 
-define('ROUTE_LOGIN',       '/login');
-define('ROUTE_LOGIN_USER',  '/auth/login');
+define('GET_LOGIN',     '/login');
+define('POST_LOGIN',    '/auth/login');
 
 
 // get the party started
@@ -33,10 +33,10 @@ session_start();
 // define our route dispatcher
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
-    $r->addRoute('GET', '/', 'login_redirect');
+    $r->addRoute('GET', '/', 'home_page_handler');
 
-    $r->addRoute('GET',  ROUTE_LOGIN, 'login_page');
-    $r->addRoute('POST', ROUTE_LOGIN_USER, 'login_handler');
+    $r->addRoute('GET',  GET_LOGIN, 'login_page_handler');
+    $r->addRoute('POST', POST_LOGIN, 'auth_login_handler');
 
     $r->addRoute('GET', '/users', 'get_all_users_handler');
 
@@ -65,6 +65,34 @@ function minutes($min) {
 
 
 /**
+ * parses request body content into JSON
+ * @param [string]  $type   Data type to be parsed (defaults to json)
+ * @return [string|array]   Returns the request body in the desired $type format
+ */
+function req($type='json') {
+    $type = strToLower($type);
+
+    // @sauce: https://stackoverflow.com/a/7084677/3708807
+    $body = file_get_contents('php://input');
+
+    $req = '';
+
+    switch ($type) {
+        case 'json':
+            $req = json_decode($body, true);
+            break;
+
+        case 'raw':
+        default:
+            $req = $body;
+            break;
+    }
+
+    return $req;
+}
+
+
+/**
  * [now description]
  * @return [type] [description]
  */
@@ -73,8 +101,12 @@ function now() {
 }
 
 
-function loginRedirect() {
-    header('location:'.ROUTE_LOGIN);
+/**
+ * Issue a redirect to the login page
+ * @return [type] [description]
+ */
+function redirect($route) {
+    header('location:'.$route);
 }
 
 
@@ -85,14 +117,14 @@ function loginRedirect() {
 function isLoggedIn() {
     // check if user session has been initialized
     if (!isset($_SESSION['user'])) {
-        loginRedirect();
+        redirect(GET_LOGIN);
     }
 
     $user = $_SESSION['user'];
 
     // check if user session is expired
     if ($user['cache'] + minutes(60) < now()) {
-        loginRedirect();
+        redirect(GET_LOGIN);
     }
 
     // update user session cache timer
@@ -104,23 +136,21 @@ function isLoggedIn() {
 
 
 
-function login_handler() {
+function auth_login_handler() {
 
-    $inputJSON = file_get_contents('php://input');
-    $input = json_decode($inputJSON, TRUE);
-
-    print_r($input);
+    $req = req();
+    print_r($req);
     // print_r($_SERVER);
 
 }
 
 
-function login_redirect() {
-    header('location:'.ROUTE_LOGIN);
+function home_page_handler() {
+    header('location:'.GET_LOGIN);
 }
 
 
-function login_page() {
+function login_page_handler() {
     require(VIEWS_DIR . '/login.twig');
 }
 
