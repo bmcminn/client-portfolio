@@ -9,8 +9,10 @@
   },
   "author": "Brandtley McMinn <labs@gbox.name>",
   "scripts": {
-    "start": "php -S localhost:3005 -t ./public",
-    "build": "node .bin/build.js"
+    "serve": "php -S localhost:3005 -t ./public",
+    "build": "node .bin/build.js",
+    "new-user": "node .bin/new-user.js",
+    "new-client": "node .bin/new-client.js"
   },
   "license": "MIT",
   "keywords": [
@@ -28,6 +30,8 @@
     "chokidar": "^2.0.0",
     "csso": "^3.5.0",
     "grunt": "^1.0.1",
+    "inquirer": "^5.1.0",
+    "js-yaml": "^3.10.0",
     "lodash": "^4.17.4",
     "stylus": "^0.54.5"
   }

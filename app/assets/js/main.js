@@ -16,7 +16,7 @@
 
         let $this = $(this);
 
-        $this.disabled = true;
+        $this.attr('disabled', true);
 
         let errors = false;
         let loginPostData = {};
@@ -34,6 +34,8 @@
         axios.post(window.routes.login, loginPostData)
             .then(function(res) {
                 console.log('submission success', res);
+                $this.attr('disabled', false);
+
             })
             ;
 

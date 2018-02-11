@@ -2,10 +2,11 @@
 
 // define base constants for the app
 define('ROOT_DIR',          __DIR__ . '/..');
-define('VIEWS_DIR',         ROOT_DIR . '/views');
+define('APP_DIR',           ROOT_DIR . '/app');
+define('VIEWS_DIR',         APP_DIR . '/views');
 
 define('ROUTE_LOGIN',       '/login');
-define('ROUTE_LOGIN_USER',  '/login/user');
+define('ROUTE_LOGIN_USER',  '/auth/login');
 
 
 // get the party started
@@ -34,7 +35,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     $r->addRoute('GET', '/', 'login_redirect');
 
-    $r->addRoute('GET', ROUTE_LOGIN, 'login_page');
+    $r->addRoute('GET',  ROUTE_LOGIN, 'login_page');
     $r->addRoute('POST', ROUTE_LOGIN_USER, 'login_handler');
 
     $r->addRoute('GET', '/users', 'get_all_users_handler');
@@ -63,6 +64,10 @@ function minutes($min) {
 }
 
 
+/**
+ * [now description]
+ * @return [type] [description]
+ */
 function now() {
     return floor(microtime(true));
 }
@@ -97,6 +102,17 @@ function isLoggedIn() {
     $_SESSION['user'] = $user;
 }
 
+
+
+function login_handler() {
+
+    $inputJSON = file_get_contents('php://input');
+    $input = json_decode($inputJSON, TRUE);
+
+    print_r($input);
+    // print_r($_SERVER);
+
+}
 
 
 function login_redirect() {

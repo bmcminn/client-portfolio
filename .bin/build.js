@@ -1,7 +1,5 @@
 
-
 // process.env.NODE_ENV = false;
-
 
 const path      = require('path');
 const fs        = require('grunt').file;
@@ -17,9 +15,9 @@ var Debug   = console.debug.bind(console);
 var Error   = console.error.bind(console);
 
 
-let RSRC_DIR    = path.join(process.cwd(), 'resources');
-let STYL_DIR    = path.join(RSRC_DIR, 'styl');
-let JS_DIR      = path.join(RSRC_DIR, 'js');
+let ASSETS_DIR  = path.join(process.cwd(), 'app/assets');
+let STYL_DIR    = path.join(ASSETS_DIR, 'styl');
+let JS_DIR      = path.join(ASSETS_DIR, 'js');
 
 let DIST_DIR    = path.join(process.cwd(), 'public');
 let CSS_DIST    = path.join(DIST_DIR, 'css');
@@ -31,8 +29,8 @@ compileJS('/');
 
 
 let watchFiles = [].concat(
-    fs.expand({ filter: 'isFile'}, path.join(RSRC_DIR, '/**/*.styl'))
-,   fs.expand({ filter: 'isFile'}, path.join(RSRC_DIR, '/**/*.js'))
+    fs.expand({ filter: 'isFile'}, path.join(ASSETS_DIR, '/**/*.styl'))
+,   fs.expand({ filter: 'isFile'}, path.join(ASSETS_DIR, '/**/*.js'))
 );
 
 
