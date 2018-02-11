@@ -45,23 +45,11 @@ chokidar
 
     })
     .on('change', (filepath, filemeta) => {
-
-
         // skip no stylus files
         if (filepath.match(/\.styl$/)) { compileStyles(); }
         if (filepath.match(/\.js$/)) { compileJS(filepath); }
-
     })
     ;
-
-
-
-// process.env.FILE_SERVER_PATH = './';
-// process.env.FILE_SERVER_PORT = 8080;
-
-
-// Log(`Starting node fileserver at http://localhost:${process.env.FILE_SERVER_PORT}`);
-// require('node-file-server');
 
 
 function compileStyles() {
@@ -100,18 +88,16 @@ function compileStyles() {
                     .replace(/PP__/gi, '--')
                     ;
 
-                // Write unminified styles to disk
-                fs.write(`${newStyle}.css`, css);
-
                 let csso_opts = {
-                    debug:  process.env.NODE_ENV ? false : true
-                // ,   c:      process.env.NODE_ENV ? true : false
+                    debug:      process.env.NODE_ENV ? false : true
+                ,   compress:   true
+                // ,   compress:   process.env.NODE_ENV ? true : false
                 };
 
                 css = CSSO.minify(css, csso_opts).css;
 
                 // Log(css);
-                fs.write(`${newStyle}.min.css`, css);
+                fs.write(`${newStyle}.css`, css);
 
                 Log(chalk.green(`> Compiled ${path.basename(style)}`));
             })

@@ -3,25 +3,52 @@
     let $doc        = $(document)
     let $loginForm  = $('[login-form]');
 
-    $doc.on('click', '[login-submit]', loginSubmit);
 
+    window.routes = {
+        login: '/auth/login'
+    };
 
 
     function loginSubmit(e) {
         e.preventDefault();
 
+        console.log('sdfjksdlfsjd');
+
         let $this = $(this);
 
+        $this.disabled = true;
+
+        let errors = false;
+        let loginPostData = {};
+
         // serialize inputs
+        $loginForm.find('input')
+            .each(function(e) {
+                let $this = $(this);
+                // TODO: run validation stuffs here
+                loginPostData[$this.attr('id')] = $this.val();
+            });
 
-        // submit request
+        console.log(loginPostData);
 
-            // on success, redirect to user dashbaord
+        axios.post(window.routes.login, loginPostData)
+            .then(function(res) {
+                console.log('submission success', res);
+            })
+            ;
 
-            // on fail, render error messaging on form
+        // // submit request
 
-        console.log('login submitted');
+        //     // on success, redirect to user dashbaord
+
+        //     // on fail, render error messaging on form
+
+        // console.log('login submitted');
     }
+
+
+    $doc.on('click', '[login-submit]', loginSubmit);
+
 
 })(jQuery);
 
