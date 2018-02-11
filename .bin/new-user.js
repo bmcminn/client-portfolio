@@ -16,30 +16,45 @@ const qs = [];
 // Question: user full name
 // -----------------------------------
 qs.push({
-    type: 'input'
-,   name: 'fullname'
-,   message: 'Client Full name:'
-// ,   validate: (answer) => answer.trim().match(regex.email)
+    type: 'list',
+    name: 'type',
+    message: 'User type:',
+    choices: [
+        'admin',
+        'client',
+    ],
+    default: 'client',
+    // validate: (answer) => answer.trim().match(regex.email),
+});
+
+
+// Question: user full name
+// -----------------------------------
+qs.push({
+    type: 'input',
+    name: 'fullname',
+    message: 'User full name:',
+    // validate: (answer) => answer.trim().match(regex.email),
 });
 
 
 // Question: user email address
 // -----------------------------------
 qs.push({
-    type: 'input'
-,   name: 'email'
-,   message: 'User email:'
-,   validate: (answer) => regex.email.test(answer.trim())
+    type: 'input',
+    name: 'email',
+    message: 'User email:',
+    validate: (answer) => regex.email.test(answer.trim())
 });
 
 
 // Question: user email address
 // -----------------------------------
 qs.push({
-    type: 'input'
-,   name: 'phone'
-,   message: 'User phone (optional):'
-// ,   validate: (answer) => regex.email.test(answer.trim())
+    type: 'input',
+    name: 'phone',
+    message: 'User phone (optional):',
+    // validate: (answer) => regex.email.test(answer.trim())
 });
 
 
@@ -53,7 +68,7 @@ let folders = fs.expand({ filter: 'isDirectory' }, [
 folders.map((folder) => {
     clientFolderChoices.push({
         name: path.basename(folder),
-        value: folder
+        value: folder,
     })
 });
 
@@ -61,10 +76,11 @@ folders.map((folder) => {
 // Question: user email address
 // -----------------------------------
 qs.push({
-    type: 'checkbox'
-,   name: 'folders'
-,   message: 'Client folders:'
-,   choices: clientFolderChoices
+    type: 'checkbox',
+    name: 'folders',
+    message: 'Client folders:',
+    choices: clientFolderChoices,
+    when: (answers) => answers.type.toLowerCase() !== 'client',
 });
 
 
