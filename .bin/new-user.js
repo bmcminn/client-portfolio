@@ -23,8 +23,8 @@ qs.push({
         'admin',
         'client',
     ],
-    default: 'client',
-    // validate: (answer) => answer.trim().match(regex.email),
+    // validate: (answers) => answers.trim().match(regex.email),
+    default: 'client'
 });
 
 
@@ -34,7 +34,8 @@ qs.push({
     type: 'input',
     name: 'fullname',
     message: 'User full name:',
-    // validate: (answer) => answer.trim().match(regex.email),
+    // validate: (answers) => answers.trim().match(regex.email),
+    default: null
 });
 
 
@@ -44,7 +45,9 @@ qs.push({
     type: 'input',
     name: 'email',
     message: 'User email:',
-    validate: (answer) => regex.email.test(answer.trim())
+    validate: function(answers) {
+        return regex.email.test(answers.trim());
+    }
 });
 
 
@@ -54,7 +57,8 @@ qs.push({
     type: 'input',
     name: 'phone',
     message: 'User phone (optional):',
-    // validate: (answer) => regex.email.test(answer.trim())
+    // validate: (answers) => regex.email.test(answers.trim())
+    default: null
 });
 
 
@@ -80,7 +84,11 @@ qs.push({
     name: 'folders',
     message: 'Client folders:',
     choices: clientFolderChoices,
-    when: (answers) => answers.type.toLowerCase() !== 'client',
+    // when: function(answers) {
+    //     console.log('client folders check:', answers.type.toLowerCase() === 'client');
+    //     return answers.type.toLowerCase() === 'client';
+    // },
+    default: null
 });
 
 
@@ -110,4 +118,7 @@ q.prompt(qs)
         let writePath = path.join(process.cwd(), 'users', `${filename}.yaml`);
 
         fs.write(writePath, content);
+
+        indexUsers();
+
     });
