@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo getenv('APP_LOCALE'); ?>">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?php echo (isset($pageTitle) ? $pageTitle : 'Waffles'); ?></title>
+    <title><?php echo (isset($pageTitle) ? $pageTitle : getenv('APP_TITLE')); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
     <link rel="apple-touch-icon" href="favicon.png">

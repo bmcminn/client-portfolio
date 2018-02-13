@@ -12,7 +12,7 @@
     "serve": "php -S localhost:3005 -t ./public",
     "build": "node .bin/build.js",
     "new-user": "node .bin/new-user.js",
-    "new-client": "node .bin/new-client.js"
+    "new-project": "node .bin/new-project.js"
   },
   "license": "MIT",
   "keywords": [
@@ -32,6 +32,7 @@
     "grunt": "^1.0.1",
     "inquirer": "^5.1.0",
     "js-yaml": "^3.10.0",
+    "leven": "^2.1.0",
     "lodash": "^4.17.4",
     "stylus": "^0.54.5"
   }

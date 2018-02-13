@@ -1,12 +1,7 @@
 const q = require('inquirer');
 const fs = require('grunt').file;
 const path = require('path');
-const YAML = require('js-yaml');
-
-// Define regex constants
-const regex = {};
-
-regex.email = /\S+@\S+\.\S{2,5}/i
+const utils = require('./utils-for-new.js');
 
 
 // setup our questions array
@@ -45,9 +40,7 @@ qs.push({
     type: 'input',
     name: 'email',
     message: 'User email:',
-    validate: function(answers) {
-        return regex.email.test(answers.trim());
-    }
+    validate: (answer) => utils.validator('email', answer)
 });
 
 
@@ -58,22 +51,7 @@ qs.push({
     name: 'phone',
     message: 'User phone (optional):',
     // validate: (answers) => regex.email.test(answers.trim())
-    default: null
-});
-
-
-// get all client folders
-let clientFolderChoices = [];
-
-let folders = fs.expand({ filter: 'isDirectory' }, [
-    path.resolve(process.cwd(), 'clients/*')
-]);
-
-folders.map((folder) => {
-    clientFolderChoices.push({
-        name: path.basename(folder),
-        value: folder,
-    })
+    default: ''
 });
 
 
@@ -83,11 +61,8 @@ qs.push({
     type: 'checkbox',
     name: 'folders',
     message: 'Client folders:',
-    choices: clientFolderChoices,
-    // when: function(answers) {
-    //     console.log('client folders check:', answers.type.toLowerCase() === 'client');
-    //     return answers.type.toLowerCase() === 'client';
-    // },
+    choices: () => utils.getClientDirs(),
+    when: (answers) => answers.type.toLowerCase() === 'client',
     default: null
 });
 
@@ -101,24 +76,4 @@ qs.push({
 
 // Init prompt
 q.prompt(qs)
-    .then((user) => {
-        let filename = user.fullname
-            .toLowerCase()
-            .replace(/\s+?/gi, '-')
-            ;
-
-        // update user folder paths to be relative to project root
-        user.folders = user.folders.map((folder) => folder.substr(process.cwd().length + 1));
-
-        let content = [
-            '---',
-            YAML.safeDump(user)
-        ].join('\n');
-
-        let writePath = path.join(process.cwd(), 'users', `${filename}.yaml`);
-
-        fs.write(writePath, content);
-
-        indexUsers();
-
-    });
+    .then(utils.writeUser);

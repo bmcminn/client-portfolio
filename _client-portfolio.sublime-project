@@ -1,8 +1,20 @@
 {
-	"folders":
-	[
-		{
-			"path": ".",
+    "search_strings": [
+        // @sauce: https://superuser.com/questions/452189/how-can-i-filter-a-file-for-lines-containing-a-string-in-sublime-text-2
+        {
+            "label":            "TODOS",
+            "search":           "// (TODO|DANGER|WARN)",
+            "regex":            true,
+            "case_sensitive":   false,
+            "whole_word":       false,
+            "show_context":     true,
+            "use_buffer":       true
+        }
+    ],
+    "folders":
+    [
+        {
+            "path": ".",
             "file_exclude_patterns": [
                 "*.lock",
                 "*.zip",
@@ -17,7 +29,7 @@
                 "aliases",
                 "after.sh",
                 "artisan",
-                "Vagrantfile",
+                "Vagrantfile"
             ],
             "folder_exclude_patterns": [
                 "node_modules",
@@ -30,7 +42,8 @@
                 ".vagrant",
                 "public/css",
                 "public/js",
+                "clients/index*"
             ]
-		}
-	]
+        }
+    ]
 }
