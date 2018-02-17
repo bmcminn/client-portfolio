@@ -3,7 +3,7 @@
     <h1><?php echo $errCode; ?></h1>
 
     <p>
-        <?php echo $errMsg; ?>
+        <?php echo isset($errMsg) ? $errMsg : 'patns'; ?>
     </p>
 
 

@@ -5,8 +5,9 @@ define('ROOT_DIR',          __DIR__ . '/..');
 define('APP_DIR',           ROOT_DIR . '/app');
 define('VIEWS_DIR',         APP_DIR . '/views');
 
-define('GET_LOGIN',     '/login');
-define('POST_LOGIN',    '/auth/login');
+define('ROUTE_GET_LOGIN',         '/login');
+define('ROUTE_POST_LOGIN',        '/auth/login');
+define('ROUTE_RESET_PASSWORD',   '/reset/password');
 
 
 // get the party started
@@ -33,18 +34,20 @@ session_start();
 // define our route dispatcher
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
-    $r->addRoute('GET', '/', 'home_page_handler');
+    $r->addRoute('GET', '/', 'get_home_page');
 
-    $r->addRoute('GET',  GET_LOGIN, 'login_page_handler');
-    $r->addRoute('POST', POST_LOGIN, 'auth_login_handler');
+    $r->addRoute('GET',  ROUTE_GET_LOGIN, 'get_login_page');
+    $r->addRoute('POST', ROUTE_POST_LOGIN, 'post_auth_login');
 
-    $r->addRoute('GET', '/users', 'get_all_users_handler');
+    $r->addRoute('GET', ROUTE_RESET_PASSWORD, 'get_reset_password');
+
+    $r->addRoute('GET', '/users', 'get_all_users');
 
     // {id} must be a number (\d+)
-    $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
+    $r->addRoute('GET', '/user/{id:\d+}', 'get_user');
 
     // The /{title} suffix is optional
-    $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
+    $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article');
 });
 
 
@@ -136,7 +139,7 @@ function isLoggedIn() {
 
 
 
-function auth_login_handler() {
+function post_auth_login() {
 
     $req = req();
     print_r($req);
@@ -145,17 +148,24 @@ function auth_login_handler() {
 }
 
 
-function home_page_handler() {
+function get_reset_password() {
+
+    require(VIEWS_DIR . "/reset-password.twig");
+}
+
+
+
+function get_home_page() {
     header('location:'.GET_LOGIN);
 }
 
 
-function login_page_handler() {
+function get_login_page() {
     require(VIEWS_DIR . '/login.twig');
 }
 
 
-function get_all_users_handler() {
+function get_all_users() {
     $user = isLoggedIn();
 }
 
