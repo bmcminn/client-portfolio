@@ -1,148 +1,168 @@
 (function($) {
 
     let $doc        = $(document)
-    let $loginForm  = $('[login-form]');
 
 
-    window.routes = {
-        login: '/auth/login'
-    };
+    // Define HTML state classes to be used
+    let errorClass  = 'error';
+    let activeClass = 'active';
+    let hiddenClass = 'visually-hidden';
 
 
-    function loginSubmit(e) {
+    // register REGEX validator strings
+    let regex = {};
+
+    // NOTE: we only validate the email follows the format xxx@xxx.xxx, no more complicated than that
+    regex.email = /\S+@\S+\.\S{2,}$/i;
+
+    // TODO: phone number regex
+    // regex.phone = /
+
+    // ensure form inputs have an error message field on the screen
+    $('form').each(function(index, form) {
+        $(form).find('input, select, textarea')
+            .each(function(index, input) {
+                $(input).parent()
+                    .append(`<small class="form-error-msg ${hiddenClass}"></small>`);
+            });
+    });
+
+
+    // Register event handlers
+    $doc.on('click', '[user-form-submit]', userFormHandler);
+
+
+    /**
+     * A generic form handler that uses HTML validation, method and action attributes to validate, serialize, and submit the form data
+     * @param  {event}  e The event object that triggered this handler
+     * @return {null}
+     */
+    function userFormHandler(e) {
         e.preventDefault();
 
-        console.log('sdfjksdlfsjd');
+        // register the submit handler as a jQuery object
+        let $submit = $(this);
 
-        let $this = $(this);
+        $submit.disable   = function() { this.attr('disabled', true); }
+        $submit.enable    = function() { this.attr('disabled', false); }
 
-        $this.attr('disabled', true);
+        // get the parent form element
+        let $form = $submit.parents('form');
 
         let errors = false;
         let loginPostData = {};
 
-        // serialize inputs
-        $loginForm.find('input')
+        // validate the form has an "action" and "method" attribute
+        if (!$form.attr('action') || !$form.attr('method')) {
+            console.error(
+                '[FATAL] form',
+                '#' + $form.attr('id'),
+                'is missing an "action" or "method" attribute.'
+            );
+
+            $submit.enable();
+            return;
+        }
+
+
+        // serialize each form input
+        $form.find('input, select, textarea')
             .each(function(e) {
                 let $this = $(this);
+
+                // run form validation
+                if (!formValidate($this)) {
+                    errors = true;
+                    return;
+                }
+
                 // TODO: run validation stuffs here
                 loginPostData[$this.attr('id')] = $this.val();
             });
 
+
+        // if we had errors, bail on the form submission
+        if (errors) { return; }
+
+
         console.log(loginPostData);
 
-        axios.post(window.routes.login, loginPostData)
+
+        // submit form data to action route
+        let submission = axios[$form.attr('method')];
+
+        submission($form.attr('action'), loginPostData)
             .then(function(res) {
                 console.log('submission success', res);
-                $this.attr('disabled', false);
-
-            })
-            ;
-
-        // // submit request
-
-        //     // on success, redirect to user dashbaord
-
-        //     // on fail, render error messaging on form
-
-        // console.log('login submitted');
+                $submit.enable();
+            });
     }
 
 
-    $doc.on('click', '[login-submit]', loginSubmit);
+    /**
+     * Validates the given input data based on the html validation attributes
+     * @param  {el}     $input  The target form input to be validated
+     * @return {bool}           Whether the field validated correctly or not
+     */
+    function formValidate($input) {
+
+        // Reset form input element and error message
+        formError($input, '', true);
+
+        // NOTE: we do not allow user input to use leading/trailing spaces
+        let value = $input.val().trim();
+
+        // is the input required?
+        if ($input.attr('required')) {
+            if (value === '') {
+                return formError($input, 'This field is required.');
+            }
+        }
+
+        switch ($input.attr('type').toLowerCase()) {
+
+            // is the input a valid email?
+            case 'email':
+                return !regex.email.test(value)
+                    ? formError($input, 'Must be a valid email address<br>(ex: name@domain.com)')
+                    : true
+                    ;
+                break;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Formats the UI to expose the necessary field
+     * @param  {el}     $input  The input field in error
+     * @param  {string} msg     The error message displayed to the user
+     * @param  {bool}   reset   Boolean that forces us to reset the input error state
+     * @return {bool}           Always returns false
+     */
+    function formError($input, msg, reset) {
+        if (reset) {
+            $input
+                .removeClass(errorClass)
+                .next()
+                    .text('')
+                    .addClass(hiddenClass)
+                ;
+
+            return;
+        }
+
+        $input
+            .addClass(errorClass)
+            .next()
+                .html(msg)
+                .removeClass(hiddenClass)
+        ;
+
+        return false;
+    }
+
 
 
 })(jQuery);
-
-
-
-// (function($){
-
-//     // let $mainNav            = $('#main-nav');
-//     // let $mainView           = $('.app-main-container');
-//     let $doc                = $(document);
-//     let sidebarOpenClass    = 'open';
-//     let activeClass         = 'active';
-
-//     // const toggleMainNav = function (e) {
-//     //     e.preventDefault();
-//     //     $mainNav.toggleClass(sidebarOpenClass);
-//     //     $mainView.toggleClass(sidebarOpenClass);
-
-//     //     var clickAway = function (e) {
-//     //         if ($mainNav[0] !== e.target
-//     //         &&  !$.contains($mainNav[0], e.target)
-//     //         ) {
-//     //             $mainNav.removeClass(sidebarOpenClass);
-//     //             $mainView.removeClass(sidebarOpenClass);
-//     //             $(document.body).off('click', clickAway);
-//     //         }
-//     //     };
-
-//     //     $(document.body).on('click', clickAway);
-//     // }
-
-//     // $doc.on('click', '#main-nav-toggle', toggleMainNav);
-
-//     // $doc.on('click', '.app-nav-link a', function(e) {
-//     //     e.preventDefault(); // stop the site from navigating away from demo
-//     //     $('.app-nav-link a').removeClass(activeClass);
-//     //     $(this).toggleClass(activeClass);
-//     // });
-
-
-//     // // HIGHLIGHT CODE SAMPLES
-//     // $('pre code').each(function() {
-//     //     let $this   = $(this);
-//     //     let lang    = $this.prop('lang');
-//     //     let code    = $this.html();
-
-//     //     code = code
-//     //         .replace(/<br>/g, 'BRBRBR')
-//     //         .replace(/\&nbsp;/g, ' ')
-//     //         .replace(/\&lt;/g, '<')
-//     //         .replace(/\&gt;/g, '>')
-//     //         ;
-
-//     //     var html = Prism.highlight(code, Prism.languages[lang]);
-
-//     //     html = html
-//     //         .replace(/BRBRBR/g, '<br>')
-//     //         ;
-
-//     //     $this.html(html);
-//     // });
-
-
-//     // trigger focus when clicking on non-form elements in .input-groups
-//     $doc.on('click', '.input-group *', function(e) {
-//         let targetTag = e.target.tagName.toLowerCase();
-
-//         if (targetTag !== 'input'
-//         ||  targetTag !== 'select'
-//         ||  targetTag !== 'button'
-//         ) {
-//             $(this).siblings('input, select').trigger('focus');
-//         }
-//     });
-
-
-//     $doc.on('focus', 'input, textarea', function() {
-//         let $this = $(this);
-
-//         if ($this.parent().hasClass('input-group')) {
-//             $this.parent().addClass('focus');
-//         }
-//     });
-
-
-//     $doc.on('blur', 'input, textarea', function() {
-//         let $this = $(this);
-
-//         if ($this.parent().hasClass('input-group')) {
-//             $this.parent().removeClass('focus');
-//         }
-//     });
-
-
-// })(jQuery);

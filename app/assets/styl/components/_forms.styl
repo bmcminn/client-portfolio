@@ -83,6 +83,12 @@ textarea
         box-shadow: $input-drop-shadow
         border-color: lighten($primary-color, 60%)
 
+    &.error
+        border-color: $danger-color
+
+.form-error-msg
+    color: $danger-color
+
 [required]:after
     content: '*'
     color: $red

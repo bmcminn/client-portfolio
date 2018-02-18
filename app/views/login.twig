@@ -1,15 +1,15 @@
 <?php require('_head.twig'); ?>
 
 
-    <div class="login-form l-center content card grid">
+    <div class="user-form l-center content card grid">
         <h1>Login</h1>
 
-        <form login-form class="grid" action="/auth/login" method="post">
+        <form user-form class="grid" action="<?php echo ROUTE_POST_LOGIN; ?>" method="post">
 
             <div class="form-group">
                 <label for="useremail">Email address</label>
                 <input type="email" id="useremail" aria-describedby="emailHelp" minlength="5" autocomplete="email" placeholder="Enter email" required>
-                <small id="emailHelp" class="form-text text-muted" visually-hidden>We'll never share your email with anyone else.</small>
+                <!-- <small id="emailHelp" class="form-text text-muted" visually-hidden>We'll never share your email with anyone else.</small> -->
             </div>
 
             <div class="form-group">
@@ -18,11 +18,11 @@
             </div>
 
             <div class="form-group">
-                <button login-submit class="btn-primary btn-block" type="submit">Login</button>
+                <button user-form-submit class="btn-primary btn-block" type="submit">Login</button>
             </div>
 
             <div>
-                <a href="<?php echo ROUTE_RESET_PASSWORD; ?>">Forgot Password?</a>
+                <a href="<?php echo ROUTE_GET_RESET_PASSWORD; ?>">Forgot Password?</a>
             </div>
         </form>
     </div>
