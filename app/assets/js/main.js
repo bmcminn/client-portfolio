@@ -13,18 +13,18 @@
     let regex = {};
 
     // NOTE: we only validate the email follows the format xxx@xxx.xxx, no more complicated than that
-    regex.email = /\S+@\S+\.\S{2,}$/i;
+    regex.email         = /\S+@\S+\.\S{2,}$/i;
+    regex.nonInputTypes = /submit|button|hidden|image/i;
+
 
     // TODO: phone number regex
     // regex.phone = /
 
     // ensure form inputs have an error message field on the screen
     $('form').each(function(index, form) {
-        $(form).find('input, select, textarea')
-            .each(function(index, input) {
-                $(input).parent()
-                    .append(`<small class="form-error-msg ${hiddenClass}"></small>`);
-            });
+        $(form)
+            .find('input, select, textarea')
+            .after(`<small class="form-error-msg ${hiddenClass}"></small>`);
     });
 
 
@@ -70,6 +70,11 @@
             .each(function(e) {
                 let $this = $(this);
 
+                // skip submit, hidden, button, and image type inputs
+                if (regex.nonInputTypes.test($this.attr('type'))) {
+                    return;
+                }
+
                 // run form validation
                 if (!formValidate($this)) {
                     errors = true;
@@ -84,16 +89,24 @@
         // if we had errors, bail on the form submission
         if (errors) { return; }
 
+        // define ajax handler methods
+        let submitHandler   = axios[$form.attr('method')];
 
-        console.log(loginPostData);
+        // get our success and error handler methods if defined in the form
+        // NOTE: success and error handlers defined in the form should be set on the window object to ensure we have access to it
+        let successHandler  = $form.attr('successHandler') || function(res) { console.log(res); };
+        let errorHandler    = $form.attr('errorHandler')   || function(err) { console.error(err); };
 
+        console.info('[HANDLERS]', successHandler, errorHandler);
 
-        // submit form data to action route
-        let submission = axios[$form.attr('method')];
-
-        submission($form.attr('action'), loginPostData)
+        submitHandler($form.attr('action'), loginPostData)
             .then(function(res) {
-                console.log('submission success', res);
+                // call the success handler
+                window[successHandler](res);
+                $submit.enable();
+            })
+            .catch(function (err) {
+                window[errorHandler](err);
                 $submit.enable();
             });
     }
@@ -107,7 +120,7 @@
     function formValidate($input) {
 
         // Reset form input element and error message
-        formError($input, '', true);
+        formErrorReset($input);
 
         // NOTE: we do not allow user input to use leading/trailing spaces
         let value = $input.val().trim();
@@ -119,6 +132,7 @@
             }
         }
 
+        // determine the input type and validate against that
         switch ($input.attr('type').toLowerCase()) {
 
             // is the input a valid email?
@@ -127,6 +141,39 @@
                     ? formError($input, 'Must be a valid email address<br>(ex: name@domain.com)')
                     : true
                     ;
+                break;
+
+            case 'tel':
+                break;
+
+            case 'checkbox':
+            case 'radio':
+                break;
+
+            case 'color':
+                break;
+
+            case 'file':
+                break;
+
+            case 'password':
+            case 'text':
+            case 'search':
+                break;
+
+            case 'url':
+                break;
+
+            case 'week':
+            case 'month':
+            case 'time':
+            case 'date':
+            case 'datetime':
+            case 'datetime-local':
+                break;
+
+            case 'number':
+            case 'range':
                 break;
         }
 
@@ -141,18 +188,7 @@
      * @param  {bool}   reset   Boolean that forces us to reset the input error state
      * @return {bool}           Always returns false
      */
-    function formError($input, msg, reset) {
-        if (reset) {
-            $input
-                .removeClass(errorClass)
-                .next()
-                    .text('')
-                    .addClass(hiddenClass)
-                ;
-
-            return;
-        }
-
+    function formError($input, msg) {
         $input
             .addClass(errorClass)
             .next()
@@ -164,5 +200,32 @@
     }
 
 
+    /**
+     * Resets the given form input error messaging
+     * @param  {el}     $input  The input field in question to reset
+     * @return {null}
+     */
+    function formErrorReset($input) {
+        $input
+            .removeClass(errorClass)
+            .next()
+                .html('')
+                .addClass(hiddenClass)
+            ;
+    }
+
+
+    window.loginSuccessHandler = function(res) {
+        console.log('submission success', res);
+        window.location = '/dashboard';
+    }
+
+    window.resetPasswordSuccessHandler = function(res) {
+        console.log('password reset request submitted');
+    }
+
+    window.formErrorHandler = function(err) {
+        console.error('submission failed', err);
+    }
 
 })(jQuery);

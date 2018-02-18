@@ -15,7 +15,8 @@ $base-font-size     = 1rem
 
 $disabled-opacity   = 0.5
 
-$input-drop-shadow  = 0 0 0 3px lighten($primary-color, 75%)
+$input-primary-shadow  = 0 0 0 3px lighten($primary-color, 75%)
+$input-danger-shadow  = 0 0 0 3px lighten($danger-color, 50%)
 
 
 // ==================================================
@@ -80,14 +81,20 @@ textarea
     &:focus,
     &:active
         outline: 0
-        box-shadow: $input-drop-shadow
+        box-shadow: $input-primary-shadow
         border-color: lighten($primary-color, 60%)
 
     &.error
         border-color: $danger-color
 
+
+        &:focus,
+        &:active
+            box-shadow: $input-danger-shadow
+
 .form-error-msg
     color: $danger-color
+
 
 [required]:after
     content: '*'

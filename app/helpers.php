@@ -94,6 +94,7 @@ function isLoggedIn() {
  */
 function error_handler($errCode) {
     // TODO: setup logger to capture error information
+    http_response_code($errCode);
     require(VIEWS_DIR . "/${errCode}.twig");
 }
 

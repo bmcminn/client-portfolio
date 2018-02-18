@@ -4,13 +4,15 @@
     <div class="user-form l-center content card grid">
         <h1>Login</h1>
 
-        <form user-form class="grid" action="<?php echo ROUTE_POST_LOGIN; ?>" method="post">
+        <form user-form class="grid" action="<?php echo ROUTE_POST_LOGIN; ?>" method="post" successHandler="loginSuccessHandler" errorHandler="formErrorHandler">
 
             <div class="form-group">
                 <label for="useremail">Email address</label>
                 <input type="email" id="useremail" aria-describedby="emailHelp" minlength="5" autocomplete="email" placeholder="Enter email" required>
-                <!-- <small id="emailHelp" class="form-text text-muted" visually-hidden>We'll never share your email with anyone else.</small> -->
+                <small id="emailHelp" class="form-text text-muted" visually-hidden>We'll never share your email with anyone else.</small>
             </div>
+
+            <input type="hidden" value="sfjsklfejslfjlfjsfkejslf">
 
             <div class="form-group">
                 <label for="userpassword">Password</label>
