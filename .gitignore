@@ -18,6 +18,8 @@ _projects/*/
 
 users/
 clients/
+cache/
+logs/
 
 todo*
 

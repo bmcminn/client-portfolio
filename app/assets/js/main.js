@@ -97,7 +97,7 @@
         let successHandler  = $form.attr('successHandler') || function(res) { console.log(res); };
         let errorHandler    = $form.attr('errorHandler')   || function(err) { console.error(err); };
 
-        console.info('[HANDLERS]', successHandler, errorHandler);
+        // console.info('[HANDLERS]', successHandler, errorHandler);
 
         submitHandler($form.attr('action'), loginPostData)
             .then(function(res) {

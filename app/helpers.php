@@ -26,6 +26,7 @@ function req($type='json') {
 
     // @sauce: https://stackoverflow.com/a/7084677/3708807
     $body = file_get_contents('php://input');
+    // $body = filter_var($body, FILTER_SANITIZE_STRING);
 
     $req = '';
 
@@ -42,6 +43,13 @@ function req($type='json') {
 
     return $req;
 }
+
+
+
+function res_json($data) {
+    echo json_encode($data, 1);
+}
+
 
 
 /**
@@ -100,4 +108,36 @@ function error_handler($errCode) {
 
 
 
-// function Log()
+/**
+ * [Logger description]
+ * @param [type] $type [description]
+ * @param [type] $msg  [description]
+ */
+function Logger($type, $msg) {
+    // TODO: turn this into a configurable logger service utility
+    // $logsPath = realpath(getcwd() . '/logs/');
+
+    // if (!is_dir($logsPath)) {
+    //     mkdir($logsPath);
+    // }
+
+    // $logPath = $logsPath . date('Y-m-d') . '.log';
+    $cwd = realpath(getcwd() . '/..');
+    $logPath = $cwd . "/logs/" . date('Y-m-d') . '.log';
+
+    // if (!is_file($logPath)) {
+
+    // }
+    $date   = date('Y-m-d::H:i:sO');
+    $caller = substr(debug_backtrace()[0]['file'], strlen($cwd) + 1);
+    $lineNo = debug_backtrace()[0]['line'];
+
+    $data   = "[${date}] [${type}] [${caller}:${lineNo}] ${msg}" . PHP_EOL;
+
+    file_put_contents($logPath, $data, FILE_APPEND);
+}
+
+
+function Debug($msg) { Logger('debug', $msg); }
+function Info($msg) { Logger('info', $msg); }
+function Error($msg) { Logger('error', $msg); }
