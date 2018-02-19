@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
 // print_r($salt);
 
 
-$hash = password_hash('rosesaredead', PASSWORD_ARGON2I);
+$hash = password_hash('testing123', PASSWORD_ARGON2I);
 
 echo $hash . PHP_EOL . PHP_EOL;
 

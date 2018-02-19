@@ -2,10 +2,14 @@
 
 use Symfony\Component\Yaml\Yaml;
 
+
+/**
+ * [postLoginHandler description]
+ * @return [type] [description]
+ */
 return function() {
     $req = req();
 
-    // $res = $req;
     $res = [];
 
     $req['useremail']       = filter_var($req['useremail'], FILTER_SANITIZE_STRING);
@@ -18,6 +22,7 @@ return function() {
         $res['success'] = false;
         $res['message'] = 'Could not find an account with the email or password provided.';
 
+        status_code(404);
         res_json($res);
         return;
     }
@@ -30,14 +35,12 @@ return function() {
         $res['success'] = false;
         $res['message'] = 'Password failed.';
 
+        status_code(404);
         res_json($res);
         return;
     }
 
-
-
     $res['success'] = true;
-
 
     res_json($res);
 
@@ -51,10 +54,10 @@ function getUser($email) {
 
     $email = strToLower(trim($email));
 
-    $usersCache = ROOT_DIR . '/cache/users.json';
+    $usersCache = CACHE_DIR . '/users.json';
 
     if (!is_file($usersCache)) {
-        getUsers();
+        cacheUsers();
     }
 
     $users = file_get_contents($usersCache);
@@ -65,21 +68,20 @@ function getUser($email) {
 
     foreach ($users as $user) {
         if ($user['email'] === $email) {
-            $_SESSION['user'] = $user;
+            $_SESSION[SESSION_USER] = $user;
             $gotUser = true;
             break;
         }
     }
 
     return $gotUser;
-
 }
 
 
 
-function getUsers() {
+function cacheUsers() {
 
-    $users = glob('../users/*.yaml');
+    $users = glob(USERS_DIR . '/*.yaml');
 
     $userDB = [];
 
@@ -94,7 +96,7 @@ function getUsers() {
 
     Debug(json_encode($userDB, true));
 
-    $userCache = ROOT_DIR . '/cache/users.json';
+    $userCache = CACHE_DIR . '/users.json';
 
     file_put_contents($userCache, json_encode($userDB, true));
 

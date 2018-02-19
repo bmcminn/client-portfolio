@@ -4,6 +4,10 @@
 define('ROOT_DIR',      realpath(__DIR__ . '/..'));
 define('APP_DIR',       ROOT_DIR . '/app');
 define('VIEWS_DIR',     APP_DIR . '/views');
+define('CACHE_DIR',     APP_DIR . '/cache');
+define('LOGS_DIR',      APP_DIR . '/logs');
+define('USERS_DIR',     ROOT_DIR . '/users');
+define('CLIENTS_DIR',   ROOT_DIR . '/clients');
 
 
 // define named route constants used throughout the system
@@ -19,6 +23,10 @@ define('ROUTE_GET_RESET_PASSWORD',      '/reset/password');
 define('ROUTE_POST_RESET_PASSWORD',     '/reset/password');
 
 define('ROUTE_GET_DASHBOARD',           '/dashboard');
+
+
+// init the user session
+session_start();
 
 
 // get the party started
@@ -44,11 +52,12 @@ if (getenv('APP_DEBUG')) {
 }
 
 
-// init the user session
-session_start();
-
-
+// Load helper functions
 require('helpers.php');
+
+
+// Ensure app directories exist
+provisionDirs();
 
 
 // define our route dispatcher
@@ -69,13 +78,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     $r->addRoute('GET',     ROUTE_GET_DASHBOARD,        require('routes/get-dashboard.php'));
 
-    // // {id} must be a number (\d+)
-    // $r->addRoute('GET',     '/user/{id:\d+}', 'get_user');
-
-    // // The /{title} suffix is optional
-    // $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article');
 });
-
 
 
 // Fetch method and URI from somewhere
@@ -90,8 +93,6 @@ if (false !== ($pos = strpos($uri, '?'))) {
 $uri = rawurldecode($uri);
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-
-
 
 
 switch ($routeInfo[0]) {
@@ -109,7 +110,6 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
-        // ... call $handler with $vars
 
         $handler($vars);
 

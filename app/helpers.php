@@ -1,5 +1,8 @@
 <?php
 
+use Symfony\Component\Filesystem\Filesystem;
+
+
 // define our render method
 function render($templateName='default', $model = []) {
 
@@ -77,14 +80,18 @@ function redirect($route) {
 function isLoggedIn() {
     // check if user session has been initialized
     if (!isset($_SESSION['user'])) {
-        redirect(GET_LOGIN);
+        // return false;
+        redirect(ROUTE_GET_LOGIN);
+        return;
     }
 
     $user = $_SESSION['user'];
 
     // check if user session is expired
     if ($user['cache'] + minutes(60) < now()) {
-        redirect(GET_LOGIN);
+        // return false;
+        redirect(ROUTE_GET_LOGIN);
+        return;
     }
 
     // update user session cache timer
@@ -107,6 +114,16 @@ function error_handler($errCode) {
 }
 
 
+/**
+ * Alias for http_response_code
+ * @param  [type] $statusCode [description]
+ * @return [type]             [description]
+ */
+function status_code($statusCode) {
+    http_response_code($statusCode);
+}
+
+
 
 /**
  * [Logger description]
@@ -114,22 +131,10 @@ function error_handler($errCode) {
  * @param [type] $msg  [description]
  */
 function Logger($type, $msg) {
-    // TODO: turn this into a configurable logger service utility
-    // $logsPath = realpath(getcwd() . '/logs/');
+    $logPath = LOGS_DIR . '/' . date('Y-m-d') . '.log';
 
-    // if (!is_dir($logsPath)) {
-    //     mkdir($logsPath);
-    // }
-
-    // $logPath = $logsPath . date('Y-m-d') . '.log';
-    $cwd = realpath(getcwd() . '/..');
-    $logPath = $cwd . "/logs/" . date('Y-m-d') . '.log';
-
-    // if (!is_file($logPath)) {
-
-    // }
     $date   = date('Y-m-d::H:i:sO');
-    $caller = substr(debug_backtrace()[0]['file'], strlen($cwd) + 1);
+    $caller = substr(debug_backtrace()[0]['file'], strlen(ROOT_DIR) + 1);
     $lineNo = debug_backtrace()[0]['line'];
 
     $data   = "[${date}] [${type}] [${caller}:${lineNo}] ${msg}" . PHP_EOL;
@@ -141,3 +146,27 @@ function Logger($type, $msg) {
 function Debug($msg) { Logger('debug', $msg); }
 function Info($msg) { Logger('info', $msg); }
 function Error($msg) { Logger('error', $msg); }
+
+
+/**
+ * [provisionDirs description]
+ * @return [type] [description]
+ */
+function provisionDirs() {
+    $fs = new Filesystem();
+
+    $dirs = [
+        APP_DIR
+    ,   VIEWS_DIR
+    ,   CACHE_DIR
+    ,   LOGS_DIR
+    ,   CLIENTS_DIR
+    ,   USERS_DIR
+    ];
+
+    foreach ($dirs as $dir) {
+        if (!is_dir($dir)) {
+            $fs->mkdir($dir);
+        }
+    }
+}

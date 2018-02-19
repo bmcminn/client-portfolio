@@ -11,7 +11,8 @@
         "webmozart/path-util": "^2.3",
         "nikic/fast-route": "^1.2",
         "filp/whoops": "^2.1",
-        "monolog/monolog": "^1.23"
+        "monolog/monolog": "^1.23",
+        "symfony/filesystem": "^4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
