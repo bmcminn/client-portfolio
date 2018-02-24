@@ -1,8 +1,5 @@
 <?php
 
-use Symfony\Component\Yaml\Yaml;
-
-
 /**
  * [postLoginHandler description]
  * @return [type] [description]
@@ -47,57 +44,3 @@ return function() {
     Debug(json_encode($res));
     // print_r($_SERVER);
 };
-
-
-
-function getUser($email) {
-
-    $email = strToLower(trim($email));
-
-    $usersCache = CACHE_DIR . '/users.json';
-
-    if (!is_file($usersCache)) {
-        cacheUsers();
-    }
-
-    $users = file_get_contents($usersCache);
-
-    $users = json_decode($users, true);
-
-    $gotUser = false;
-
-    foreach ($users as $user) {
-        if ($user['email'] === $email) {
-            $_SESSION[SESSION_USER] = $user;
-            $gotUser = true;
-            break;
-        }
-    }
-
-    return $gotUser;
-}
-
-
-
-function cacheUsers() {
-
-    $users = glob(USERS_DIR . '/*.yaml');
-
-    $userDB = [];
-
-    foreach ($users as $userpath) {
-        $contents = file_get_contents($userpath);
-
-        $data = Yaml::parse($contents);
-
-        array_push($userDB, $data);
-    }
-
-
-    Debug(json_encode($userDB, true));
-
-    $userCache = CACHE_DIR . '/users.json';
-
-    file_put_contents($userCache, json_encode($userDB, true));
-
-}

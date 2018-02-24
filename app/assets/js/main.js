@@ -14,7 +14,7 @@
 
     // NOTE: we only validate the email follows the format xxx@xxx.xxx, no more complicated than that
     regex.email         = /\S+@\S+\.\S{2,}$/i;
-    regex.nonInputTypes = /submit|button|hidden|image/i;
+    regex.nonInputTypes = /submit|button|image/i;
 
 
     // TODO: phone number regex
@@ -64,6 +64,9 @@
             return;
         }
 
+        // reset any possible new password fields
+        window.newPassword = null;
+        window.newPasswordConfirm = null;
 
         // serialize each form input
         $form.find('input, select, textarea')
@@ -85,7 +88,6 @@
                 loginPostData[$this.attr('id')] = $this.val();
             });
 
-
         // if we had errors, bail on the form submission
         if (errors) { return; }
 
@@ -94,19 +96,27 @@
 
         // get our success and error handler methods if defined in the form
         // NOTE: success and error handlers defined in the form should be set on the window object to ensure we have access to it
-        let successHandler  = $form.attr('successHandler') || function(res) { console.log(res); };
-        let errorHandler    = $form.attr('errorHandler')   || function(err) { console.error(err); };
+        let successHandler  = window[$form.attr('successHandler')] || function(res) { console.log(res); };
+        let errorHandler    = window[$form.attr('errorHandler')]   || function(err) { console.error(err); };
 
         // console.info('[HANDLERS]', successHandler, errorHandler);
 
         submitHandler($form.attr('action'), loginPostData)
             .then(function(res) {
                 // call the success handler
-                window[successHandler](res);
+                successHandler(res);
+
+                // reset form helper data
+                delete(window.newPassword);
+                delete(window.newPasswordConfirm);
                 $submit.enable();
             })
             .catch(function (err) {
-                window[errorHandler](err);
+                errorHandler(err);
+
+                // reset form helper data
+                delete(window.newPassword);
+                delete(window.newPasswordConfirm);
                 $submit.enable();
             });
     }
@@ -143,6 +153,9 @@
                     ;
                 break;
 
+            case 'hidden':
+                break;
+
             case 'tel':
                 break;
 
@@ -156,7 +169,17 @@
             case 'file':
                 break;
 
+            // if we have multiple password fields, make sure they match, cuz it's probably a password confirmation
             case 'password':
+                if (window.newPassword) {
+                    window.newPasswordConfirm = $input.val();
+                    if ($input.val() !== window.newPassword) {
+                        return formError($input, 'Passwords must match.');
+                    }
+                }
+
+                window.newPassword = $input.val();
+                break;
             case 'text':
             case 'search':
                 break;
@@ -216,7 +239,7 @@
 
 
     window.loginSuccessHandler = function(res) {
-        console.log('submission success', res);
+        console.log('From submission success', res);
         window.location = '/dashboard';
     }
 
@@ -225,7 +248,7 @@
     }
 
     window.formErrorHandler = function(err) {
-        console.error('submission failed', err);
+        console.error('Form submission failed', err);
     }
 
 })(jQuery);

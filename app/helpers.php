@@ -1,22 +1,49 @@
 <?php
 
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Yaml;
 
 
-// define our render method
-function render($templateName='default', $model = []) {
 
+// =======================================================
+//  TIME HELPERS
+// =======================================================
+
+
+/**
+ * Returns time for N minutes in seconds
+ * @param  integer  $n  Number of minutes
+ * @return integer      Time in seconds
+ */
+function minutes($n = 1) {
+    return 60 * $n;
 }
 
 
 /**
- * Takes num minutes and turns it into seconds
- * @param  [int]    $min    Number of minutes to be converted
- * @return [int]            Number of minutes in seconds
+ * Returns time for N hours in seconds
+ * @param  integer  $n   Number of hours
+ * @return integer       Time in seconds
  */
-function minutes($min) {
-    return 60 * $min;
+function hours($n = 1) {
+    return minutes(60) * $n;
 }
+
+
+/**
+ * Alias of time(); Returns the current time in seconds
+ * @return [type] [description]
+ */
+function now() {
+    return time();
+    // return floor(microtime(true));
+}
+
+
+
+// =======================================================
+//  NETWORK HELPERS
+// =======================================================
 
 
 /**
@@ -24,18 +51,22 @@ function minutes($min) {
  * @param [string]  $type   Data type to be parsed (defaults to json)
  * @return [string|array]   Returns the request body in the desired $type format
  */
-function req($type='json') {
+function req($req=[], $type='json') {
     $type = strToLower($type);
 
     // @sauce: https://stackoverflow.com/a/7084677/3708807
     $body = file_get_contents('php://input');
     // $body = filter_var($body, FILTER_SANITIZE_STRING);
 
-    $req = '';
-
-    switch ($type) {
+    switch (strtolower($type)) {
         case 'json':
-            $req = json_decode($body, true);
+            $data   = json_decode($body, true);
+
+            if (!$data) {
+                $data = [];
+            }
+
+            $req = array_replace_recursive($data, $req);
             break;
 
         case 'raw':
@@ -48,19 +79,53 @@ function req($type='json') {
 }
 
 
-
+/**
+ * [res_json description]
+ * @param  [type] $data [description]
+ * @return [type]       [description]
+ */
 function res_json($data) {
     echo json_encode($data, 1);
 }
 
 
+/**
+ * Alias for http_response_code
+ * @param  [type] $statusCode [description]
+ * @return [type]             [description]
+ */
+function status_code($statusCode) {
+    http_response_code($statusCode);
+}
+
 
 /**
- * [now description]
- * @return [type] [description]
+ * [error_page_handler description]
+ * @param  [type] $errCode [description]
+ * @return [type]          [description]
  */
-function now() {
-    return floor(microtime(true));
+function error_page_handler($errCode, $errMsg='') {
+    // TODO: setup logger to capture error information
+    status_code($errCode);
+    require(VIEWS_DIR . "/error_page.twig");
+}
+
+
+/**
+ * [post_error description]
+ * @param  [type] $msg [description]
+ * @return [type]      [description]
+ */
+function post_error($errCode, $msg) {
+    status_code($errCode);
+
+    $res = [
+        'succes'    => false,
+        'message'   => $msg
+    ];
+
+    res_json($res);
+    Error($msg);
 }
 
 
@@ -71,6 +136,11 @@ function now() {
 function redirect($route) {
     header('location:'.$route);
 }
+
+
+// =======================================================
+//  USER HELPERS
+// =======================================================
 
 
 /**
@@ -103,26 +173,107 @@ function isLoggedIn() {
 
 
 /**
- * [error_handler description]
- * @param  [type] $errCode [description]
- * @return [type]          [description]
+ * [getUser description]
+ * @param  [type] $email [description]
+ * @return [type]        [description]
  */
-function error_handler($errCode) {
-    // TODO: setup logger to capture error information
-    http_response_code($errCode);
-    require(VIEWS_DIR . "/${errCode}.twig");
+function getUser($email) {
+    $email      = strToLower(trim($email));
+    $usersCache = CACHE_DIR . '/users.json';
+
+    if (!is_file($usersCache)) {
+        cacheUsers();
+    }
+
+    $users = file_get_contents($usersCache);
+    $users = json_decode($users, true);
+
+    $gotUser = false;
+
+    foreach ($users as $user) {
+        if ($user['email'] === $email) {
+            $_SESSION['user'] = $user;
+            $gotUser = true;
+            break;
+        }
+    }
+
+    return $gotUser;
 }
 
 
 /**
- * Alias for http_response_code
- * @param  [type] $statusCode [description]
- * @return [type]             [description]
+ * [cacheUsers description]
+ * @return [type] [description]
  */
-function status_code($statusCode) {
-    http_response_code($statusCode);
+function cacheUsers() {
+    $users  = glob(USERS_DIR . '/*.yaml');
+    $userDB = [];
+
+    foreach ($users as $userpath) {
+        $contents   = file_get_contents($userpath);
+        $data       = Yaml::parse($contents);
+        array_push($userDB, $data);
+    }
+
+    Debug(json_encode($userDB, true));
+
+    $userCache = CACHE_DIR . '/users.json';
+
+    file_put_contents($userCache, json_encode($userDB, true));
 }
 
+
+/**
+ * Detemines if a given password reset hash file exists
+ * @param  [type] $hash [description]
+ * @return [type]       [description]
+ */
+function hash_exists($hash) {
+
+    $filepath = CACHE_DIR . '/' . $hash;
+
+    if (!file_exists($filepath)) {
+        return false;
+    }
+
+    // get hash cache data
+    $cache = readJSON($filepath);
+
+    // if cache is expired
+    if (($cache['timestamp'] + PW_RESET_CACHE_EXPIRATION) < now()) {
+        Info('[HASH EXISTS] ' . $hash . ' is expired; deleting file.');
+        unlink($filepath);
+        return false;
+    }
+
+    return true;
+}
+
+
+
+
+
+// =======================================================
+//  SYSTEM HELPERS
+// =======================================================
+
+
+/**
+ * Reads JSON data from file
+ * @param  string  $filepath Filepath of JSON data we wish to consume
+ * @param  boolean $assoc    Tells JSON parser to return an object or associative array
+ * @return mixed             Returns an Object or Array based on $assoc boolean
+ */
+function readJSON($filepath, $assoc=true) {
+    if (!file_exists($filepath)) {
+        throw new Exception('"$filepath" does not exist');
+    }
+
+    $content = file_get_contents($filepath);
+
+    return json_decode($content, $assoc);
+}
 
 
 /**
@@ -134,10 +285,11 @@ function Logger($type, $msg) {
     $logPath = LOGS_DIR . '/' . date('Y-m-d') . '.log';
 
     $date   = date('Y-m-d::H:i:sO');
+    $type   = strToUpper($type);
     $caller = substr(debug_backtrace()[0]['file'], strlen(ROOT_DIR) + 1);
     $lineNo = debug_backtrace()[0]['line'];
 
-    $data   = "[${date}] [${type}] [${caller}:${lineNo}] ${msg}" . PHP_EOL;
+    $data   = "[${date}] [${type}] [${caller}:${lineNo}] ${msg}" . EOL;
 
     file_put_contents($logPath, $data, FILE_APPEND);
 }
@@ -170,3 +322,12 @@ function provisionDirs() {
         }
     }
 }
+
+
+// define our render method
+function render($templateName='default', $model = []) {
+
+}
+
+
+

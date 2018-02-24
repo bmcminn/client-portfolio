@@ -1,0 +1,75 @@
+
+// =============================================
+// VARIABLES
+// =============================================
+
+// NOTE: `unless` prioritizes the _variables.styl value when available
+
+$button-icon-spacing    = 0.4rem
+$border-radius          = 3px unless $border-radius
+$DARKEN_COLORS          = 20% unless $DARKEN_COLORS
+
+$component-padding  = .5rem .65rem
+
+$base-font-size     = 1rem
+
+$white = #fff unless $white
+
+
+
+// TODO: test :hover bug on buttons for touch devices
+
+
+
+// =============================================
+// BUTTON STYLES
+// =============================================
+
+.alert
+    border: 1px solid
+    margin: 1rem 0
+    padding: 0.64rem 1rem
+    border-radius: $border-radius
+
+
+// MIXIN: _btn
+//  Generates a set of button styles using the provided defaults
+// ------------------------------
+_alert($NAME, $COLOR, $TEXT_OVERRIDE=$white)
+
+    .alert-{$NAME}
+        background-color: lighten($COLOR, 75%)
+        border-color: lighten($COLOR, 25%)
+        color: darken($COLOR, $DARKEN_COLORS)
+
+    // .alert-{$NAME}-outline
+    //     background-color: transparent
+    //     border-color: initial
+    //     color: $COLOR
+
+    // .alert-{$NAME}:hover
+    //     background-color: lighten($COLOR, $DARKEN_COLORS)
+
+    // .alert-{$NAME}.active,
+    // .alert-{$NAME}[aria-pressed="true"]
+    //     background-color: darken($COLOR, $DARKEN_COLORS)
+
+    // .alert-{$NAME}-outline:hover,
+    // .alert-{$NAME}-outline.active,
+    // .alert-{$NAME}-outline[aria-pressed="true"]
+    //     color: $TEXT_OVERRIDE
+    //     border-color: darken($COLOR, $DARKEN_COLORS)
+    //     background-color: darken($COLOR, $DARKEN_COLORS)
+
+
+
+// =============================================
+// BUTTON STATE STYLES
+// =============================================
+
+_alert(primary, $primary-color)
+_alert(secondary, $secondary-color)
+_alert(info, $info-color)
+_alert(success, $success-color)
+// _alert(warning, $warning-color, $black)
+_alert(danger, $danger-color)
