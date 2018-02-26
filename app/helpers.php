@@ -177,10 +177,28 @@ function isLoggedIn() {
 /**
  * [getUser description]
  * @param  [type] $email [description]
- * @return [type]        [description]
+ * @return [obj]        [description]
  */
 function getUser($email) {
-    $email      = strToLower(trim($email));
+    $email = strToLower(trim($email));
+
+    $users = getUsers();
+
+    $userData = false;
+
+    foreach ($users as $user) {
+        if ($user['email'] === $email) {
+            $userDate = $user;
+            break;
+        }
+    }
+
+    return $userDate;
+}
+
+
+
+function getUsers() {
     $usersCache = CACHE_DIR . '/users.json';
 
     if (!is_file($usersCache)) {
@@ -188,20 +206,9 @@ function getUser($email) {
     }
 
     $users = file_get_contents($usersCache);
-    $users = json_decode($users, true);
-
-    $gotUser = false;
-
-    foreach ($users as $user) {
-        if ($user['email'] === $email) {
-            $_SESSION['user'] = $user;
-            $gotUser = true;
-            break;
-        }
-    }
-
-    return $gotUser;
+    return json_decode($users, true);
 }
+
 
 
 /**
@@ -253,6 +260,30 @@ function hash_exists($hash) {
 }
 
 
+
+function updateUser($email, $model) {
+
+    $email = strToLower(trim($email));
+
+    $users = getUsers();
+
+    for ($i = count($users)-1; $i > 0; $i--) {
+        $user = $users[$i];
+
+        if ($user['email'] === $email) {
+            $user = array_replace_recursive([], $user, $model);
+
+            $users[$i] = $user;
+            break;
+        }
+
+    }
+
+    $userCache = CACHE_DIR . '/users.json';
+
+    file_put_contents($userCache, json_encode($users));
+
+}
 
 
 

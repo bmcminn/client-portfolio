@@ -24,6 +24,11 @@ return function() {
         return;
     }
 
+
+    $user['cache'] = now();
+
+    $_SESSION['user'] = $user;
+
     Debug(json_encode('------------------'));
     Debug(json_encode($req));
     Debug(json_encode($user));
@@ -32,7 +37,7 @@ return function() {
         $res['success'] = false;
         $res['message'] = 'Password failed.';
 
-        status_code(404);
+        status_code(400);
         res_json($res);
         return;
     }
