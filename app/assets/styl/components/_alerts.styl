@@ -27,7 +27,7 @@ $white = #fff unless $white
 
 .alert
     border: 1px solid
-    margin: 1rem 0
+    margin: 0.5rem 0
     padding: 0.64rem 1rem
     border-radius: $border-radius
 
@@ -38,29 +38,9 @@ $white = #fff unless $white
 _alert($NAME, $COLOR, $TEXT_OVERRIDE=$white)
 
     .alert-{$NAME}
-        background-color: lighten($COLOR, 75%)
+        background-color: lighten($COLOR, 85%)
         border-color: lighten($COLOR, 25%)
         color: darken($COLOR, $DARKEN_COLORS)
-
-    // .alert-{$NAME}-outline
-    //     background-color: transparent
-    //     border-color: initial
-    //     color: $COLOR
-
-    // .alert-{$NAME}:hover
-    //     background-color: lighten($COLOR, $DARKEN_COLORS)
-
-    // .alert-{$NAME}.active,
-    // .alert-{$NAME}[aria-pressed="true"]
-    //     background-color: darken($COLOR, $DARKEN_COLORS)
-
-    // .alert-{$NAME}-outline:hover,
-    // .alert-{$NAME}-outline.active,
-    // .alert-{$NAME}-outline[aria-pressed="true"]
-    //     color: $TEXT_OVERRIDE
-    //     border-color: darken($COLOR, $DARKEN_COLORS)
-    //     background-color: darken($COLOR, $DARKEN_COLORS)
-
 
 
 // =============================================

@@ -124,6 +124,8 @@ function post_error($errCode, $msg) {
         'message'   => $msg
     ];
 
+    Error('[POST ERROR] ' . $errCode . ' :: ' . $msg);
+
     res_json($res);
     Error($msg);
 }

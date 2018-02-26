@@ -71,7 +71,22 @@ function processPasswordReset($req) {
         $req['userpasswordconfirm'] = filter_var($req['userpasswordconfirm'], FILTER_SANITIZE_STRING);
     }
 
-    // if (file_exists(CACHE_DIR . '/' . $req['hash']));
+
+    // check the passwords match
+    if ($req['userpassword'] !== $req['userpasswordconfirm']) {
+        post_error(400, 'Passwords do not match.');
+        return;
+    }
+
+    // check if hash file exists
+    if (!file_exists(CACHE_DIR . '/' . $req['hash'])) {
+        return;
+    }
+
+
+    Info('resetting password for user ', $req['hash']);
+
+
 
 }
 
@@ -80,7 +95,7 @@ function processPasswordReset($req) {
 
 function requestPasswordReset($req) {
 
-    $LOG_LABEL = '[PASSWORD RESET EVENT]';
+    $LOG_LABEL = '[PASSWORD RESET REQUEST EVENT]';
 
     if (!isset($req['useremail'])) {
         post_error(400, 'Missing parameter "useremail".');

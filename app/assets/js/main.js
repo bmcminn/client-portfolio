@@ -22,10 +22,33 @@
 
     // ensure form inputs have an error message field on the screen
     $('form').each(function(index, form) {
-        $(form)
+        let $form = $(form);
+        $form
+            .prepend('<div class="alert visually-hidden"></div>')
             .find('input, select, textarea')
             .after(`<small class="form-error-msg ${hiddenClass}"></small>`);
+
+        // form.alertBox = $form.find('.alert');
+
+        // form.alertBox.alert = function(status, msg) {
+        //     let $this = $(this);
+        //     $this
+        //         .text(msg)
+        //         .attr('class', 'alert alert-' + status)
+        //         ;
+        // };
+
+        // form.alertBox.success = function(msg) {
+        //     this.alert('success', msg);
+        // };
+
+        // form.alertBox.fail = function(msg) {
+        //     this.alert('danger', msg);
+        // };
+
     });
+
+
 
 
     // Register event handlers
@@ -96,15 +119,18 @@
 
         // get our success and error handler methods if defined in the form
         // NOTE: success and error handlers defined in the form should be set on the window object to ensure we have access to it
-        let successHandler  = window[$form.attr('successHandler')] || function(res) { console.log(res); };
-        let errorHandler    = window[$form.attr('errorHandler')]   || function(err) { console.error(err); };
+        let successHandler  = window[$form.attr('successHandler')] || function(form, res) { console.log(res); };
+        let errorHandler    = window[$form.attr('errorHandler')]   || function(form, err) { console.error(err); };
 
         // console.info('[HANDLERS]', successHandler, errorHandler);
+
+        console.debug('form submitting');
+
 
         submitHandler($form.attr('action'), loginPostData)
             .then(function(res) {
                 // call the success handler
-                successHandler(res);
+                successHandler(res, $form);
 
                 // reset form helper data
                 delete(window.newPassword);
@@ -112,7 +138,7 @@
                 $submit.enable();
             })
             .catch(function (err) {
-                errorHandler(err);
+                errorHandler(err, $form);
 
                 // reset form helper data
                 delete(window.newPassword);
@@ -200,6 +226,22 @@
                 break;
         }
 
+
+        // // validate if the current field value matches another field value
+        // if ($input.attr('matches')) {
+        //     let current    = $input.val();
+        //     let target     = $('#' + $input.attr('matches')).val();
+
+        //     console.log(current, target);
+
+        //     if (current !== target) {
+        //         console.error(current, target);
+        //         return formError($input, 'Passwords must match.');
+        //     }
+        // }
+
+
+
         return true;
     }
 
@@ -212,6 +254,7 @@
      * @return {bool}           Always returns false
      */
     function formError($input, msg) {
+        console.error($input, msg);
         $input
             .addClass(errorClass)
             .next()
@@ -238,16 +281,45 @@
     }
 
 
-    window.loginSuccessHandler = function(res) {
+    // function resetFormMessage($form) {
+    //     $form
+    //         .find('alert')
+    //         .attr('class', 'alert visually-hidden')
+    //         .html('')
+    //         ;
+    // }
+
+    // function formMessage(status, $form, msg) {
+    //     $form
+    //         .find('.alert')
+    //         .attr('class', 'alert alert-' + status)
+    //         .html(msg)
+    //         ;
+    // }
+
+    // function formSuccess($form, msg) {
+    //     formMessage('success', $form, msg);
+    // }
+
+    // function formError($form, msg) {
+    //     formMessage('error', $form, msg);
+    // }
+
+    window.loginSuccessHandler = function(res, $form) {
         console.log('From submission success', res);
         window.location = '/dashboard';
     }
 
-    window.resetPasswordSuccessHandler = function(res) {
-        console.log('password reset request submitted');
+    window.resetPasswordSuccessHandler = function(res, $form) {
+        // formSuccess($form, 'Password reset successful!');
+        let msg = 'Password reset submitted!';
+        $form.html('<div class="alert alert-success">' + msg + '</div>');
+        console.log(msg);
+
     }
 
-    window.formErrorHandler = function(err) {
+    window.formErrorHandler = function(err, $form) {
+        formError($form, 'Password reset failed... ' + err);
         console.error('Form submission failed', err);
     }
 
