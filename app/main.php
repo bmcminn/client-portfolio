@@ -14,6 +14,10 @@ define('USERS_DIR',     ROOT_DIR . '/users');
 define('CLIENTS_DIR',   ROOT_DIR . '/clients');
 
 
+// define local app file constants
+define('USERS_CACHE',   CACHE_DIR . '/users.json');
+
+
 // define named route constants used throughout the system
 define('ROUTE_GET_HOMEPAGE',            '/');
 

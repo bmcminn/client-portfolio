@@ -32,7 +32,7 @@ function hours($n = 1) {
 
 /**
  * Alias of time(); Returns the current time in seconds
- * @return [type] [description]
+ * @return integer  The curren time in seconds
  */
 function now() {
     return time();
@@ -47,9 +47,10 @@ function now() {
 
 
 /**
- * parses request body content into JSON
- * @param [string]  $type   Data type to be parsed (defaults to json)
- * @return [string|array]   Returns the request body in the desired $type format
+ * [req description]
+ * @param  array  $req      The request body data
+ * @param  string $type     What format to parse the request body as
+ * @return mixed            Returns the request body data depending on the $type argument
  */
 function req($req=[], $type='json') {
     $type = strToLower($type);
@@ -80,9 +81,9 @@ function req($req=[], $type='json') {
 
 
 /**
- * [res_json description]
- * @param  [type] $data [description]
- * @return [type]       [description]
+ * Defines a JSON response object
+ * @param  mixed    $data   Array or Object data to submit
+ * @return null
  */
 function res_json($data) {
     echo json_encode($data, 1);
@@ -91,8 +92,8 @@ function res_json($data) {
 
 /**
  * Alias for http_response_code
- * @param  [type] $statusCode [description]
- * @return [type]             [description]
+ * @param  integer  $statusCode     The status code to define in the response header
+ * @return null
  */
 function status_code($statusCode) {
     http_response_code($statusCode);
@@ -100,9 +101,10 @@ function status_code($statusCode) {
 
 
 /**
- * [error_page_handler description]
- * @param  [type] $errCode [description]
- * @return [type]          [description]
+ * Render the error page on GET requests
+ * @param  integer  $errCode    An HTML response code
+ * @param  string   $msg        The message to return to the user/log
+ * @return null
  */
 function error_page_handler($errCode, $errMsg='') {
     // TODO: setup logger to capture error information
@@ -112,9 +114,10 @@ function error_page_handler($errCode, $errMsg='') {
 
 
 /**
- * [post_error description]
- * @param  [type] $msg [description]
- * @return [type]      [description]
+ * Defines a POST error response message and logs the error to system
+ * @param  integer  $errCode    An HTML response code
+ * @param  string   $msg        The message to return to the user/log
+ * @return null
  */
 function post_error($errCode, $msg) {
     status_code($errCode);
@@ -133,7 +136,7 @@ function post_error($errCode, $msg) {
 
 /**
  * Issue a redirect to the login page
- * @return [type] [description]
+ * @return string   The target route to redirect the user to
  */
 function redirect($route) {
     header('location:'.$route);
@@ -146,24 +149,26 @@ function redirect($route) {
 
 
 /**
- * Middleware: checks if user session data is established and redirects to /login if not
- * @return boolean [description]
+ * Checks if the user is currently logged in or not
+ * @param  boolean  $redirect   If true, redirects user to login screen
+ * @return boolean              True if user session is valid, false otherwise
  */
-function isLoggedIn() {
+function isLoggedIn($redirect=true) {
     // check if user session has been initialized
     if (!isset($_SESSION['user'])) {
         // return false;
-        redirect(ROUTE_GET_LOGIN);
-        return;
+        $redirect ? redirect(ROUTE_GET_LOGIN) : null;
+        return false;
     }
 
+    // get the user data form our session
     $user = $_SESSION['user'];
 
     // check if user session is expired
-    if ($user['cache'] + minutes(60) < now()) {
+    if ($user['cache'] + minutes(getenv('APP_USER_CACHE_DURATION')) < now()) {
         // return false;
-        redirect(ROUTE_GET_LOGIN);
-        return;
+        $redirect ? redirect(ROUTE_GET_LOGIN) : null;
+        return false;
     }
 
     // update user session cache timer
@@ -171,21 +176,29 @@ function isLoggedIn() {
 
     // return updated user session data
     $_SESSION['user'] = $user;
+
+    // user session data is valid
+    return true;
 }
 
 
 /**
- * [getUser description]
- * @param  [type] $email [description]
- * @return [obj]        [description]
+ * Get the user data from our lsit of users by email
+ * @param  string   $email  The target user email
+ * @return mixed            Returns user data (as array) if present, false if not
  */
 function getUser($email) {
+
+    // clean up email data
     $email = strToLower(trim($email));
 
+    // get list of users from the system
     $users = getUsers();
 
+    // init our return data var
     $userData = false;
 
+    // iterate over users list and
     foreach ($users as $user) {
         if ($user['email'] === $email) {
             $userDate = $user;
@@ -193,50 +206,99 @@ function getUser($email) {
         }
     }
 
+    // return the user data
     return $userDate;
 }
 
 
+/**
+ * Finds and updates user record data by email
+ * @param  string   $email  Email of the target user to be updated
+ * @param  array    $model  Associative array mapping the values to be updated
+ * @return null
+ */
+function updateUser($email, $model) {
 
+    // clean up email data
+    $email = strToLower(trim($email));
+
+    // get the current list of cached users
+    $users = getUsers();
+
+    // iterate over each user record to find target user and update its record data
+    for ($i = count($users)-1; $i > 0; $i--) {
+        $user = $users[$i];
+
+        if ($user['email'] === $email) {
+            $user = array_replace_recursive([], $user, $model);
+
+            $users[$i] = $user;
+            break;
+        }
+
+    }
+
+    // update users cache file on disk
+    file_put_contents(USERS_CACHE, json_encode($users));
+
+}
+
+
+/**
+ * Gets the currently cached set of user data
+ * @return Array The list of cached user data
+ */
 function getUsers() {
-    $usersCache = CACHE_DIR . '/users.json';
 
+    // define users cache file location
+    $usersCache = USERS_CACHE;
+
+    // if users cache file does not exist, create it
     if (!is_file($usersCache)) {
         cacheUsers();
     }
 
+    // get users cache file contents
     $users = file_get_contents($usersCache);
+
+    // decode JSON data and return list of users
     return json_decode($users, true);
 }
 
 
 
 /**
- * [cacheUsers description]
- * @return [type] [description]
+ * Gets list of user profile data and caches them in a user JSON file/cache
+ * @return null
  */
 function cacheUsers() {
+
+    // get list of user YAML files
     $users  = glob(USERS_DIR . '/*.yaml');
+
+    // init user data list
     $userDB = [];
 
+    // iterate over user YAML data and add each one to the user cache
     foreach ($users as $userpath) {
         $contents   = file_get_contents($userpath);
         $data       = Yaml::parse($contents);
         array_push($userDB, $data);
     }
 
-    Debug(json_encode($userDB, true));
+    Info('Users cache created.');
 
-    $userCache = CACHE_DIR . '/users.json';
+    // write users cache to disk
+    file_put_contents(USERS_CACHE, json_encode($userDB, true));
 
-    file_put_contents($userCache, json_encode($userDB, true));
+    return;
 }
 
 
 /**
  * Detemines if a given password reset hash file exists
- * @param  [type] $hash [description]
- * @return [type]       [description]
+ * @param  string   $hash   Target hashed cache filename string
+ * @return boolean          True if the hash cache file exists; false otherwise
  */
 function hash_exists($hash) {
 
@@ -256,33 +318,8 @@ function hash_exists($hash) {
         return false;
     }
 
+    // all else, return true that the cache exists
     return true;
-}
-
-
-
-function updateUser($email, $model) {
-
-    $email = strToLower(trim($email));
-
-    $users = getUsers();
-
-    for ($i = count($users)-1; $i > 0; $i--) {
-        $user = $users[$i];
-
-        if ($user['email'] === $email) {
-            $user = array_replace_recursive([], $user, $model);
-
-            $users[$i] = $user;
-            break;
-        }
-
-    }
-
-    $userCache = CACHE_DIR . '/users.json';
-
-    file_put_contents($userCache, json_encode($users));
-
 }
 
 
@@ -310,32 +347,69 @@ function readJSON($filepath, $assoc=true) {
 
 
 /**
- * [Logger description]
- * @param [type] $type [description]
- * @param [type] $msg  [description]
+ * Logs messaging to app logs directory
+ * @param string    $type   The type of log we wish to log
+ * @param string    $msg    The log message data to be logged
  */
 function Logger($type, $msg) {
+
+    // if we're not debugging the app, bug out
+    if (!APP_DEBUG && strToLower($type) === 'debug') {
+        return;
+    }
+
+    // define our logger to run on a daily rotation
     $logPath = LOGS_DIR . '/' . date('Y-m-d') . '.log';
 
+    // define the current date/time
     $date   = date('Y-m-d::H:i:sO');
-    $type   = strToUpper($type);
-    $caller = substr(debug_backtrace()[0]['file'], strlen(ROOT_DIR) + 1);
-    $lineNo = debug_backtrace()[0]['line'];
 
+    // define the log type
+    $type   = strToUpper($type);
+
+    // get the current stacktrace
+    $stacktrace = debug_backtrace()[0];
+
+    // TODO: fix this so we can actually get the right calling file
+    // get the calling file
+    $caller = substr($stacktrace['file'], strlen(ROOT_DIR) + 1);
+
+    // get the line number the call was made from
+    $lineNo = $stacktrace['line'];
+
+    // define the log entry
     $data   = "[${date}] [${type}] [${caller}:${lineNo}] ${msg}" . EOL;
 
+    // append our log message to the end of our daily log file
     file_put_contents($logPath, $data, FILE_APPEND);
 }
 
 
+/**
+ * Logs a DEBUG message to the system; Only works if env APP_DEBUG is configured
+ * @param string    $msg    The message we wish to log
+ */
 function Debug($msg) { Logger('debug', $msg); }
-function Info($msg) { Logger('info', $msg); }
-function Error($msg) { Logger('error', $msg); }
 
 
 /**
- * [provisionDirs description]
- * @return [type] [description]
+ * Logs an INFO message to the system
+ * @param string    $msg    The message we wish to log
+ */
+function Info($msg) { Logger('info', $msg); }
+
+
+/**
+ * Logs an ERROE message to the system
+ * @param string    $msg    The message we wish to log
+ */
+function Error($msg) { Logger('error', $msg); }
+
+
+
+/**
+ * Initializes file system for unwatched directories
+ * @return null
  */
 function provisionDirs() {
     $fs = new Filesystem();

@@ -29,10 +29,7 @@ return function() {
 
     $_SESSION['user'] = $user;
 
-    Debug(json_encode('------------------'));
-    Debug(json_encode($req));
-    Debug(json_encode($user));
-
+    // if password is not correct
     if (!password_verify($req['userpassword'], $_SESSION['user']['hash'])) {
         $res['success'] = false;
         $res['message'] = 'Password failed.';
