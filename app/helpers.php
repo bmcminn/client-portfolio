@@ -154,6 +154,7 @@ function redirect($route) {
  * @return boolean              True if user session is valid, false otherwise
  */
 function isLoggedIn($redirect=true) {
+
     // check if user session has been initialized
     if (!isset($_SESSION['user'])) {
         // return false;
@@ -164,8 +165,11 @@ function isLoggedIn($redirect=true) {
     // get the user data form our session
     $user = $_SESSION['user'];
 
+    // define cache buffer
+    $cacheBuffer = $user['cache'] + minutes(getenv('APP_USER_CACHE_DURATION'));
+
     // check if user session is expired
-    if ($user['cache'] + minutes(getenv('APP_USER_CACHE_DURATION')) < now()) {
+    if ($cacheBuffer < now()) {
         // return false;
         $redirect ? redirect(ROUTE_GET_LOGIN) : null;
         return false;

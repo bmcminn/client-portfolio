@@ -4,6 +4,8 @@ return function() {
     isLoggedIn();
 
     $req = req();
-    echo 'user dashboard here';
+
+    require(VIEWS_DIR . '/app.twig');
+
     // print_r($_SERVER);
 };

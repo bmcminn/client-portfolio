@@ -24,9 +24,10 @@ return function() {
         return;
     }
 
-
+    // init user timeout cache
     $user['cache'] = now();
 
+    // cache the $user data in a session
     $_SESSION['user'] = $user;
 
     // if password is not correct
