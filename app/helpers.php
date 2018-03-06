@@ -205,13 +205,13 @@ function getUser($email) {
     // iterate over users list and
     foreach ($users as $user) {
         if ($user['email'] === $email) {
-            $userDate = $user;
+            $userData = $user;
             break;
         }
     }
 
     // return the user data
-    return $userDate;
+    return $userData;
 }
 
 
@@ -229,22 +229,26 @@ function updateUser($email, $model) {
     // get the current list of cached users
     $users = getUsers();
 
+    $userUpdated = false;
+
     // iterate over each user record to find target user and update its record data
-    for ($i = count($users)-1; $i > 0; $i--) {
+    for ($i = count($users)-1; $i >= 0; $i--) {
         $user = $users[$i];
 
         if ($user['email'] === $email) {
-            $user = array_replace_recursive([], $user, $model);
-
-            $users[$i] = $user;
+            $users[$i] = array_replace_recursive($user, $model);
+            $userUpdated = true;
             break;
         }
+    }
 
+    if (!$userUpdated) {
+        Debug('[USER UPDATE FAILED] ' . $email . ' -- ' . json_encode($model));
+        $users[] = $model;
     }
 
     // update users cache file on disk
-    file_put_contents(USERS_CACHE, json_encode($users));
-
+    file_put_contents(USERS_CACHE, json_encode($users, JSON_PRETTY_PRINT));
 }
 
 
@@ -254,16 +258,13 @@ function updateUser($email, $model) {
  */
 function getUsers() {
 
-    // define users cache file location
-    $usersCache = USERS_CACHE;
-
     // if users cache file does not exist, create it
-    if (!is_file($usersCache)) {
+    if (!is_file(USERS_CACHE)) {
         cacheUsers();
     }
 
     // get users cache file contents
-    $users = file_get_contents($usersCache);
+    $users = file_get_contents(USERS_CACHE);
 
     // decode JSON data and return list of users
     return json_decode($users, true);
@@ -277,23 +278,39 @@ function getUsers() {
  */
 function cacheUsers() {
 
+    if (!file_exists(USERS_CACHE)) {
+        $data = json_encode([]);
+        file_put_contents(USERS_CACHE, $data);
+    }
+
     // get list of user YAML files
     $users  = glob(USERS_DIR . '/*.yaml');
 
-    // init user data list
-    $userDB = [];
+    Debug(json_encode($users));
+
+    // check that $users exist
+    if (count($users) === 0) {
+        redirect(ROUTE_GET_REGISTER);
+        return;
+    }
 
     // iterate over user YAML data and add each one to the user cache
     foreach ($users as $userpath) {
         $contents   = file_get_contents($userpath);
         $data       = Yaml::parse($contents);
-        array_push($userDB, $data);
+
+        updateUser($data['email'], $data);
+        print_r($data);
+
     }
+
+
+    print_r($users);
 
     Info('Users cache created.');
 
     // write users cache to disk
-    file_put_contents(USERS_CACHE, json_encode($userDB, true));
+    // file_put_contents(USERS_CACHE, json_encode($userDB, true));
 
     return;
 }

@@ -30,7 +30,15 @@ define('ROUTE_POST_LOGOUT',             '/auth/logout');
 define('ROUTE_GET_RESET_PASSWORD',      '/reset/password');
 define('ROUTE_POST_RESET_PASSWORD',     '/reset/password');
 
+define('ROUTE_GET_REGISTER',            '/user/register');
+define('ROUTE_POST_REGISTER',           '/user/register');
+
+define('ROUTE_UPDATE_USER_CACHE',       '/reset/usercache');
+
 define('ROUTE_GET_DASHBOARD',           '/dashboard');
+
+
+define('API_GET_USER',                '/api/get/user');
 
 
 // init the user session
@@ -78,20 +86,56 @@ provisionDirs();
 // define our route dispatcher
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
-    // Homepage route
+    // HOMEPAGE
     $r->addRoute('GET',     ROUTE_GET_HOMEPAGE,         require('routes/get-homepage.php'));
 
-    // User login routes
+    // USER LOGIN
     $r->addRoute('GET',     ROUTE_GET_LOGIN,            require('routes/get-login.php'));
     $r->addRoute('POST',    ROUTE_POST_LOGIN,           require('routes/post-login.php'));
+
+    // USER LOGOUT
     $r->addRoute('GET',     ROUTE_GET_LOGOUT,           require('routes/get-logout.php'));
     // $r->addRoute('POST',    ROUTE_POST_LOGOUT,          require('routes/post-logout.php'));
+
+
+    $r->addRoute('GET',     ROUTE_UPDATE_USER_CACHE,    require('routes/update-user-cache.php'));
+
+    // USER REGISTRATION
+    $r->addRoute('GET',     ROUTE_GET_REGISTER,         require('routes/get-register.php'));
+    // $r->addRoute('POST',    ROUTE_POST_REGISTER,        require('routes/post-register.php'));
 
     // Reset password routes
     $r->addRoute('GET',     ROUTE_GET_RESET_PASSWORD . '[/{hash}]', require('routes/get-reset-password.php'));
     $r->addRoute('POST',    ROUTE_POST_RESET_PASSWORD,              require('routes/post-reset-password.php'));
 
     $r->addRoute('GET',     ROUTE_GET_DASHBOARD,                    require('routes/get-dashboard.php'));
+
+
+    $r->addRoute('GET', API_GET_USER, function() {
+        $res = [];
+        $res['success'] = true;
+
+        if (!isLoggedIn(false)) {
+            $res['success'] = false;
+            status_code(400);
+            res_json($res);
+            return;
+        }
+        $user = $_SESSION['user'];
+
+        $userData = [
+            'email'     => $user['email']
+        ,   'fullname'  => $user['fullname']
+        ,   'phone'     => $user['phone']
+        ,   'type'      => $user['type']
+        ];
+
+        $res['user'] = $userData;
+
+        res_json($res);
+        return;
+
+    });
 
 });
 

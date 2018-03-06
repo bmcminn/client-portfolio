@@ -28,24 +28,6 @@
             .find('input, select, textarea')
             .after(`<small class="form-error-msg ${hiddenClass}"></small>`);
 
-        // form.alertBox = $form.find('.alert');
-
-        // form.alertBox.alert = function(status, msg) {
-        //     let $this = $(this);
-        //     $this
-        //         .text(msg)
-        //         .attr('class', 'alert alert-' + status)
-        //         ;
-        // };
-
-        // form.alertBox.success = function(msg) {
-        //     this.alert('success', msg);
-        // };
-
-        // form.alertBox.fail = function(msg) {
-        //     this.alert('danger', msg);
-        // };
-
     });
 
 
@@ -72,6 +54,8 @@
         // get the parent form element
         let $form = $submit.parents('form');
 
+        formStatusReset($form);
+
         let errors = false;
         let loginPostData = {};
 
@@ -86,10 +70,6 @@
             $submit.enable();
             return;
         }
-
-        // reset any possible new password fields
-        window.newPassword = null;
-        window.newPasswordConfirm = null;
 
         // serialize each form input
         $form.find('input, select, textarea')
@@ -148,6 +128,7 @@
     }
 
 
+
     /**
      * Validates the given input data based on the html validation attributes
      * @param  {el}     $input  The target form input to be validated
@@ -167,6 +148,8 @@
                 return formError($input, 'This field is required.');
             }
         }
+
+
 
         // determine the input type and validate against that
         switch ($input.attr('type').toLowerCase()) {
@@ -197,14 +180,11 @@
 
             // if we have multiple password fields, make sure they match, cuz it's probably a password confirmation
             case 'password':
-                if (window.newPassword) {
-                    window.newPasswordConfirm = $input.val();
-                    if ($input.val() !== window.newPassword) {
-                        return formError($input, 'Passwords must match.');
-                    }
-                }
+                return inputMatches($input)
+                    ? true
+                    : formError($input, 'Passwords must match.')
+                    ;
 
-                window.newPassword = $input.val();
                 break;
             case 'text':
             case 'search':
@@ -281,29 +261,47 @@
     }
 
 
-    // function resetFormMessage($form) {
-    //     $form
-    //         .find('alert')
-    //         .attr('class', 'alert visually-hidden')
-    //         .html('')
-    //         ;
-    // }
 
-    // function formMessage(status, $form, msg) {
-    //     $form
-    //         .find('.alert')
-    //         .attr('class', 'alert alert-' + status)
-    //         .html(msg)
-    //         ;
-    // }
+    function formStatus($form, status, msg) {
+        $form
+            .find('.alert')
+            .attr('class', 'alert alert-' + status)
+            .html(msg)
+            ;
+    }
 
-    // function formSuccess($form, msg) {
-    //     formMessage('success', $form, msg);
-    // }
 
-    // function formError($form, msg) {
-    //     formMessage('error', $form, msg);
-    // }
+    function formFail($form, msg, err) {
+        err = err || '';
+        formStatus($form, 'danger', msg);
+        // console.error('Form submission failed... ', msg, err, err);
+        console.error('Form submission failed... ', err);
+    }
+
+
+    function formSuccess($form, msg) {
+        formStatus($form, 'success', msg);
+    }
+
+
+    function formStatusReset($form) {
+        $form
+            .find('alert')
+            .attr('class', 'alert visually-hidden')
+            .html('')
+            ;
+    }
+
+
+    function inputMatches($input) {
+        if ($input.attr('matches')) {
+            console.log($input, 'needs to match ', $('#' + $input.attr('matches')));
+        }
+
+        return true;
+    }
+
+
 
     window.loginSuccessHandler = function(res, $form) {
         console.log('From submission success', res);
@@ -319,8 +317,8 @@
     }
 
     window.formErrorHandler = function(err, $form) {
-        formError($form, 'Password reset failed... ' + err);
-        console.error('Form submission failed', err);
+        let msg = 'Request failed!';
+        formFail($form, msg, err);
     }
 
 })(jQuery);
