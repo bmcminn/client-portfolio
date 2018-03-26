@@ -15,6 +15,19 @@
     [
         {
             "path": ".",
+            "folder_exclude_patterns": [
+                "node_modules",
+                "vendor",
+                ".phpintel",
+                "bower_components",
+                "app/views/cache",
+                "_data",
+                "__*",
+                ".vagrant",
+                "public/css",
+                "public/js",
+                "clients/index*"
+            ],
             "file_exclude_patterns": [
                 "*.lock",
                 "*.zip",
@@ -30,19 +43,6 @@
                 "after.sh",
                 "artisan",
                 "Vagrantfile"
-            ],
-            "folder_exclude_patterns": [
-                "node_modules",
-                "vendor",
-                ".phpintel",
-                "bower_components",
-                "app/views/cache",
-                "_data",
-                "__*",
-                ".vagrant",
-                "public/css",
-                "public/js",
-                "clients/index*"
             ]
         }
     ]
