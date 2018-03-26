@@ -16,8 +16,20 @@ $api = $app->make(Dingo\Api\Routing\Router::class);
 
 
 $app->get('/', function() {
-    echo "sdfjksld";
+
+    // if (auth()->user()) {
+
+    // }
+
+    return view('login', ['name' => 'James']);;
 });
+
+
+$app->get('/dashboard', [ 'middleware' => 'api.auth', function() {
+
+    return view('app', []);
+
+}]);
 
 
 

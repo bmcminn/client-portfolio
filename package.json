@@ -11,8 +11,7 @@
   "scripts": {
     "serve": "php -S localhost:8000 -t ./public",
     "build": "node .bin/build.js",
-    "new-user": "node .bin/new-user.js",
-    "new-project": "node .bin/new-project.js"
+    "provision": "touch ./database/database.sqlite && php artisan migrate --seed"
   },
   "license": "MIT",
   "keywords": [
