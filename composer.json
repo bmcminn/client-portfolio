@@ -14,7 +14,9 @@
         "nikic/fast-route": "^1.2",
         "symfony/filesystem": "^4.0",
         "vlucas/phpdotenv": "~2.2",
-        "webmozart/path-util": "^2.3"
+        "webmozart/path-util": "^2.3",
+        "proshore/entrust-lumen": "^1.9",
+        "laravelista/lumen-vendor-publish": "^2.1"
     },
     "require-dev": {
         "flipbox/lumen-generator": "^5.4",
