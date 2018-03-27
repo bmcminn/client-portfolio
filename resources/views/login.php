@@ -1,29 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
     <title>Document</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 </head>
 <body>
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
 
-    <form method="post" action="/auth/login">
+    <form class="login-form card" method="post" action="/auth/login">
+
+        <h1 class="form-group">
+            Client Login
+        </h1>
+
         <div class="form-group">
             <label for="useremail">Email</label>
-            <input type="email" name="useremail" id="useremail">
+            <input type="email" name="useremail" id="useremail" autocomplete="email">
         </div>
 
         <div class="form-group">
             <label for="userpassword">Password</label>
-            <input type="password" name="userpassword" id="userpassword">
+            <input type="password" name="userpassword" id="userpassword" autocomplete="current-password">
         </div>
 
-        <div class="form-group">
+        <div class="form-group text-center">
             <button class="btn btn-primary" type="submit">Login</button>
             <a class="btn btn-link" href="/forgot/password">Forgot password?</a>
         </div>
     </form>
 
+    <script src="/js/helpers.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 </html>
