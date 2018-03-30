@@ -22,6 +22,7 @@ class UsersController extends Controller {
     public function authenticate(Request $request) {
 
         Log::info("hiiidsfoiasjdfisa");
+
         $this->validate($request, [
             'email'     => 'required',
             'password'  => 'required'

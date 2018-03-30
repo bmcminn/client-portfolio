@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Log;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
@@ -11,8 +13,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exception\HttpResponseException;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
     /**
      * Handle a login request to the application.
      *
@@ -20,14 +21,18 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function postLogin(Request $request)
-    {
+    public function postLogin(Request $request) {
+
+        Log::debug('[----------------------------------------] ');
+        Log::debug('[AuthController@postLogin()] ');
+
         try {
             $this->validate($request, [
                 'email' => 'required|email|max:255',
                 'password' => 'required',
             ]);
         } catch (ValidationException $e) {
+            Log::error($e->getResponse());
             return $e->getResponse();
         }
 
@@ -43,6 +48,7 @@ class AuthController extends Controller
             return $this->onJwtGenerationError();
         }
 
+
         // All good so return the token
         return $this->onAuthorized($token);
     }
@@ -52,8 +58,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    protected function onUnauthorized()
-    {
+    protected function onUnauthorized() {
         return new JsonResponse([
             'message' => 'invalid_credentials'
         ], Response::HTTP_UNAUTHORIZED);
@@ -64,8 +69,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    protected function onJwtGenerationError()
-    {
+    protected function onJwtGenerationError() {
         return new JsonResponse([
             'message' => 'could_not_create_token'
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -76,8 +80,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    protected function onAuthorized($token)
-    {
+    protected function onAuthorized($token) {
         return new JsonResponse([
             'message' => 'token_generated',
             'data' => [
@@ -93,8 +96,7 @@ class AuthController extends Controller
      *
      * @return array
      */
-    protected function getCredentials(Request $request)
-    {
+    protected function getCredentials(Request $request) {
         return $request->only('email', 'password');
     }
 
@@ -103,8 +105,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function deleteInvalidate()
-    {
+    public function deleteInvalidate() {
         $token = JWTAuth::parseToken();
 
         $token->invalidate();
@@ -117,8 +118,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function patchRefresh()
-    {
+    public function patchRefresh() {
         $token = JWTAuth::parseToken();
 
         $newToken = $token->refresh();
@@ -136,8 +136,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getUser()
-    {
+    public function getUser() {
         return new JsonResponse([
             'message' => 'authenticated_user',
             'data' => JWTAuth::parseToken()->authenticate()

@@ -25,6 +25,8 @@ $link-color     = $blue
 
 $border-radius  = 3px
 
+$margin-block   = 1rem 0
+
 
 // Responsive breakpoint variables
 $bp-mobile      = 320px
@@ -37,197 +39,12 @@ $bp-desktop     = 1200px
 
 
 
-// ---------------------------------------------------------------------------
-//  CSS Reset
-// ---------------------------------------------------------------------------
+@import "_reset"
+@import "_layout"
+@import "_forms"
+@import "_buttons"
 
-/*! minireset.css v0.0.3 | MIT License | github.com/jgthms/minireset.css */
-html, body,
-p, ol, ul, li,
-dl, dt, dd,
-blockquote, figure, fieldset, legend,
-textarea, pre, iframe,
-hr, h1, h2, h3, h4, h5, h6
-    margin: 0
-    padding: 0
+@import "_components"
 
-h1, h2, h3
-    font-weight: bolder
+@import "_helpers"
 
-h4, h5, h6
-    font-size: 100%
-    font-weight: normal
-
-h1
-    font-size: 2em
-
-h2
-    font-size: 1.6em
-
-h3
-    font-size: 1.4em
-
-
-ul
-    list-style: none
-
-button, input, select, textarea
-    margin: 0
-
-html
-    box-sizing: border-box
-    font-size: 100%
-
-*, *:before, *:after
-    box-sizing: inherit
-    font-size: inherit
-
-img, embed, iframe, object, audio, video
-    height: auto
-    max-width: 100%
-
-iframe
-    border: 0
-
-table
-    border-collapse: collapse
-    border-spacing: 0
-
-td, th
-    padding: 0
-    text-align: left
-
-
-
-
-// ===========================================================================
-//  Base Layout styles
-// ===========================================================================
-
-body
-    font-family: sans-serif
-    min-height: 100%
-
-
-.container
-    max-width: $bp-desktop
-
-
-// ===========================================================================
-//  Form styles
-// ===========================================================================
-
-form
-    padding: 1rem
-
-.form-group
-    display: block
-    margin: 1rem 0
-
-
-input
-    appearance: none
-    border-radius: $border-radius
-    border: 1px solid $border-color
-    display: inline-block
-    padding: 0.5rem
-    width: 100%
-
-label
-    display: inline-block
-    margin: 0 0 0.5rem
-
-
-
-
-// ===========================================================================
-//  Button styles
-// ===========================================================================
-
-.btn
-    appearance: none
-    background-color: $border-color
-    border-radius: $border-radius
-    border: 1px solid transparent
-    outline: 0
-    padding: 0.5rem 0.7rem
-    transition: all ease 0.3s
-
-    html.no-touch &:hover
-        cursor: pointer
-
-_btn($NAME, $COLOR, $TEXT_OVERRIDE=$white)
-
-    .btn-{$NAME}
-        // text-shadow: 0 0 1px rgba(0, 0, 0, 0.6)
-        background-color: $COLOR
-        border-color: $COLOR
-        color: $TEXT_OVERRIDE
-
-    .btn-{$NAME}-outline
-        background-color: transparent
-        border-color: initial
-        color: $COLOR
-
-    html.no-touch
-        .btn-{$NAME}:hover,
-        .btn-{$NAME}[aria-pressed="true"]
-            background-color: darken($COLOR, $DARKEN_COLORS)
-
-        .btn-{$NAME}-outline:hover,
-        .btn-{$NAME}-outline[aria-pressed="true"]
-            background-color: darken($COLOR, $DARKEN_COLORS)
-            border-color: darken($COLOR, $DARKEN_COLORS)
-            color: $TEXT_OVERRIDE
-
-
-
-_btn('primary', $link-color, $white)
-
-
-
-a:link,
-.btn-link,
-.link
-    color: $link-color
-    background-color: transparent
-
-    html.no-touch &:hover
-        color: darken($link-color, 50%)
-
-
-
-
-
-.card
-    border: 1px solid $border-color
-    margin: 1rem 0
-    padding: 1rem
-    border-radius: $border-radius
-
-
-
-
-// ===========================================================================
-//  Helper styles
-// ===========================================================================
-
-.text-center
-    text-align: center
-
-.text-left
-    text-align: left
-
-.text-right
-    text-align: right
-
-
-
-.login-form
-    width: 100%
-    max-width: 320px
-    margin: auto
-    position: absolute
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);

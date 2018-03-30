@@ -36,3 +36,33 @@ function watchForHover() {
 }
 
 watchForHover();
+
+
+
+
+window.apiRoutes = {
+    'api.index': {
+        route:  '/api',
+        method: 'GET'
+    }
+,   'api.auth.login': {
+        route:  '/api/auth/login',
+        method: 'POST'
+    }
+,   'api.auth.invalidate': {
+        route:  '/api/auth/invalidate',
+        method: 'DELETE'
+    }
+,   'api.projects': {
+        route:  '/api/projects',
+        method: 'GET'
+    }
+,   'api.auth.user': {
+        route:  '/api/auth/user',
+        method: 'GET'
+    }
+,   'api.auth.refresh': {
+        route:  '/api/auth/refresh',
+        method: 'PATCH'
+    }
+};

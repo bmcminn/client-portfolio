@@ -17,30 +17,36 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
 
-    <form class="login-form card" method="post" action="/auth/login">
+    <form class="login-form" method="post" action="/auth/login">
+        <div class="card">
 
-        <h1 class="form-group">
-            Client Login
-        </h1>
+            <h1 class="form-group text-center">
+                Client Login
+            </h1>
 
-        <div class="form-group">
-            <label for="useremail">Email</label>
-            <input type="email" name="useremail" id="useremail" autocomplete="email">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" autocomplete="current-password">
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn btn-primary btn-block" type="submit">Login</button>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="userpassword">Password</label>
-            <input type="password" name="userpassword" id="userpassword" autocomplete="current-password">
-        </div>
-
-        <div class="form-group text-center">
-            <button class="btn btn-primary" type="submit">Login</button>
+        <div class="form-group px-1">
             <a class="btn btn-link" href="/forgot/password">Forgot password?</a>
         </div>
     </form>
 
     <script src="/js/helpers.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="/js/login.js"></script>
 </body>
 </html>

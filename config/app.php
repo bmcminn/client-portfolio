@@ -28,6 +28,13 @@ return [
     |
     */
     'locale' => env('APP_LOCALE', 'en'),
+
+
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
+
+
+    'log_max_files' => env('APP_LOG_DAYS', 7),
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
