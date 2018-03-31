@@ -24,9 +24,6 @@
                 params[el.name] = el.value;
             });
 
-
-        console.debug(params);
-
         axios.post(loginRoute, params)
             .then(success)
             .catch(errs)
@@ -37,11 +34,16 @@
 
 
     function success(res) {
+        console.debug('-----------------------------------');
+        console.debug('Login form success()');
         console.log(res);
+
     }
 
 
     function errs(err) {
+        console.debug('-----------------------------------');
+        console.debug('Login form errs()');
         console.error(err);
     }
 
