@@ -3,7 +3,7 @@
         // @sauce: https://superuser.com/questions/452189/how-can-i-filter-a-file-for-lines-containing-a-string-in-sublime-text-2
         {
             "label":            "TODOS",
-            "search":           "// (TODO|DANGER|WARN)",
+            "search":           "// (TODO|DANGER|WARN|REPLACE)",
             "regex":            true,
             "case_sensitive":   false,
             "whole_word":       false,
@@ -38,6 +38,10 @@
                 "*.pdf",
                 "*.doc",
                 "*.docx",
+                "*.skp",
+                "*.ai",
+                "*.ps",
+                "*.pdf",
                 "license",
                 "aliases",
                 "after.sh",

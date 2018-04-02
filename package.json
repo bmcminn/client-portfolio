@@ -1,29 +1,8 @@
 {
-  "name": "client-portfolio",
-  "version": "1.0.0",
-  "description": "App for managing and distributing client deliverables.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bmcminn/client-portfolio"
-  },
   "author": "Brandtley McMinn <labs@gbox.name>",
-  "scripts": {
-    "serve": "php -S localhost:8000 -t ./public",
-    "build": "node .bin/build.js",
-    "provision": "touch ./database/database.sqlite && php artisan migrate --seed"
-  },
-  "license": "MIT",
-  "keywords": [
-    "photography",
-    "client",
-    "previews",
-    "portfolio"
-  ],
   "bugs": {
     "url": "https://github.com/bmcminn/client-portfolio/issues"
   },
-  "homepage": "https://github.com/bmcminn/client-portfolio",
   "dependencies": {
     "chalk": "^2.3.0",
     "chokidar": "^2.0.0",
@@ -34,6 +13,30 @@
     "leven": "^2.1.0",
     "lodash": "^4.17.4",
     "stylus": "^0.54.5",
-    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"
-  }
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
+    "yargs": "^11.0.0"
+  },
+  "description": "App for managing and distributing client deliverables.",
+  "homepage": "https://github.com/bmcminn/client-portfolio",
+  "keywords": [
+    "photography",
+    "client",
+    "previews",
+    "portfolio"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "client-portfolio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmcminn/client-portfolio"
+  },
+  "scripts": {
+    "build": "node .bin/build.js",
+    "build-prod": "node .bin/build.js --compress",
+    "provision": "touch ./database/database.sqlite && php artisan migrate --seed",
+    "serve": "php -S localhost:8000 -t ./public",
+    "watch": "node .bin/build.js --watch"
+  },
+  "version": "1.0.0"
 }

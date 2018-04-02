@@ -1,5 +1,8 @@
-(function($) {
+// check if user is authenticated
+window.isUserAuthenticated();
 
+
+(function($) {
 
     $(document).on('submit', 'form', formHandler)
 
@@ -12,10 +15,8 @@
 
         let $this = $(e.target);
 
-        let API = window.apiRoutes;
-
-        let loginMethod = API['api.auth.login'].method;
-        let loginRoute = API['api.auth.login'].route;
+        // let loginRoute  = window.appRoute('api.auth.login');
+        let loginRoute = '/auth/login';
 
         let params = {};
 
@@ -24,24 +25,25 @@
                 params[el.name] = el.value;
             });
 
-        axios.post(loginRoute, params)
-            .then(success)
-            .catch(errs)
+        window.api.post(loginRoute, params)
+            .then(loginSuccess)
+            .catch(loginErrs)
             ;
-
     }
 
 
 
-    function success(res) {
+    function loginSuccess(res) {
         console.debug('-----------------------------------');
         console.debug('Login form success()');
         console.log(res);
 
+        sessionStorage.setItem('token', res.data.data.token);
+        window.location.href = '/dashboard';
     }
 
 
-    function errs(err) {
+    function loginErrs(err) {
         console.debug('-----------------------------------');
         console.debug('Login form errs()');
         console.error(err);

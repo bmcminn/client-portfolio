@@ -10,14 +10,20 @@
 
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <?php if (env('APP_DEBUG')) : ?>
+        <script src="/js/modernizr.min.js"></script>
+    <?php else : ?>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <?php endif; ?>
+
+
 </head>
 <body>
     <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
 
-    <form class="login-form" method="post" action="/auth/login">
+    <form class="login-form" method="post" action="/api/auth/login">
         <div class="card">
 
             <h1 class="form-group text-center">
@@ -44,14 +50,29 @@
         </div>
     </form>
 
+
+    <?php if (env('APP_DEBUG')) : ?>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/axios.min.js"></script>
+    <?php else : ?>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <?php endif; ?>
+
     <script src="/js/helpers.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="/js/login.js"></script>
 
 
-    <script defer async src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-    <script defer async src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
-    <script defer async src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+    <?php if (env('APP_DEBUG')) : ?>
+        <script defer async src="/js/vue.min.js"></script>
+        <script defer async src="/js/vuex.min.js"></script>
+        <script defer async src="/js/vue-router.min.js"></script>
+    <?php else : ?>
+        <script defer async src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+        <script defer async src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js"></script>
+        <script defer async src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+    <?php endif; ?>
+
+
 </body>
 </html>

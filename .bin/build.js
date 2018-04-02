@@ -8,11 +8,31 @@ const _         = require('lodash');
 const Stylus    = require('stylus');
 const CSSO      = require('csso');
 const chalk     = require('chalk');
-const uglify    = require('uglify-js');
+const Uglify    = require('uglify-js');
+const yargs     = require('yargs');
 
 var Log     = console.log.bind(console);
 var Debug   = console.debug.bind(console);
 var Error   = console.error.bind(console);
+
+
+
+const argv = yargs
+    // .usage('$0 <cmd> [args]')
+    .command('watch', 'Start a watch process.', {
+        alias: 'w'
+    })
+    .command('compress', 'Start a watch process.', {
+        alias: 'c'
+    })
+    .boolean('watch')
+    .boolean('compress')
+    .help()
+    .argv
+    ;
+
+
+console.log(argv);
 
 
 let ASSETS_DIR  = path.join(process.cwd(), 'resources');
@@ -22,7 +42,6 @@ let JS_DIR      = path.join(ASSETS_DIR, 'js');
 let DIST_DIR    = path.join(process.cwd(), 'public');
 let CSS_DIST    = path.join(DIST_DIR, 'css');
 let JS_DIST     = path.join(DIST_DIR, 'js');
-
 
 
 let UglifyOptions = {
@@ -37,28 +56,31 @@ let UglifyOptions = {
 
 compileStyles('get-this-party-started');
 compileJS('/');
+migrateAssets();
 
 
-let watchFiles = [].concat(
-    fs.expand({ filter: 'isFile'}, path.join(ASSETS_DIR, '/**/*.styl'))
-,   fs.expand({ filter: 'isFile'}, path.join(ASSETS_DIR, '/**/*.js'))
-);
+if (argv.watch) {
 
+    let watchFiles = [].concat(
+        fs.expand({ filter: 'isFile'}, path.join(ASSETS_DIR, '/**/*.styl'))
+    ,   fs.expand({ filter: 'isFile'}, path.join(ASSETS_DIR, '/**/*.js'))
+    );
 
-Log(watchFiles);
+    // Log(watchFiles);
 
-chokidar
-    .watch(watchFiles, {ignored: /(^|[\/\\])\../})
-    .on('any', (e, filepath) => {
-        Log(filepath);
-
-    })
-    .on('change', (filepath, filemeta) => {
-        // skip no stylus files
-        if (filepath.match(/\.styl$/)) { compileStyles(); }
-        if (filepath.match(/\.js$/)) { compileJS(filepath); }
-    })
-    ;
+    chokidar
+        .watch(watchFiles, {ignored: /(^|[\/\\])\../})
+        .on('any', (e, filepath) => {
+            Log(filepath);
+        })
+        .on('change', (filepath, filemeta) => {
+            // skip no stylus files
+            if (filepath.match(/\.styl$/)) { compileStyles(); }
+            if (filepath.match(/\.js$/)) { compileJS(filepath); }
+            // if (filepath.match(/))
+        })
+        ;
+}
 
 
 function compileStyles() {
@@ -77,7 +99,6 @@ function compileStyles() {
         let newStyle = path.join(CSS_DIST, filename.replace(/\.[\w\d]+/, ''));
 
         let content = fs.read(style);
-
 
         Stylus(content)
             .set('filename',    style)
@@ -136,15 +157,26 @@ function compileJS(filepath) {
         let filename = path.basename(src);
         let dest = path.join(JS_DIST, filename);
 
-        let res = uglify.minify(fs.read(src), UglifyOptions);
+        let res = fs.read(src);
 
-        if (res.error) {
-            Error(chalk.red(`> `, JSON.stringify(res, null, 2)));
-        } else {
+        if (argv.compress) {
+            let min = Uglify.minify(res, UglifyOptions);
 
-            fs.write(dest, res.code);
-            Log(chalk.green(`> Compiled ${filename}`));
+            if (min.error) {
+                Error(chalk.red(`> `, JSON.stringify(min, null, 2)));
+                return;
+            }
+
+            res = min.code;
         }
 
+        fs.write(dest, res);
+        Log(chalk.green(`> Compiled ${filename}`));
     });
+}
+
+
+// TODO: make this process migrate static assets
+function migrateAssets() {
+
 }

@@ -25,11 +25,11 @@ $app->get('/', function() {
 });
 
 
-$app->get('/dashboard', [ 'middleware' => 'api.auth', function() {
+$app->get('/dashboard', function() {
 
     return view('app', []);
 
-}]);
+});
 
 
 

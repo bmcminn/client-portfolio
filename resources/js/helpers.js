@@ -1,3 +1,59 @@
+
+/**
+ * Renders a "header" string in the console to denote when a given process is fired
+ * @param  {string} header Header text to render in console
+ * @return {void}
+ */
+window.logHeader = function(header) {
+    console.log('-----------------------------------');
+    console.log(header);
+}
+
+
+/**
+ * [api description]
+ * @type {[type]}
+ */
+api = axios.create({
+    baseURL: '/api',
+    timeout: 1000,
+    headers: {
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+});
+
+if (sessionStorage.getItem('token')) {
+    window.api = api;
+}
+
+
+
+/**
+ * [isUserAuthenticated description]
+ * @return {void}
+ */
+window.isUserAuthenticated = function() {
+    if (sessionStorage.getItem('token')) {
+        api.get('/auth/user')
+            .then(function(res) {
+                window.logHeader('Check is user session valid');
+                console.log(res);
+                // sessionStorage.setItem('token', res.data.token);
+            })
+            .catch(function(err) {
+                window.logHeader('User session invalid');
+                console.error(err);
+                sessionStorage.clear();
+                window.location.href = window.appRoute('app.login');
+            });
+
+    } else {
+        sessionStorage.clear();
+
+    }
+}
+
+
 /**
  * Triggers hover/touch toggle mixed-touch enabled devices
  * @sauce: https://stackoverflow.com/a/30303898/3708807
@@ -14,7 +70,6 @@ function watchForHover() {
 
         document.documentElement.classList.add('no-touch');
         hasHoverClass = true;
-
     }
 
     function disableHover() {
@@ -28,41 +83,11 @@ function watchForHover() {
         lastTouchTime = new Date();
     }
 
-    document.addEventListener('touchstart', updateLastTouchTime, true);
-    document.addEventListener('touchstart', disableHover, true);
-    document.addEventListener('mousemove', enableHover, true);
+    document.addEventListener('touchstart', updateLastTouchTime,    true);
+    document.addEventListener('touchstart', disableHover,           true);
+    document.addEventListener('mousemove',  enableHover,            true);
 
     enableHover();
 }
 
 watchForHover();
-
-
-
-
-window.apiRoutes = {
-    'api.index': {
-        route:  '/api',
-        method: 'GET'
-    }
-,   'api.auth.login': {
-        route:  '/api/auth/login',
-        method: 'POST'
-    }
-,   'api.auth.invalidate': {
-        route:  '/api/auth/invalidate',
-        method: 'DELETE'
-    }
-,   'api.projects': {
-        route:  '/api/projects',
-        method: 'GET'
-    }
-,   'api.auth.user': {
-        route:  '/api/auth/user',
-        method: 'GET'
-    }
-,   'api.auth.refresh': {
-        route:  '/api/auth/refresh',
-        method: 'PATCH'
-    }
-};
