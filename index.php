@@ -106,6 +106,7 @@ $container['db'] = function ($c) {
 
 
 // load API routes
+require APP_DIR . '/auth.router.php';
 require APP_DIR . '/api.router.php';
 
 // load server side rendered routes
