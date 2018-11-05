@@ -19,6 +19,17 @@
 </head>
 <body>
 
+    <div id="app">
+        <sidenav></sidenav>
+        <topnav></topnav>
+    </div>
+
+
+
+    <template>
+
+    </template>
+
 
 
     <?php if (env('APP_DEBUG')) : ?>
