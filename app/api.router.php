@@ -1,6 +1,5 @@
 <?php
 
-
 $app->get('/api/status', function ($req, $res) {
     return $res->withJson([
         'status' => 'success',
@@ -20,13 +19,3 @@ $app->post('/api/order/submit', function($req, $res) {
 
     return $res->withJson($data);
 })->setName('api.order.submit');
-
-
-
-
-$app->get('/auth', function($req, $res) {
-
-
-
-    return $res->withJson($data);
-})->setName('auth');

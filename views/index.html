@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/resources/css/modern-normalize.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 </head>
 <body>
     <div id="app">
         <router-view></router-view>
-        {{ message }}
     </div>
 
 
@@ -15,11 +16,40 @@
         <div>Home!!!</div>
     </template>
 
+
+    <template id="login">
+        <div>
+            <form class="form-login">
+                <h1 class="mt-0">Client Login</h1>
+                <div class="form-input">
+                    <label for="email">Email Address:</label>
+                    <input id="email" type="email" v-model="email" />
+                </div>
+                <div class="form-input">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" v-model="password" />
+                </div>
+
+                <div class="form-input">
+                    <button class="btn btn-primary"
+                        v-on:click="logUserIn"
+                        v-bind:disabled="isLoggingIn"
+                    >
+                        Login
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </template>
+
+
     <template id="not-found">
         <div>
             Not found...
         </div>
     </template>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
