@@ -25,6 +25,7 @@ define('DS',        DIRECTORY_SEPARATOR);
 // init global directory maps
 define('APP_DIR',       __DIR__ . '/app');
 define('CACHE_DIR',     __DIR__ . '/.cache');
+define('LOGS_DIR',      __DIR__ . '/.cache/logs');
 define('DATA_DIR',      __DIR__ . '/data');
 define('PROJECTS_DIR',  __DIR__ . '/data/projects');
 define('VIEWS_DIR',     __DIR__ . '/views');
@@ -63,6 +64,14 @@ $container['db'] = function ($c) {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $pdo;
+};
+
+
+// Setup Logger service
+$container['loggerService'] = function ($c) {
+    return new \Gbox\Minilog('logName', [
+        'dir' => LOGS_DIR,
+    ]);
 };
 
 

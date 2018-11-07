@@ -13,7 +13,15 @@
 
 
     <template id="home">
+        <user-state></user-state>
+
         <div>Home!!!</div>
+    </template>
+
+    <template id="dashboard">
+        <user-state></user-state>
+
+        <div>Dashboard!!!</div>
     </template>
 
 
@@ -23,11 +31,11 @@
                 <h1 class="mt-0">Client Login</h1>
                 <div class="form-input">
                     <label for="email">Email Address:</label>
-                    <input id="email" type="email" v-model="email" />
+                    <input id="email" type="email" v-model="email" autocomplete="" />
                 </div>
                 <div class="form-input">
                     <label for="password">Password:</label>
-                    <input id="password" type="password" v-model="password" />
+                    <input id="password" type="password" v-model="password"  autocomplete="current-password" />
                 </div>
 
                 <div class="form-input">
@@ -54,6 +62,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js" integrity="sha256-yEB9jUlD51i5kxJZlzgzfR6XmVKI76Nl1WRA1aqIilU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js" integrity="sha256-1QlN0ckC4jlz91DZixPZxTv9vYpcBmS7sK7HA8xFmFA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex-persist"></script>
     <script src="/resources/js/main.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@ $dirs = [
     VIEWS_DIR,
     CACHE_DIR,
     DATA_DIR,
+    LOGS_DIR,
     PROJECTS_DIR,
 ];
 

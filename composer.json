@@ -13,7 +13,8 @@
         "webmozart/path-util": "^2.3",
         "slim/slim": "^3.0",
         "modularr/yaml-front-matter": "^1.0",
-        "slim/twig-view": "^2.4"
+        "slim/twig-view": "^2.4",
+        "gbox/minilog": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
