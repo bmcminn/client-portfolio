@@ -12,15 +12,19 @@ $app->post('/auth/login', function($req, $res) {
     $log->debug($params);
 
 
-
-
     $user = [
         'name'      => 'John Schmidt',
         'id'        => 123456798,
         'email'     => 'jschmidt98@gmail.com',
     ];
 
-    $data = $user;
+    $data = [
+        'user'  => $user,
+        'token' => 'sefjklsefjslefjsklefjkslefjskljfsel',
+    ];
+
+
+    // TODO add some mechanism for generating auth token
 
     return $res->withJson($data);
 

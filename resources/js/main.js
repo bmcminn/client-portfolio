@@ -1,15 +1,12 @@
 
+Vue.config.devtools = true;
+
+
+
+
 // --------------------------------------------------
 //  AXIOS INSTANCES
 // --------------------------------------------------
-
-const API = axios.create({
-    baseURL: '/api',
-    timeout: 1000,
-    headers: {
-        'X-Custom-Header': 'foobar'
-    },
-});
 
 const Auth = axios.create({
     baseURL: '/auth',
@@ -18,6 +15,27 @@ const Auth = axios.create({
 
     },
 });
+
+const API = axios.create({
+    baseURL: '/api',
+    timeout: 1000,
+    headers: {
+    },
+});
+
+// --------------------------------------------------
+//  SET HELPER METHODS
+// --------------------------------------------------
+
+const Helpers = {};
+
+Helpers.setApiAuthToken = function (token) {
+    if (token) {
+        API.defaults.headers.Authorization = 'bearer ' + token;
+    }
+};
+
+Helpers.setApiAuthToken(localStorage.getItem('token'));
 
 
 
@@ -76,7 +94,7 @@ Vue.component('user-state', {
         user() { return this.$store.getters.user },
     },
     created() {
-        if (!this.user) {
+        if (!localStorage.getItem('token')) {
             this.$router.push({ name: 'login' });
             return;
         }
@@ -89,17 +107,29 @@ Vue.component('user-state', {
 
 const NotFoundComponent = {
     template: document.querySelector('template#not-found').innerHTML,
+
+    created() {
+        document.title = 'Page not found...';
+    }
 };
+
+
 
 const Home = {
     template: document.querySelector('template#home').innerHTML,
-
+    created() {
+        document.title = 'Welcome to Pants';
+    }
 };
+
+
 
 const Dashboard = {
     template: document.querySelector('template#dashboard').innerHTML,
 
 };
+
+
 
 const Login = {
     template: document.querySelector('template#login').innerHTML,
@@ -122,6 +152,8 @@ const Login = {
             e.preventDefault();
             e.stopPropagation();
 
+            let self = this;
+
             this.isLoggingIn = true;
 
             console.debug('email   ', this.email);
@@ -135,15 +167,23 @@ const Login = {
                 })
                 .then((res) => {
                     console.debug('user:', res.data);
-                    this.$store.commit('UPDATE_USER', res.data);
-                    this.$router.push({ name: 'home' });
+                    localStorage.setItem('token', res.data.token);
+                    self.$store.commit('UPDATE_USER', res.data.user);
+                    self.$router.push({ name: 'home' });
+                    Helpers.setApiAuthToken(res.data.token);
                 })
                 .catch((err) => {
                     console.error(err);
                 })
                 .then(() => {
-                    this.isLoggingIn = false;
+                    self.isLoggingIn = false;
                 });
+        }
+    },
+    created() {
+        document.title = 'Client Login';
+        if (localStorage.getItem('token')) {
+            this.$router.push({ name: 'home' })
         }
     }
 };
