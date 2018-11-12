@@ -53,6 +53,21 @@ $appConfig = require './app/config.php';
 $app = new \Slim\App(['settings' => $appConfig]);
 
 
+
+// Setup JWT Middleware
+$app->add(new \Tuupola\Middleware\JwtAuthentication([
+    'path'      => '/api',
+    'secure'    => false,
+    'secret'    => env('JWT_SECRET'),
+    // 'rules' => [
+    //     // Ignore OPTIONS requests
+    //     new \Tuupola\Middleware\JwtAuthentication\RequestMethodRule([
+    //         'ignore' => ['OPTIONS']
+    //     ]),
+    // ],
+]));
+
+
 // Fetch DI Container
 $container = $app->getContainer();
 
@@ -115,11 +130,11 @@ $container['loggerService'] = function ($c) {
 
 
 // load API routes
-require APP_DIR . '/auth.router.php';
-require APP_DIR . '/api.router.php';
+require APP_DIR . '/routes/auth.router.php';
+require APP_DIR . '/routes/api.router.php';
 
 // load server side rendered routes
-require APP_DIR . '/client.router.php';
+require APP_DIR . '/routes/client.router.php';
 
 
 

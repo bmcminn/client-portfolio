@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Auth;
+
 
 $app->post('/auth/login', function($req, $res) {
 
@@ -18,9 +20,13 @@ $app->post('/auth/login', function($req, $res) {
         'email'     => 'jschmidt98@gmail.com',
     ];
 
+
+    $token = Auth::generateToken($user);
+
+
     $data = [
         'user'  => $user,
-        'token' => 'sefjklsefjslefjsklefjkslefjskljfsel',
+        'token' => $token,
     ];
 
 

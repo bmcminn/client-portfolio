@@ -2,6 +2,39 @@
 Vue.config.devtools = true;
 
 
+/**
+ * [lsSetItem description]
+ * @param  {[type]} key   [description]
+ * @param  {[type]} value [description]
+ * @return {[type]}       [description]
+ */
+function lsSetItem(key, value) {
+    let typ = typeof(value);
+
+    if (typ === 'object' || typ === 'array') {
+        value = JSON.stringify(value);
+    }
+
+    localStorage.setItem(key, value);
+}
+
+
+/**
+ * [lsGetItem description]
+ * @param  {[type]} key [description]
+ * @return {[type]}     [description]
+ */
+function lsGetItem(key, isStructure) {
+    isStructure = isStructure || null;
+
+    let value = localStorage.getItem(key);
+
+    if (isStructure) {
+        return JSON.parse(value);
+    }
+
+    return value;
+}
 
 
 // --------------------------------------------------
@@ -35,7 +68,7 @@ Helpers.setApiAuthToken = function (token) {
     }
 };
 
-Helpers.setApiAuthToken(localStorage.getItem('token'));
+Helpers.setApiAuthToken(lsGetItem('token'));
 
 
 
@@ -59,17 +92,18 @@ const vuexLocal = new window.VuexPersistence.VuexPersistence({
 
 const store = new Vuex.Store({
     state: {
-        user: null,
+        user:   lsGetItem('user', true),
+        token:  lsGetItem('token'),
     },
 
     mutators: { // synchronous
-
+        UPDATE_USER: function(state, payload) {
+            state.user = payload;
+        },
     },
 
     actions: { // asynchronous
-        UPDATE_USER(state, payload) {
-            state.user = payload;
-        },
+
     },
 
     getters: {
@@ -94,7 +128,7 @@ Vue.component('user-state', {
         user() { return this.$store.getters.user },
     },
     created() {
-        if (!localStorage.getItem('token')) {
+        if (!lsGetItem('token')) {
             this.$router.push({ name: 'login' });
             return;
         }
@@ -168,9 +202,13 @@ const Login = {
                 })
                 .then((res) => {
                     console.debug('user:', res.data);
-                    localStorage.setItem('token', res.data.token);
+
+                    lsSetItem('token',   res.data.token);
+                    lsSetItem('user',    JSON.stringify(res.data.user));
+
                     self.$store.commit('UPDATE_USER', res.data.user);
                     self.$router.push({ name: 'home' });
+
                     Helpers.setApiAuthToken(res.data.token);
                 })
                 .catch((err) => {
@@ -183,7 +221,7 @@ const Login = {
     },
     created() {
         document.title = 'Client Login';
-        if (localStorage.getItem('token')) {
+        if (lsGetItem('token')) {
             this.$router.push({ name: 'home' })
         }
     }

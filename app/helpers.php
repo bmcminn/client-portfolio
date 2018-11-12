@@ -68,4 +68,31 @@ function get_template($twig, $filepath) {
 }
 
 
+/**
+ * Returns N minutes in seconds
+ * @param  int $len Number of minutes
+ * @return int      Time in seconds
+ */
+function minutes($len) {
+    return floor($len * 60);
+}
 
+
+/**
+ * Returns N hours in seconds
+ * @param  int $len Number of hours
+ * @return int      Time in seconds
+ */
+function hours($len) {
+    return $len * minutes(60);
+}
+
+
+/**
+ * Returns N days in seconds
+ * @param  int $len Number of days
+ * @return int      Time in seconds
+ */
+function days($len) {
+    return $len * hours(24);
+}

@@ -1,4 +1,10 @@
 
+# JWT Authorization header access for PHP
+# sauce: https://github.com/tuupola/slim-jwt-auth#install
+RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+
+
 <IfModule mod_fastcgi.c>
   AddHandler fcgid-script .php
 </IfModule>
