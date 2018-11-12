@@ -101,6 +101,7 @@ Vue.component('user-state', {
 
         console.log('user', this.user);
     },
+    template: '<div style="height: 0; width: 0; display: hidden"></div>'
 });
 
 

@@ -1,0 +1,23 @@
+<div>
+    <form class="form-login">
+        <h1 class="mt-0">Client Login</h1>
+        <div class="form-input">
+            <label for="email">Email Address:</label>
+            <input id="email" type="email" v-model="email" autocomplete="" />
+        </div>
+        <div class="form-input">
+            <label for="password">Password:</label>
+            <input id="password" type="password" v-model="password"  autocomplete="current-password" />
+        </div>
+
+        <div class="form-input">
+            <button class="btn btn-primary"
+                v-on:click="logUserIn"
+                v-bind:disabled="isLoggingIn"
+            >
+                Login
+            </button>
+        </div>
+
+    </form>
+</div>
