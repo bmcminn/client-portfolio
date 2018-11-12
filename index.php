@@ -40,9 +40,9 @@ require "./app/helpers.php";
 
 
 // init ENV boolean flags
-define('IS_PRODUCTION', (bool)env('ENV') === 'production');
+define('IS_PROD',       (bool)env('ENV') === 'production');
 define('IS_STAGING',    (bool)env('ENV') === 'staging');
-define('IS_DEV',        (bool)(!IS_STAGING && !IS_PRODUCTION));
+define('IS_DEV',        (bool)(!IS_STAGING && !IS_PROD));
 
 
 // Define App instance config
@@ -78,7 +78,7 @@ $container['loggerService'] = function ($c) {
 // // Register Twig View helper
 // $container['view'] = function ($c) {
 //     $view = new \Slim\Views\Twig(VIEWS_DIR, [
-//         'cache' => IS_PRODUCTION ? CACHE_DIR : false,
+//         'cache' => IS_PROD ? CACHE_DIR : false,
 //     ]);
 
 //     // Instantiate and add Slim specific extension

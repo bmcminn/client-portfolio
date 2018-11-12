@@ -1,7 +1,8 @@
 vendor/
 .env
 .idea
-.env.testing
+.env.*
+!.env.example
 .cache/
 
 .vagrant/*
