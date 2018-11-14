@@ -75,7 +75,27 @@ $scripts = [
 </head>
 <body>
     <div id="app">
-        <router-view></router-view>
+        <header class="page-header">
+            <div class="brand">Logo Text</div>
+            <nav>
+                <router-link :to="{name:'home'}">Home</router-link>
+                <router-link :to="{name:'about'}">About</router-link>
+                <router-link :to="{name:'portfolio'}">Portfolio</router-link>
+            </nav>
+        </header>
+
+        <transition name="fade">
+            <router-view></router-view>
+        </transition>
+
+
+        <footer class="page-footer">
+            <nav>
+                <router-link :to="{name:'privacy'}">Privacy Policy</router-link>
+                <router-link :to="{name:'terms'}">Terms of Use</router-link>
+                <router-link :to="{name:'login'}">Client Login</router-link>
+            </nav>
+        </footer>
     </div>
 
     <?php renderPartials(); ?>

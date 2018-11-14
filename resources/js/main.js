@@ -56,6 +56,11 @@ const API = axios.create({
     },
 });
 
+// TODO: add API.interceptors
+
+
+
+
 // --------------------------------------------------
 //  SET HELPER METHODS
 // --------------------------------------------------
@@ -166,6 +171,30 @@ const Dashboard = {
 
 
 
+const Portfolio = {
+    template: document.querySelector('template#portfolio').innerHTML,
+};
+
+
+
+const About = {
+    template: document.querySelector('template#about').innerHTML,
+};
+
+
+
+const Privacy = {
+    template: document.querySelector('template#privacy').innerHTML,
+};
+
+
+
+const Terms = {
+    template: document.querySelector('template#terms').innerHTML,
+};
+
+
+
 const Login = {
     template: document.querySelector('template#login').innerHTML,
     props: {
@@ -237,6 +266,10 @@ const routes = [
     { name: 'home',         path: '/',          component: Home },
     { name: 'dashboard',    path: '/dashboard', component: Dashboard },
     { name: 'login',        path: '/login',     component: Login },
+    { name: 'portfolio',    path: '/portfolio', component: Portfolio },
+    { name: 'about',        path: '/about',     component: About },
+    { name: 'terms',        path: '/terms',     component: Terms },
+    { name: 'privacy',      path: '/privacy',   component: Privacy },
     // { path: '/foo',   component: Foo },
     // { path: '/bar',   component: Bar },
     { name: '404',          path: '*',          component: NotFoundComponent },
