@@ -1,37 +1,50 @@
 <?php
 
-
 use App\Auth;
+use App\User;
 
 
 $app->post('/auth/login', function($req, $res) {
 
-    $log = $this->get('loggerService');
+    $log    = $this->get('loggerService');
+    $db     = $this->get('db');
 
-    $params = $req->getQueryParams();
+    // get POST body
+    $args = $req->getParsedBody();
 
+    // filter form args
+    $args['email']      = filter_var($args['email'],    FILTER_SANITIZE_EMAIL);
+    $args['password']   = filter_var($args['password'], FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $log->debug($params);
+    // $log->debug($args);
 
+    // get user model
+    $user = User::getUserProfile($args, $db);
 
-    $user = [
-        'name'      => 'John Schmidt',
-        'id'        => 123456798,
-        'email'     => 'jschmidt98@gmail.com',
-    ];
+    // $log->debug($user);
 
+    // if user doesn't exist
+    if (!$user) {
+        return $res
+            ->withStatus(401)
+            ->withJson([
+                'success'   => false,
+                'reason'    => 'login-failed',
+            ]);
+    }
 
+    // Generate auth token
     $token = Auth::generateToken($user);
 
+    // TODO: log auth token for management later
 
+    // build response payload
     $data = [
         'user'  => $user,
         'token' => $token,
     ];
 
-
-    // TODO add some mechanism for generating auth token
-
+    // return response
     return $res->withJson($data);
 
 })->setName('auth.login');
