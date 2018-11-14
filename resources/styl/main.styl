@@ -1,0 +1,50 @@
+
+// ---------------------------------------------------------------------------
+//  Default color defs
+// ---------------------------------------------------------------------------
+
+$black  = hsl(0, 0%, 30%)
+$blue   = hsl(200, 87%, 42%)
+$white  = hsl(0, 0%, 100%)
+
+// ---------------------------------------------------------------------------
+// UI Color defs
+// ---------------------------------------------------------------------------
+
+$DARKEN_COLORS  = 20%
+
+$border-color   = lighten($black, 75%)
+
+$link-color     = $blue
+
+
+
+// ---------------------------------------------------------------------------
+//  Layout variables
+// ---------------------------------------------------------------------------
+
+$border-radius  = 3px
+
+$margin-block   = 1rem 0
+
+
+// Responsive breakpoint variables
+$bp-mobile      = 320px
+// $bp-mobile-max  = $bp-mobile - 1
+$bp-tablet      = 768px
+// $bp-tablet-max  = $bp-lappy - 1
+$bp-lappy       = 1024px
+// $bp-lappy-max   = $bp-desktop - 1
+$bp-desktop     = 1200px
+
+
+
+@import "_reset"
+@import "_layout"
+@import "_forms"
+@import "_buttons"
+
+@import "_components"
+
+@import "_helpers"
+

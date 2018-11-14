@@ -1,0 +1,53 @@
+{
+    "search_strings": [
+        // @sauce: https://superuser.com/questions/452189/how-can-i-filter-a-file-for-lines-containing-a-string-in-sublime-text-2
+        {
+            "label":            "TODOS",
+            "search":           "// (TODO|DANGER|WARN|REPLACE)",
+            "regex":            true,
+            "case_sensitive":   false,
+            "whole_word":       false,
+            "show_context":     true,
+            "use_buffer":       true
+        }
+    ],
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns": [
+                "node_modules",
+                "vendor",
+                ".phpintel",
+                "bower_components",
+                "app/views/cache",
+                "_data",
+                "__*",
+                ".vagrant",
+                "public/css",
+                "public/js",
+                "clients/index*"
+            ],
+            "file_exclude_patterns": [
+                "*.lock",
+                "*.zip",
+                "license",
+                "*.sublime-workspace",
+                "*.jpg",
+                "*.jpeg",
+                "*.pdf",
+                "*.doc",
+                "*.docx",
+                "*.skp",
+                "*.ai",
+                "*.ps",
+                "*.pdf",
+                "license",
+                "aliases",
+                "after.sh",
+                "artisan",
+                "Vagrantfile"
+            ]
+        }
+    ]
+}

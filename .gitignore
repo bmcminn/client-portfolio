@@ -1,9 +1,14 @@
 vendor/
-node_modules/
-bower_components/
-.grunt/
-__*
+.env
+.idea
+.env.*
+!.env.example
+.cache/
 
+.vagrant/*
+
+node_modules/
+__*/
 
 _projects/*/
 static/
@@ -13,6 +18,13 @@ static/
 
 .phpintel
 .env
+
+users/
+clients/
+app/cache/
+app/logs/
+
+todo*
 
 # Packages #
 ############
@@ -44,3 +56,13 @@ static/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+
+# compilted assets #
+######################
+public/css
+public/js
+
+
+Homestead.json
+Homestead.yaml

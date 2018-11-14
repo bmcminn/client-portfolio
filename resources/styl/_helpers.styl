@@ -1,0 +1,52 @@
+
+// ===========================================================================
+//  Helper styles
+// ===========================================================================
+
+.text-center
+    text-align: center
+
+.text-left
+    text-align: left
+
+.text-right
+    text-align: right
+
+
+.block
+    display: block
+    width: 100%
+    margin: $margin-block
+
+
+
+_mp($SIZES=0..4, $PROP=null)
+
+    if $PROP
+        for $n in $SIZES
+            m{substr($PROP, 0, 1)}-{$n}
+                margin-{$PROP}: unit($n, 'rem') !important
+
+            p{substr($PROP, 0, 1)}-{$n}
+                padding-{$PROP}: unit($n, 'rem') !important
+
+    else
+        for $n in $SIZES
+            m-{$n}
+                margin-{$PROP}: unit($n, 'rem') !important
+
+            p-{$n}
+                padding-{$PROP}: unit($n, 'rem') !important
+
+
+$sizes = 0..4
+
+// margin top (mt-#)
+_mp($sizes)
+_mp($sizes, 'top')
+_mp($sizes, 'right')
+_mp($sizes, 'bottom')
+_mp($sizes, 'left')
+
+
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading...</title>
+    <link rel="stylesheet" type="text/css" href="/resources/css/modern-normalize.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+
+    <script src="/resources/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="brand">Logo Text</div>
+
+
+        </header>
+        <router-view></router-view>
+    </div>
+
+
+    <template id="home">
+        <div>
+            <user-state></user-state>
+
+            <div>Home!!!</div>
+        </div>
+    </template>
+
+    <template id="dashboard">
+        <div>
+            <user-state></user-state>
+
+            <div>Dashboard!!!</div>
+        </div>
+    </template>
+
+
+    <template id="login">
+        <div>
+            <form class="form-login">
+                <h1 class="mt-0">Client Login</h1>
+                <div class="form-input">
+                    <label for="email">Email Address:</label>
+                    <input id="email" type="email" v-model="email" autocomplete="" />
+                </div>
+                <div class="form-input">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" v-model="password"  autocomplete="current-password" />
+                </div>
+
+                <div class="form-input">
+                    <button class="btn btn-primary"
+                        v-on:click="logUserIn"
+                        v-bind:disabled="isLoggingIn"
+                    >
+                        Login
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </template>
+
+
+    <template id="not-found">
+        <div>
+            Not found...
+        </div>
+    </template>
+
+
+
+    <script src="/resources/js/libs/axios.min.js"></script>
+    <script src="/resources/js/libs/lodash.min.js"></script>
+    <script src="/resources/js/libs/no-touchy.js"></script>
+    <!-- <script src="/resources/js/libs/vue.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+    <script src="/resources/js/libs/vue-router.min.js"></script>
+    <script src="/resources/js/libs/vuex.min.js"></script>
+    <script src="/resources/js/libs/vuex-persist.js"></script>
+
+
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js" integrity="sha256-yEB9jUlD51i5kxJZlzgzfR6XmVKI76Nl1WRA1aqIilU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js" integrity="sha256-1QlN0ckC4jlz91DZixPZxTv9vYpcBmS7sK7HA8xFmFA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex-persist"></script>
+    -->
+    <script src="/resources/js/main.js"></script>
+</body>
+</html>
