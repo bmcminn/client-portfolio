@@ -75,11 +75,24 @@ $container = $app->getContainer();
 // Hookup DB instance
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
-    $pdo = new PDO($db['type'] . ':' . $db['path']);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    return $pdo;
+
+    return new \Medoo\Medoo([
+        'database_type' => $db['type'] ?? 'sqlite',
+        'database_file' => $db['file'] ?? DATA_DIR . '/main.db',
+        // 'database_name' => $db['name'] ?? null,
+        // 'server'        => $db['host'] ?? null,
+        // 'username'      => $db['user'] ?? null,
+        // 'password'      => $db['pass'] ?? null,
+    ]);
 };
+
+// $container['db'] = function ($c) {
+//     $db = $c['settings']['db'];
+//     $pdo = new PDO($db['type'] . ':' . $db['path']);
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+//     return $pdo;
+// };
 
 
 // Setup Logger service
