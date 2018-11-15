@@ -21,7 +21,7 @@ class Auth {
     }
 
 
-    public static function generateToken($data) {
+    public static function generateToken($data, $expires=null) {
 
         $now = time();
 
@@ -34,6 +34,15 @@ class Auth {
         $token['iat'] = $now;
         $token['nbf'] = $now - minutes(0.5);
         $token['sub'] = $data;
+
+        // set token expiration; defaults to 24 hours
+        if ($expires) {
+            $token['exp'] = $now + $expires;
+
+        } else {
+            $token['exp'] = $now + days(1);
+
+        }
 
         $jwt = JWT::encode($token, $secret);
 

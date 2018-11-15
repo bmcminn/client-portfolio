@@ -20,7 +20,8 @@
         "gbox/minilog": "^1.0",
         "tuupola/slim-jwt-auth": "^3.1",
         "firebase/php-jwt": "^5.0",
-        "catfan/Medoo": "^1.6"
+        "catfan/Medoo": "^1.6",
+		"rakit/validation": "^0.22.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
