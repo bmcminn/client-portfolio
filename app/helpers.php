@@ -96,3 +96,40 @@ function hours($len) {
 function days($len) {
     return $len * hours(24);
 }
+
+
+/**
+ * [weeks description]
+ * @param  [type] $len [description]
+ * @return [type]      [description]
+ */
+function weeks($len) {
+    return $len * days(7);
+}
+
+
+/**
+ * [glob_recursive description]
+ * @param  [type]  $pattern [description]
+ * @param  integer $flags   [description]
+ * @return [type]           [description]
+ */
+function glob_recursive($pattern, $flags=0) {
+    $files = glob($pattern, $flags);
+
+    foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+        $files = array_merge($files, glob_recursive($dir.'/'.basename($pattern), $flags));
+    }
+
+    return $files;
+}
+
+
+/**
+ * [redirect description]
+ * @param  string $route [description]
+ * @return [type]        [description]
+ */
+function redirect($route = '/') {
+    header("location: {$route}");
+}
