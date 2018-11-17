@@ -197,18 +197,11 @@ const Terms = {
 
 const Login = {
     template: document.querySelector('template#login').innerHTML,
-    props: {
-        email:      null,
-        password:   null,
-    },
     data() {
         return {
             isLoggingIn: false,
-        }
-    },
-    computed() {
-        return {
-
+            email: null,
+            password: null,
         }
     },
     methods: {

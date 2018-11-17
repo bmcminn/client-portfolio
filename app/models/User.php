@@ -4,7 +4,6 @@ namespace App;
 
 class User {
 
-
     public static function getUserProfile($user, $db) {
 
         // encode $user password
@@ -13,12 +12,11 @@ class User {
         $cols =[ 'id', 'first_name', 'last_name', 'email', 'phone', ];
 
         $where = [
-            'email'     => trim($user['email']),
-            'password'  => trim($user['password']),
+            'email'     => trim(filter_var($user['email'],     FILTER_SANITIZE_EMAIL)),
+            'password'  => trim(filter_var($user['password'],  FILTER_SANITIZE_STRING)),
         ];
 
         return $db->select('users', $cols, $where);
-
     }
 
 }
