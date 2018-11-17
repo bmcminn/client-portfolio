@@ -24,11 +24,11 @@ $scripts = [
         'prod'  => 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
         'int'   => 'sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=',
     ],
-    [
-        'local' => $JS_PATH . '/libs/lodash.js',
-        'prod'  => 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js',
-        'int'   => 'sha256-7/yoZS3548fXSRXqc/xYzjsmuW3sFKzuvOCHd06Pmps=',
-    ],
+    // [
+    //     'local' => $JS_PATH . '/libs/lodash.js',
+    //     'prod'  => 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js',
+    //     'int'   => 'sha256-7/yoZS3548fXSRXqc/xYzjsmuW3sFKzuvOCHd06Pmps=',
+    // ],
     [
         'local' => $JS_PATH . '/libs/no-touchy.js',
         'prod'  => $JS_PATH . '/libs/no-touchy.js',
@@ -48,10 +48,10 @@ $scripts = [
         'prod'  => 'https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js',
         'int'   => 'sha256-1QlN0ckC4jlz91DZixPZxTv9vYpcBmS7sK7HA8xFmFA=',
     ],
-    [
-        'local' => $JS_PATH . '/libs/vuex-persist.js',
-        'prod'  => 'https://cdn.jsdelivr.net/npm/vuex-persist',
-    ],
+    // [
+    //     'local' => $JS_PATH . '/libs/vuex-persist.js',
+    //     'prod'  => 'https://cdn.jsdelivr.net/npm/vuex-persist',
+    // ],
     [
         'local' => $JS_PATH . '/main.js',
         'prod'  => $JS_PATH . '/main.min.js',

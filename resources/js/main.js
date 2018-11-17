@@ -85,14 +85,14 @@ Helpers.setApiAuthToken(lsGetItem('token'));
 Vue.use(Vuex);
 
 
-const vuexLocal = new window.VuexPersistence.VuexPersistence({
-    key:        'vuex',                 // The key to store the state on in the storage provider.
-    storage:    window.localStorage,    // or window.sessionStorage or localForage
-    filter:     function(mutation) {
-        console.debug('vuexLocal@mutation', mutation);
-        return mutation.type == 'UPDATE_USER'
-    },
-});
+// const vuexLocal = new window.VuexPersistence.VuexPersistence({
+//     key:        'vuex',                 // The key to store the state on in the storage provider.
+//     storage:    window.localStorage,    // or window.sessionStorage or localForage
+//     filter:     function(mutation) {
+//         console.debug('vuexLocal@mutation', mutation);
+//         return mutation.type == 'UPDATE_USER'
+//     },
+// });
 
 
 const store = new Vuex.Store({
@@ -118,7 +118,7 @@ const store = new Vuex.Store({
     },
 
     plugins: [
-        vuexLocal.plugin,
+        // vuexLocal.plugin,
     ],
 });
 
