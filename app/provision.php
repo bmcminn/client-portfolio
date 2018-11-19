@@ -15,3 +15,4 @@ foreach ($dirs as $i => $dir) {
         mkdir($dir, 0700, true);
     }
 }
+

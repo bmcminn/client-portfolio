@@ -84,6 +84,7 @@ $scripts = [
             </nav>
         </header>
 
+
         <transition name="fade">
             <router-view></router-view>
         </transition>
@@ -95,6 +96,10 @@ $scripts = [
                 <router-link :to="{name:'terms'}">Terms of Use</router-link>
                 <router-link :to="{name:'login'}">Client Login</router-link>
             </nav>
+
+            <div class="site-copyright">
+                Copyright &copy; <?php echo Date('Y'); ?>
+            </div>
         </footer>
     </div>
 

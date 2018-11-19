@@ -59,6 +59,7 @@ $app->add(new \Tuupola\Middleware\JwtAuthentication([
     'path'      => '/api',
     'secure'    => false,
     'secret'    => env('JWT_SECRET'),
+    'ignore'    => [ '/api/status' ],
     // 'rules' => [
     //     // Ignore OPTIONS requests
     //     new \Tuupola\Middleware\JwtAuthentication\RequestMethodRule([
@@ -72,13 +73,16 @@ $app->add(new \Tuupola\Middleware\JwtAuthentication([
 $container = $app->getContainer();
 
 
-// Hookup DB instance
+// // Hookup DB instance
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
 
     return new \Medoo\Medoo([
         'database_type' => $db['type'] ?? 'sqlite',
         'database_file' => $db['file'] ?? DATA_DIR . '/main.db',
+        'options' => [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ],
         // 'database_name' => $db['name'] ?? null,
         // 'server'        => $db['host'] ?? null,
         // 'username'      => $db['user'] ?? null,
@@ -86,13 +90,15 @@ $container['db'] = function ($c) {
     ]);
 };
 
-// $container['db'] = function ($c) {
-//     $db = $c['settings']['db'];
-//     $pdo = new PDO($db['type'] . ':' . $db['path']);
-//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-//     return $pdo;
-// };
+$container['pdo'] = function ($c) {
+    $db = $c['settings']['db'];
+    $pdo = new PDO('sqlite:' . $db['path']);
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+    return $pdo;
+};
 
 
 // Setup Logger service

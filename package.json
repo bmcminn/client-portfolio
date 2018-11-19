@@ -35,6 +35,7 @@
     "scripts": {
         "build": "node .bin/build.js",
         "build-prod": "node .bin/build.js --compress",
+        "composer-u": "composer dumpautoload -o",
         "provision": "touch ./database/database.sqlite",
         "serve": "php -S localhost:8000 index.php",
         "watch": "node .bin/build.js --watch"

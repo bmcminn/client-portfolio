@@ -3,17 +3,14 @@
 namespace App;
 
 
+use \App\BaseController;
 use \Firebase\JWT\JWT;
-use \Interop\Container\ContainerInterface;
-
-class AuthController {
 
 
-    protected $ci;
-    //Constructor
-    public function __construct(ContainerInterface $ci) {
-        $this->ci = $ci;
-    }
+class AuthController extends BaseController {
+
+
+
 
 
 
@@ -22,22 +19,34 @@ class AuthController {
         $log    = $this->ci->get('loggerService');
         $db     = $this->ci->get('db');
 
+
+
         // get POST body
-        $args = $req->getParsedBody();
+        $args = $req->getParsedBody()['params'];
+
 
         // filter form args
-        $args['email']      = filter_var($args['email'],    FILTER_SANITIZE_EMAIL);
-        $args['password']   = filter_var($args['password'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $email      = trim(filter_var($args['email'],    FILTER_SANITIZE_EMAIL));
+        $password   = trim(filter_var($args['password'], FILTER_SANITIZE_STRING));
 
-        // $log->debug($args);
+        $password   = password_hash($password, PASSWORD_ARGON2I);
+
+        $cols = [ 'id', 'first_name', 'last_name', 'email', 'phone', 'password', ];
+
+        $where = [
+            'email'     => $email,
+            // 'password'  => $password,
+        ];
+
+        $user = $db->select('users', $cols, $where);
 
         // get user model
-        $user = User::getUserProfile($args, $db);
+        // $user = User::getUserProfile($args, $db);
 
         // $log->debug($user);
 
         // if user doesn't exist
-        if (!$user) {
+        if (!$user || !password_verify($password, $user->password)) {
             return $res
                 ->withStatus(401)
                 ->withJson([
@@ -46,6 +55,10 @@ class AuthController {
                     'message'   => 'user credentials provided did not match',
                 ]);
         }
+
+
+        $user = User::GetUserById($db, $user->id);
+
 
         // Generate auth token
         $token = Auth::generateToken($user);

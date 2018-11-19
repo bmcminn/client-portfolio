@@ -1,35 +1,11 @@
 <?php
 
-$app->get('/api/status', function ($req, $res) {
-    return $res->withJson([
-        'status' => 'success',
-        'data'  => [
-            'serverStatus' => 'up'
-        ]
-    ]);
-})->setName('api.status');
+use \App\ApiController;
 
 
+$app->group('/api', function() {
 
-$app->get('/api/user/{id}', function($req, $res, $args) {
+    $this->get('/status',       ApiController::class    . ':status'     )->setName('api.status');
+    $this->get('/user/{id}',    UserController::class   . ':getUserById')->setName('api.user.id');
 
-    $id = $args['id'] ?? null;
-
-    // TODO: figure out better error handling for missing route params
-    if (!$id) {
-        return $response
-            ->withStatus(500)
-            ->withJson([
-                'message' => '/api/user/:id requires id route param(s)'
-            ]);
-    }
-
-    // TODO: add in actual user lookup via User class
-    $data = [
-        'accountId' => $id,
-        'name'      => 'Bob Vila',
-    ];
-
-    return $res->withJson($data);
-
-})->setName('api.user.id');
+});
