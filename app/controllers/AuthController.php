@@ -20,7 +20,6 @@ class AuthController extends BaseController {
         $db     = $this->ci->get('db');
 
 
-
         // get POST body
         $args = $req->getParsedBody()['params'];
 
@@ -40,13 +39,17 @@ class AuthController extends BaseController {
 
         $user = $db->select('users', $cols, $where);
 
+        if (!empty($user)) {
+            $user = $user[0];
+        }
+
         // get user model
         // $user = User::getUserProfile($args, $db);
 
         // $log->debug($user);
 
         // if user doesn't exist
-        if (!$user || !password_verify($password, $user->password)) {
+        if (!$user || !password_verify($password, $user['password'])) {
             return $res
                 ->withStatus(401)
                 ->withJson([
@@ -57,7 +60,9 @@ class AuthController extends BaseController {
         }
 
 
-        $user = User::GetUserById($db, $user->id);
+        $user = $user[0];
+
+        $user = User::GetUserById($db, $user['id']);
 
 
         // Generate auth token
