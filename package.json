@@ -38,6 +38,7 @@
         "composer-u": "composer dumpautoload -o",
         "provision": "touch ./database/database.sqlite",
         "serve": "php -S localhost:8000 index.php",
+        "styles": "node .bin/styles.js",
         "watch": "node .bin/build.js --watch"
     },
     "version": "1.0.0"

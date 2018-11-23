@@ -11,11 +11,7 @@ if (IS_DEV) {
         foreach ($sqlData as $si => $sql) {
             $res = $pdo->query($sql);
         }
-
-
         // echo password_hash('Testing123', PASSWORD_ARGON2I);
-
-
     });
 }
 
@@ -39,6 +35,8 @@ $app->get('/[{path:.*}]', function($request, $response, $path = null) {
 
         // write markup to disk
         file_put_contents($cacheIndex, $content);
+
+        exec('yarn styles');
     }
 
     return file_get_contents($cacheIndex);

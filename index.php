@@ -53,7 +53,6 @@ $appConfig = require './app/config.php';
 $app = new \Slim\App(['settings' => $appConfig]);
 
 
-
 // Setup JWT Middleware
 $app->add(new \Tuupola\Middleware\JwtAuthentication([
     'path'      => '/api',
