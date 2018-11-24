@@ -1,275 +1,329 @@
-/*! modern-normalize | MIT License | https://github.com/sindresorhus/modern-normalize */
 
+/* line 275 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
+
+/* line 1 : C:\Users\Brandtley\github\client-portfolio\node_modules\stylus\lib\functions\index.styl */
+
+/* line 1 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
+/* modern-normalize | MIT License | https://github.com/sindresorhus/modern-normalize */
+
+/* line 3 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /* Document
    ========================================================================== */
 
+/* line 6 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Use a better box model (opinionated).
  */
 
+/* line 10 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+/* line 14 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
+/* line 20 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Use a more readable tab size (opinionated).
  */
 
+/* line 24 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 :root {
-    -moz-tab-size: 4;
-    tab-size: 4;
+  -moz-tab-size: 4;
+  tab-size: 4;
 }
 
+/* line 29 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
+/* line 34 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 html {
-    line-height: 1.15; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
-    color: var(--color-text);
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  color: var(--color-text);
 }
 
+/* line 40 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /* Sections
    ========================================================================== */
 
+/* line 43 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Remove the margin in all browsers.
  */
 
+/* line 47 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 body {
-    margin: 0;
-    min-height: 100vh;
+  margin: 0;
+  min-height: 100vh;
 }
 
+/* line 52 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
  */
 
+/* line 56 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        'Segoe UI',
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif,
-        'Apple Color Emoji',
-        'Segoe UI Emoji',
-        'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
+/* line 70 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /* Grouping content
    ========================================================================== */
 
+/* line 73 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Add the correct height in Firefox.
  */
 
+/* line 77 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 hr {
-    height: 0;
+  height: 0;
 }
 
+/* line 81 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /* Text-level semantics
    ========================================================================== */
 
+/* line 84 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Add the correct text decoration in Chrome, Edge, and Safari.
  */
 
+/* line 88 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 abbr[title] {
-    text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 
+/* line 92 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
 
+/* line 96 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 b,
 strong {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
+/* line 101 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * 1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 
+/* line 106 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 code,
 kbd,
 samp,
 pre {
-    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* 1 */
-    font-size: 1em; /* 2 */
+  font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
+/* line 114 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Add the correct font size in all browsers.
  */
 
+/* line 118 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 small {
-    font-size: 80%;
+  font-size: 80%;
 }
 
+/* line 122 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Prevent `sub` and `sup` elements from affecting the line height in all browsers.
  */
 
+/* line 126 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 sub,
 sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
+/* line 134 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 sub {
-    bottom: -0.25em;
+  bottom: -0.25em;
 }
 
+/* line 138 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 sup {
-    top: -0.5em;
+  top: -0.5em;
 }
 
+/* line 142 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /* Forms
    ========================================================================== */
 
+/* line 145 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * 1. Change the font styles in all browsers.
  * 2. Remove the margin in Firefox and Safari.
  */
 
+/* line 150 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 button,
 input,
 optgroup,
 select,
 textarea {
-    font-family: inherit; /* 1 */
-    font-size: 100%; /* 1 */
-    line-height: 1.15; /* 1 */
-    margin: 0; /* 2 */
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
 }
 
+/* line 161 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Remove the inheritance of text transform in Edge and Firefox.
  * 1. Remove the inheritance of text transform in Firefox.
  */
 
+/* line 166 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 button,
-select { /* 1 */
-    text-transform: none;
+select {
+/* 1 */
+  text-transform: none;
 }
 
+/* line 171 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Correct the inability to style clickable types in iOS and Safari.
  */
 
+/* line 175 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
-    -webkit-appearance: button;
+  -webkit-appearance: button;
 }
 
+/* line 182 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Remove the inner border and padding in Firefox.
  */
 
+/* line 186 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 button::-moz-focus-inner,
 [type='button']::-moz-focus-inner,
 [type='reset']::-moz-focus-inner,
 [type='submit']::-moz-focus-inner {
-    border-style: none;
-    padding: 0;
+  border-style: none;
+  padding: 0;
 }
 
+/* line 194 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Restore the focus styles unset by the previous rule.
  */
 
+/* line 198 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 button:-moz-focusring,
 [type='button']:-moz-focusring,
 [type='reset']:-moz-focusring,
 [type='submit']:-moz-focusring {
-    outline: 1px dotted ButtonText;
+  outline: 1px dotted ButtonText;
 }
 
+/* line 205 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Correct the padding in Firefox.
  */
 
+/* line 209 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 fieldset {
-    padding: 0.35em 0.75em 0.625em;
+  padding: 0.35em 0.75em 0.625em;
 }
 
+/* line 213 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Remove the padding so developers are not caught out when they zero out `fieldset` elements in all browsers.
  */
 
+/* line 217 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 legend {
-    padding: 0;
+  padding: 0;
 }
 
+/* line 221 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Add the correct vertical alignment in Chrome and Firefox.
  */
 
+/* line 225 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 progress {
-    vertical-align: baseline;
+  vertical-align: baseline;
 }
 
+/* line 229 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Correct the cursor style of increment and decrement buttons in Safari.
  */
 
+/* line 233 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 [type='number']::-webkit-inner-spin-button,
 [type='number']::-webkit-outer-spin-button {
-    height: auto;
+  height: auto;
 }
 
+/* line 238 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * 1. Correct the odd appearance in Chrome and Safari.
  * 2. Correct the outline style in Safari.
  */
 
+/* line 243 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 [type='search'] {
-    -webkit-appearance: textfield; /* 1 */
-    outline-offset: -2px; /* 2 */
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
 }
 
+/* line 248 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
  */
 
+/* line 252 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 [type='search']::-webkit-search-decoration {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
+/* line 256 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /**
  * 1. Correct the inability to style clickable types in iOS and Safari.
  * 2. Change font properties to `inherit` in Safari.
  */
 
+/* line 261 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 ::-webkit-file-upload-button {
-    -webkit-appearance: button; /* 1 */
-    font: inherit; /* 2 */
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
 }
 
+/* line 266 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /* Interactive
    ========================================================================== */
 
+/* line 269 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 /*
  * Add the correct display in Chrome and Safari.
  */
 
+/* line 273 : C:\Users\Brandtley\github\client-portfolio\resources\styl\modern-normalize.styl */
 summary {
-    display: list-item;
+  display: list-item;
 }
