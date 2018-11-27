@@ -41,8 +41,15 @@ require "./app/helpers.php";
 
 // init ENV boolean flags
 define('IS_PROD',       (bool)env('ENV') === 'production');
-define('IS_STAGING',    (bool)env('ENV') === 'staging');
-define('IS_DEV',        (bool)(!IS_STAGING && !IS_PROD));
+define('IS_DEV',        (bool)!IS_PROD);
+
+
+// Define Logger service
+use \App\Logger as Log;
+
+Log::config('logs', [
+    'dir' => LOGS_DIR,
+]);
 
 
 // Define App instance config
@@ -89,23 +96,24 @@ $container['db'] = function ($c) {
     ]);
 };
 
+
 $container['pdo'] = function ($c) {
     $db = $c['settings']['db'];
     $pdo = new PDO('sqlite:' . $db['path']);
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE,               PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,    PDO::FETCH_ASSOC);
 
     return $pdo;
 };
 
 
 // Setup Logger service
-$container['loggerService'] = function ($c) {
-    return new \Gbox\Minilog('logName', [
-        'dir' => LOGS_DIR,
-    ]);
-};
+// $container['loggerService'] = function ($c) {
+//     return new \Gbox\Minilog('logs', [
+//         'dir' => LOGS_DIR,
+//     ]);
+// };
 
 
 // // Register Twig View helper
@@ -146,14 +154,12 @@ $container['loggerService'] = function ($c) {
 // };
 
 
-
 // load API routes
 require APP_DIR . '/routes/auth.router.php';
 require APP_DIR . '/routes/api.router.php';
 
 // load server side rendered routes
 require APP_DIR . '/routes/client.router.php';
-
 
 
 // Run app
