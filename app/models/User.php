@@ -2,7 +2,20 @@
 
 namespace App;
 
+
+use Rakit\Validation\Validator;
+
+
 class User {
+
+    protected $ci;
+    // protected $
+
+
+    function __construct($ci) {
+        $this->ci = $ci;
+    }
+
 
     public static function GetUserById($db, int $id) {
 
@@ -10,25 +23,56 @@ class User {
 
         $where  = [ 'id' => $id ];
 
-        return $db->select('users', $cols, $where);
+        $user = $db->select('users', $cols, $where);
+
+        if (empty($user)) {
+            return false;
+        }
+
+        return $user[0];
 
     }
 
 
-    public static function GetUserProfile($user, $db) {
+    /**
+     * [GetUserData description]
+     * @param [type] $user [description]
+     * @param [type] $db   [description]
+     */
+    public static function GetUserData($login) {
+
+        $db = $this->ci['db'];
+
+
+        // validate the input is correct
+        $validation = $validator->validate($login, [
+            'email'     => 'required|email',
+            'password'  => 'required|min:6',
+        ]);
+
+        if ($validation->fails()) {
+            return $validation->errors();
+        }
 
         // clean up user data
-        $user['email']      = trim(filter_var($user['email'],     FILTER_SANITIZE_EMAIL));
-        $user['password']   = trim(filter_var($user['password'],  FILTER_SANITIZE_STRING));
+        $login['email']      = trim(filter_var($login['email'],     FILTER_SANITIZE_EMAIL));
+        $login['password']   = trim(filter_var($login['password'],  FILTER_SANITIZE_STRING));
+
+        $cols = [ 'id', 'first_name', 'last_name', 'email', 'phone'];
+
+        $where = [
+            'email' => $login['email']
+        ];
+
+        $user = $db->select('users', $cols, $where);
 
 
-        $user['password'] = password_hash($user['password'], PASSWORD_ARGON2I);
-
-        $cols = [ 'id', 'first_name', 'last_name', 'email', 'phone', ];
-
-        $where = $user;
-
-        return $db->select('users', $cols, $where);
     }
 
+
+
+
+
 }
+
+

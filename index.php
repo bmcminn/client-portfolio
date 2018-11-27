@@ -29,6 +29,7 @@ define('LOGS_DIR',      __DIR__ . '/.cache/logs');
 define('DATA_DIR',      __DIR__ . '/data');
 define('PROJECTS_DIR',  __DIR__ . '/data/projects');
 define('VIEWS_DIR',     __DIR__ . '/views');
+define('CSS_DIR',       __DIR__ . '/resources/css');
 
 
 // load provision script(s)

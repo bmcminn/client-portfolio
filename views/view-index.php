@@ -84,6 +84,8 @@ $scripts = [
                 <router-link :to="{name:'home'}">Home</router-link>
                 <router-link :to="{name:'about'}">About</router-link>
                 <router-link :to="{name:'portfolio'}">Portfolio</router-link>
+                <!-- // TODO: show/hide logout button on user state check -->
+                <button v-on:click="logout()">Logout</button>
             </nav>
         </header>
 

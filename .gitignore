@@ -23,6 +23,7 @@ users/
 clients/
 app/cache/
 app/logs/
+resources/css/
 
 todo*
 

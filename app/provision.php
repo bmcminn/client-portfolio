@@ -7,6 +7,7 @@ $dirs = [
     DATA_DIR,
     LOGS_DIR,
     PROJECTS_DIR,
+    CSS_DIR,
 ];
 
 

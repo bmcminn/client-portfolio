@@ -2,39 +2,34 @@
 
 namespace App;
 
-
+use \App\Logger as Log;
 use \App\BaseController;
 use \Firebase\JWT\JWT;
 
 
 class AuthController extends BaseController {
 
-
-
-
-
-
     public function login($req, $res, $args) {
+        // Log::header('AuthController @ login()');
+        Log::debug('// ==================================================');
+        Log::debug('login()');
 
-        $log    = $this->ci->get('loggerService');
+        // $log    = $this->ci->get('loggerService');
         $db     = $this->ci->get('db');
 
-
         // get POST body
-        $args = $req->getParsedBody()['params'];
+        $args   = $req->getParsedBody()['params'];
 
+        Log::debug('$args', $args);
 
         // filter form args
         $email      = trim(filter_var($args['email'],    FILTER_SANITIZE_EMAIL));
         $password   = trim(filter_var($args['password'], FILTER_SANITIZE_STRING));
 
-        $password   = password_hash($password, PASSWORD_ARGON2I);
-
-        $cols = [ 'id', 'first_name', 'last_name', 'email', 'phone', 'password', ];
+        $cols = [ 'id', 'password', ];
 
         $where = [
-            'email'     => $email,
-            // 'password'  => $password,
+            'email' => $email,
         ];
 
         $user = $db->select('users', $cols, $where);
@@ -43,10 +38,13 @@ class AuthController extends BaseController {
             $user = $user[0];
         }
 
+        Log::debug('AuthContoller@login:', $user);
+
         // get user model
         // $user = User::getUserProfile($args, $db);
 
         // $log->debug($user);
+        // Log::debug($user);
 
         // if user doesn't exist
         if (!$user || !password_verify($password, $user['password'])) {
@@ -59,9 +57,6 @@ class AuthController extends BaseController {
                 ]);
         }
 
-
-        $user = $user[0];
-
         $user = User::GetUserById($db, $user['id']);
 
 
@@ -69,6 +64,9 @@ class AuthController extends BaseController {
         $token = Auth::generateToken($user);
 
         // TODO: log auth token for management later
+        $db->insert('auth_tokens', ['token' => $token]);
+
+        Log::notice('Login event:', time(), $token);
 
         // build response payload
         $data = [

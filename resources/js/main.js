@@ -2,20 +2,49 @@
 Vue.config.devtools = true;
 
 
+
+function seconds(time) {
+    return time * 1000;
+}
+
+function minutes(time) {
+    return time * seconds(60);
+}
+
+function hours(time) {
+    return time * minutes(60);
+}
+
+function days(time) {
+    return time * hours(24);
+}
+
+
+
 /**
  * [lsSetItem description]
- * @param  {[type]} key   [description]
- * @param  {[type]} value [description]
+ * @param  {string} key     [description]
+ * @param  {any}    value   [description]
+ * @param  {int}    expires [description]
  * @return {[type]}       [description]
  */
-function lsSetItem(key, value) {
-    let typ = typeof(value);
+function lsSetItem(key, value, expires) {
 
-    if (typ === 'object' || typ === 'array') {
-        value = JSON.stringify(value);
-    }
+    // make expires a positive integer
+    expires = new Date().getTime() + (Math.abs(expires) || hours(24));
 
-    localStorage.setItem(key, value);
+    let data = {
+        expires,
+        value,
+    };
+
+    console.log('data pre-string', data);
+
+    data = JSON.stringify(data);
+
+    console.log('data', data);
+
+    localStorage.setItem(key, data);
 }
 
 
@@ -24,16 +53,16 @@ function lsSetItem(key, value) {
  * @param  {[type]} key [description]
  * @return {[type]}     [description]
  */
-function lsGetItem(key, isStructure) {
-    isStructure = isStructure || null;
+function lsGetItem(key) {
+    let now = new Date().getTime();
 
-    let value = localStorage.getItem(key);
+    let data = JSON.parse(localStorage.getItem(key));
 
-    if (isStructure) {
-        return JSON.parse(value);
+    if (!data || now > data.expires) {
+        return false;
     }
 
-    return value;
+    return data.value;
 }
 
 
@@ -226,7 +255,7 @@ const Login = {
                     console.debug('user:', res.data);
 
                     lsSetItem('token',   res.data.token);
-                    lsSetItem('user',    JSON.stringify(res.data.user));
+                    lsSetItem('user',    res.data.user);
 
                     self.$store.commit('UPDATE_USER', res.data.user);
                     self.$router.push({ name: 'home' });
@@ -287,4 +316,11 @@ const app = new Vue({
             message: 'Hello Vue!',
         }
     },
+    methods: {
+        logout() {
+            localStorage.clear();
+            console.log('pants');
+            this.$router.push({name: 'login'})
+        },
+    }
 }).$mount('#app')
