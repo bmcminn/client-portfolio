@@ -49,7 +49,7 @@ define('IS_DEV',        (bool)!IS_PROD);
 use \App\Logger as Log;
 
 Log::config('logs', [
-    'dir' => LOGS_DIR,
+    'logspath' => LOGS_DIR,
 ]);
 
 
